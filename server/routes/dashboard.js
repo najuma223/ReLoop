@@ -25,7 +25,19 @@ let store = {
       quality: "Verified",
       coordinates: [13.0878, 80.2785],
       available: true,
-      description: "Treated cooling tower blowdown, suitable for industrial reuse and irrigation."
+      indicativePrice: "₹0.15/L",
+      intendedUses: ["Irrigation", "Construction", "Dust Suppression", "Industrial Cooling"],
+      description: "Treated cooling tower blowdown, suitable for industrial reuse and irrigation.",
+      labReport: {
+        id: "LAB-2025-081",
+        tester: "AquaCert Labs",
+        status: "Verified",
+        ph: 7.2,
+        turbidity: "1.2 NTU",
+        tds: "410 ppm",
+        expiryDate: "2025-10-15"
+      },
+      dataSource: "Simulated Demo Data for Hackathon Showcase"
     },
     {
       id: "src-2",
@@ -37,7 +49,19 @@ let store = {
       quality: "Pending",
       coordinates: [13.0450, 80.2400],
       available: true,
-      description: "Tertiary treated municipal wastewater, lab analysis verification in progress."
+      indicativePrice: "₹0.08/L",
+      intendedUses: ["Landscaping", "Flushing"],
+      description: "Tertiary treated municipal wastewater, lab analysis verification in progress.",
+      labReport: {
+        id: "LAB-2025-099",
+        tester: "Metropolitan Testing Facility",
+        status: "Pending",
+        ph: 6.8,
+        turbidity: "3.8 NTU",
+        tds: "650 ppm",
+        expiryDate: "Awaiting Clearance"
+      },
+      dataSource: "Simulated Demo Data for Hackathon Showcase"
     },
     {
       id: "src-3",
@@ -49,7 +73,19 @@ let store = {
       quality: "Verified",
       coordinates: [12.9800, 80.2200],
       available: true,
-      description: "High TDS reverse osmosis reject water, suitable for flushing & dust suppression."
+      indicativePrice: "₹0.10/L",
+      intendedUses: ["Toilet Flushing", "Dust Suppression", "Construction"],
+      description: "High TDS reverse osmosis reject water, suitable for flushing & dust suppression.",
+      labReport: {
+        id: "LAB-2025-072",
+        tester: "AquaCert Labs",
+        status: "Verified",
+        ph: 7.6,
+        turbidity: "0.8 NTU",
+        tds: "1850 ppm",
+        expiryDate: "2025-11-20"
+      },
+      dataSource: "Simulated Demo Data for Hackathon Showcase"
     },
     {
       id: "src-4",
@@ -61,7 +97,19 @@ let store = {
       quality: "Verified",
       coordinates: [13.0100, 80.2600],
       available: true,
-      description: "Residential greywater system filtered through sand & carbon media."
+      indicativePrice: "₹0.12/L",
+      intendedUses: ["Irrigation", "Landscaping"],
+      description: "Residential greywater system filtered through sand & carbon media.",
+      labReport: {
+        id: "LAB-2025-114",
+        tester: "State Environmental Lab",
+        status: "Verified",
+        ph: 7.1,
+        turbidity: "1.5 NTU",
+        tds: "380 ppm",
+        expiryDate: "2025-12-01"
+      },
+      dataSource: "Simulated Demo Data for Hackathon Showcase"
     }
   ],
   demands: [
@@ -73,7 +121,10 @@ let store = {
       status: "Active",
       statusColor: "green",
       coordinates: [13.0827, 80.2707],
-      createdAt: "2025-04-20"
+      indicativeBudget: "₹0.18/L",
+      requiredQuality: "Verified",
+      createdAt: "2025-04-20",
+      dataSource: "Simulated Demo Data for Hackathon Showcase"
     },
     {
       id: "dem-2",
@@ -83,7 +134,10 @@ let store = {
       status: "Pending",
       statusColor: "blue",
       coordinates: [13.0600, 80.2500],
-      createdAt: "2025-04-21"
+      indicativeBudget: "₹0.12/L",
+      requiredQuality: "Standard",
+      createdAt: "2025-04-21",
+      dataSource: "Simulated Demo Data for Hackathon Showcase"
     },
     {
       id: "dem-3",
@@ -93,7 +147,10 @@ let store = {
       status: "Matching",
       statusColor: "amber",
       coordinates: [13.0300, 80.2300],
-      createdAt: "2025-04-22"
+      indicativeBudget: "₹0.15/L",
+      requiredQuality: "Verified",
+      createdAt: "2025-04-22",
+      dataSource: "Simulated Demo Data for Hackathon Showcase"
     }
   ],
   matches: [
