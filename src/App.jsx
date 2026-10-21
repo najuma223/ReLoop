@@ -10,6 +10,7 @@ import {
   LogOut,
   AlertCircle,
 } from 'lucide-react';
+import BuyerDashboard from './components/buyer/BuyerDashboard';
 import './App.css';
 
 // Exact SVG Icons matching the reference design
@@ -77,6 +78,7 @@ export default function App() {
 
   // Authenticated state
   const [currentUser, setCurrentUser] = useState(null);
+  const [activePortalView, setActivePortalView] = useState('auto'); // 'auto' | 'hub' | 'buyer'
 
   // Clicking a role ONLY updates the selection state without modifying input values
   const handleSelectRole = (roleKey) => {
@@ -260,13 +262,24 @@ export default function App() {
 
   const handleLogout = () => {
     setCurrentUser(null);
+    setActivePortalView('auto');
     setAlert(null);
     setPassword('');
     setConfirmPassword('');
   };
 
-  // If user is logged in, show the Dashboard Hub overview and ready-state for the other 4 dashboards
+  // If user is logged in, show either the Buyer Dashboard or the 5-Portal Hub
   if (currentUser) {
+    if (activePortalView === 'buyer' || (currentUser.role === 'buyer' && activePortalView === 'auto')) {
+      return (
+        <BuyerDashboard
+          currentUser={currentUser}
+          onLogout={handleLogout}
+          onSwitchPortal={() => setActivePortalView('hub')}
+        />
+      );
+    }
+
     const roleCapitalized = currentUser.role.charAt(0).toUpperCase() + currentUser.role.slice(1);
     return (
       <div className="dashboard-hub">
@@ -297,25 +310,28 @@ export default function App() {
             </h1>
             <p className="hub-welcome-subtitle">
               You are signed in to the <strong>{roleCapitalized} Portal</strong>. You have completed{' '}
-              <strong>Dashboard 1: Login & Authentication</strong>.
+              <strong>Dashboard 1: Login & Authentication</strong> and <strong>Dashboard 2: Buyer Dashboard</strong>.
             </p>
 
             <div style={{ marginTop: '20px', display: 'flex', gap: '14px', alignItems: 'center' }}>
-              <span
+              <button
+                onClick={() => setActivePortalView('buyer')}
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '6px',
-                  background: '#dcfce7',
-                  color: '#15803d',
-                  padding: '6px 14px',
-                  borderRadius: '20px',
-                  fontSize: '13px',
+                  background: '#2563eb',
+                  color: '#ffffff',
+                  padding: '8px 18px',
+                  borderRadius: '8px',
+                  fontSize: '13.5px',
                   fontWeight: 600,
+                  cursor: 'pointer',
+                  border: 'none',
                 }}
               >
-                <CheckCircle2 size={16} /> Dashboard 1 (Login) Active & Verified
-              </span>
+                🌊 Launch Buyer Dashboard
+              </button>
               <button
                 onClick={handleLogout}
                 style={{
@@ -352,16 +368,20 @@ export default function App() {
             </div>
 
             {/* 2. Buyer */}
-            <div className={`hub-portal-card ${currentUser.role === 'buyer' ? 'active-role' : ''}`}>
+            <div
+              className="hub-portal-card active-role"
+              onClick={() => setActivePortalView('buyer')}
+              style={{ cursor: 'pointer' }}
+            >
               <div className="hub-portal-icon">
                 <WaterCanisterIcon />
               </div>
               <div className="hub-portal-title">2. Buyer Dashboard</div>
               <div className="hub-portal-desc">
-                Browse tested recycled water sources, match orders, request tankers, and track freshwater savings.
+                Interactive spatial map with Chennai pins, demand allocations, ReLoop Rescue™ failover, and metrics.
               </div>
-              <div className="hub-portal-status">
-                {currentUser.role === 'buyer' ? '👉 Your Active Role' : 'Ready for UI'}
+              <div className="hub-portal-status" style={{ color: '#10b981' }}>
+                👉 Open Live Buyer Dashboard
               </div>
             </div>
 

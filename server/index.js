@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth.js';
+import buyerRoutes from './routes/buyer.js';
 import { connectDB, isDbConnected } from './db.js';
 
 dotenv.config();
@@ -17,6 +18,7 @@ connectDB();
 
 // API Routes
 app.use('/api/auth', authRoutes);
+app.use('/api', buyerRoutes);
 
 app.get('/api/health', (req, res) => {
   res.json({

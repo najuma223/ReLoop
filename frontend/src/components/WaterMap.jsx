@@ -26,10 +26,10 @@ export default function WaterMap({ sources, demands, onRequestSource }) {
       attributionControl: false
     });
 
-    // Clean lightweight CartoDB Positron tiles for high-end look
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    // Clean OpenStreetMap tiles
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
-      subdomains: 'abcd'
+      attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
 
     // Zoom controls at bottom right
