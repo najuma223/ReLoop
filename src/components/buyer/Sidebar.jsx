@@ -119,10 +119,6 @@ export default function Sidebar({ activeTab, setActiveTab, onOpenRescue, current
         </div>
 
         <div className="sidebar-quick-links">
-          <button className="footer-link-btn" title="Switch Portal / Hub" onClick={onSwitchPortal}>
-            <LayoutDashboard size={16} />
-            <span>Portals</span>
-          </button>
           <button className="footer-link-btn" title="Log out" onClick={onLogout}>
             <LogOut size={16} />
             <span>Log out</span>

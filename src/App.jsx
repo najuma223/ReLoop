@@ -268,163 +268,60 @@ export default function App() {
     setConfirmPassword('');
   };
 
-  // If user is logged in, show either the Buyer Dashboard or the 5-Portal Hub
+  // If user is logged in, directly show their dashboard (No intermediate portal hub page)
   if (currentUser) {
-    if (activePortalView === 'buyer' || (currentUser.role === 'buyer' && activePortalView === 'auto')) {
+    if (currentUser.role === 'buyer') {
       return (
         <BuyerDashboard
           currentUser={currentUser}
           onLogout={handleLogout}
-          onSwitchPortal={() => setActivePortalView('hub')}
         />
       );
     }
 
     const roleCapitalized = currentUser.role.charAt(0).toUpperCase() + currentUser.role.slice(1);
     return (
-      <div className="dashboard-hub">
-        <header className="hub-nav">
-          <div className="hub-brand">
-            <div className="hub-brand-icon">
+      <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: '#f8fafc', fontFamily: 'var(--font-sans)' }}>
+        <header style={{ height: '64px', background: '#ffffff', borderBottom: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 32px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontWeight: 800, fontSize: '18px', color: '#0f172a' }}>
+            <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: '#2563eb', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <DropletIcon />
             </div>
             <span>ReLoop 2.0</span>
           </div>
 
-          <div className="hub-user-pill">
-            <span className="hub-role-badge">{currentUser.role}</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <span style={{ padding: '4px 10px', borderRadius: '9999px', fontSize: '12px', fontWeight: 600, textTransform: 'uppercase', background: '#eff6ff', color: '#2563eb', border: '1px solid #bfdbfe' }}>
+              {currentUser.role}
+            </span>
             <span style={{ fontSize: '14px', fontWeight: 600, color: '#1e293b' }}>
               {currentUser.fullName || currentUser.email}
             </span>
-            <button className="hub-btn-logout" onClick={handleLogout}>
-              <LogOut size={14} style={{ marginRight: '6px' }} />
+            <button
+              onClick={handleLogout}
+              style={{ padding: '6px 14px', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '13px', color: '#475569', fontWeight: 500, cursor: 'pointer', background: '#ffffff' }}
+            >
+              <LogOut size={14} style={{ marginRight: '6px', verticalAlign: 'middle' }} />
               Log Out
             </button>
           </div>
         </header>
 
-        <main className="hub-container">
-          <div className="hub-welcome-card">
-            <h1 className="hub-welcome-title">
-              Welcome to ReLoop 2.0, {currentUser.fullName || roleCapitalized}!
+        <main style={{ maxWidth: '640px', margin: '80px auto', padding: '0 24px', textAlign: 'center' }}>
+          <div style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '40px', boxShadow: '0 4px 12px rgba(0,0,0,0.05)' }}>
+            <h1 style={{ fontSize: '26px', fontWeight: 700, color: '#0f172a', marginBottom: '12px' }}>
+              Welcome, {currentUser.fullName || roleCapitalized}!
             </h1>
-            <p className="hub-welcome-subtitle">
-              You are signed in to the <strong>{roleCapitalized} Portal</strong>. You have completed{' '}
-              <strong>Dashboard 1: Login & Authentication</strong> and <strong>Dashboard 2: Buyer Dashboard</strong>.
+            <p style={{ fontSize: '15px', color: '#64748b', lineHeight: 1.6, marginBottom: '24px' }}>
+              You are signed in to the <strong>{roleCapitalized} Portal</strong>. Please share the UI design for this dashboard to build it next!
             </p>
-
-            <div style={{ marginTop: '20px', display: 'flex', gap: '14px', alignItems: 'center' }}>
-              <button
-                onClick={() => setActivePortalView('buyer')}
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  background: '#2563eb',
-                  color: '#ffffff',
-                  padding: '8px 18px',
-                  borderRadius: '8px',
-                  fontSize: '13.5px',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  border: 'none',
-                }}
-              >
-                🌊 Launch Buyer Dashboard
-              </button>
+            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
               <button
                 onClick={handleLogout}
-                style={{
-                  color: '#2563eb',
-                  fontSize: '13px',
-                  fontWeight: 600,
-                  textDecoration: 'underline',
-                  background: 'none',
-                  border: 'none',
-                }}
+                style={{ padding: '10px 20px', background: '#2563eb', color: '#ffffff', border: 'none', borderRadius: '8px', fontSize: '14px', fontWeight: 600, cursor: 'pointer' }}
               >
-                Switch Role / Sign In as another user
+                Log Out / Switch Role
               </button>
-            </div>
-          </div>
-
-          <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#0f172a', marginBottom: '16px' }}>
-            5 ReLoop Platform Portals:
-          </h3>
-
-          <div className="hub-grid">
-            {/* 1. Login */}
-            <div className="hub-portal-card active-role">
-              <div className="hub-portal-icon">
-                <CheckCircle2 size={24} />
-              </div>
-              <div className="hub-portal-title">1. Login & Auth</div>
-              <div className="hub-portal-desc">
-                Role-based sign in & registration for all 4 ecosystem stakeholders.
-              </div>
-              <div className="hub-portal-status">
-                <CheckCircle2 size={14} /> Completed
-              </div>
-            </div>
-
-            {/* 2. Buyer */}
-            <div
-              className="hub-portal-card active-role"
-              onClick={() => setActivePortalView('buyer')}
-              style={{ cursor: 'pointer' }}
-            >
-              <div className="hub-portal-icon">
-                <WaterCanisterIcon />
-              </div>
-              <div className="hub-portal-title">2. Buyer Dashboard</div>
-              <div className="hub-portal-desc">
-                Interactive spatial map with Chennai pins, demand allocations, ReLoop Rescue™ failover, and metrics.
-              </div>
-              <div className="hub-portal-status" style={{ color: '#10b981' }}>
-                👉 Open Live Buyer Dashboard
-              </div>
-            </div>
-
-            {/* 3. Seller / Supplier */}
-            <div className={`hub-portal-card ${currentUser.role === 'supplier' ? 'active-role' : ''}`}>
-              <div className="hub-portal-icon">
-                <DropletIcon />
-              </div>
-              <div className="hub-portal-title">3. Seller / Supplier</div>
-              <div className="hub-portal-desc">
-                List STP treated water supply, schedule quality audits, monitor storage, and view payouts.
-              </div>
-              <div className="hub-portal-status">
-                {currentUser.role === 'supplier' ? '👉 Your Active Role' : 'Ready for UI'}
-              </div>
-            </div>
-
-            {/* 4. Verifier */}
-            <div className={`hub-portal-card ${currentUser.role === 'verifier' ? 'active-role' : ''}`}>
-              <div className="hub-portal-icon">
-                <VerifierShieldIcon />
-              </div>
-              <div className="hub-portal-title">4. Verifier Dashboard</div>
-              <div className="hub-portal-desc">
-                Review water lab test certificates, conduct quality checks, and approve safety gates.
-              </div>
-              <div className="hub-portal-status">
-                {currentUser.role === 'verifier' ? '👉 Your Active Role' : 'Ready for UI'}
-              </div>
-            </div>
-
-            {/* 5. Transporter */}
-            <div className={`hub-portal-card ${currentUser.role === 'transporter' ? 'active-role' : ''}`}>
-              <div className="hub-portal-icon">
-                <TruckIcon />
-              </div>
-              <div className="hub-portal-title">5. Transporter Portal</div>
-              <div className="hub-portal-desc">
-                Accept delivery jobs, track tanker routes via Leaflet map, confirm delivery volume, and collect transit fees.
-              </div>
-              <div className="hub-portal-status">
-                {currentUser.role === 'transporter' ? '👉 Your Active Role' : 'Ready for UI'}
-              </div>
             </div>
           </div>
         </main>
