@@ -221,6 +221,10 @@ export default function WaterMap({ sources = [], demands = [], onRequestSource }
 
     // 1. Render Suppliers
     displayedSources.forEach(src => {
+      if (!src.coordinates || !Array.isArray(src.coordinates) || src.coordinates.length < 2) return;
+      const [lat, lon] = src.coordinates;
+      if (typeof lat !== 'number' || typeof lon !== 'number' || isNaN(lat) || isNaN(lon)) return;
+
       const isDisrupted = isRescueSimulated && src.id === disruptedSourceId;
       const isRescued = isRescueSimulated && activeMatchPair.sourceId === src.id;
       const isSelected = selectedEntity?.data?.id === src.id;
@@ -242,7 +246,7 @@ export default function WaterMap({ sources = [], demands = [], onRequestSource }
           <div class="popup-title">${src.name}</div>
           <div class="popup-meta">${src.type}</div>
           <div class="popup-stat-grid">
-            <div>Available: <strong>${src.quantity.toLocaleString()} L/day</strong></div>
+            <div>Available: <strong>${(src.quantity || 0).toLocaleString()} L/day</strong></div>
             <div>Price: <strong>${src.indicativePrice || '₹0.15/L'}</strong></div>
           </div>
           <div class="popup-source-note">Simulated Demo Data · Chennai</div>
@@ -252,6 +256,10 @@ export default function WaterMap({ sources = [], demands = [], onRequestSource }
 
     // 2. Render Buyers
     displayedDemands.forEach(dem => {
+      if (!dem.coordinates || !Array.isArray(dem.coordinates) || dem.coordinates.length < 2) return;
+      const [lat, lon] = dem.coordinates;
+      if (typeof lat !== 'number' || typeof lon !== 'number' || isNaN(lat) || isNaN(lon)) return;
+
       const isSelected = selectedEntity?.data?.id === dem.id;
 
       const marker = L.marker(dem.coordinates, {
@@ -298,21 +306,23 @@ export default function WaterMap({ sources = [], demands = [], onRequestSource }
 
       const routeColor = isRescueSimulated ? '#f59e0b' : currentSource.quality === 'Verified' ? '#0284c7' : '#94a3b8';
 
-      // Polyline for route
-      const polyline = L.polyline(res.polylineCoords, {
-        color: routeColor,
-        weight: 4.5,
-        opacity: 0.9,
-        dashArray: isRescueSimulated ? '8, 6' : currentSource.quality === 'Verified' ? '5, 8' : '3, 6',
-        lineCap: 'round',
-        lineJoin: 'round'
-      }).addTo(routeLayerRef.current);
+      if (res.polylineCoords && res.polylineCoords.length >= 2) {
+        // Polyline for route
+        const polyline = L.polyline(res.polylineCoords, {
+          color: routeColor,
+          weight: 4.5,
+          opacity: 0.9,
+          dashArray: isRescueSimulated ? '8, 6' : currentSource.quality === 'Verified' ? '5, 8' : '3, 6',
+          lineCap: 'round',
+          lineJoin: 'round'
+        }).addTo(routeLayerRef.current);
 
-      polyline.bindTooltip(`
-        <strong>${currentSource.name} → ${currentDemand.title}</strong><br/>
-        Road: ${res.roadDistanceKm} km | Straight-Line: ${res.straightLineKm} km<br/>
-        Est. Transit: ~${res.durationMin} mins (${res.routingSource})
-      `, { sticky: true });
+        polyline.bindTooltip(`
+          <strong>${currentSource.name} → ${currentDemand.title}</strong><br/>
+          Road: ${res.roadDistanceKm} km | Straight-Line: ${res.straightLineKm} km<br/>
+          Est. Transit: ~${res.durationMin} mins (${res.routingSource})
+        `, { sticky: true });
+      }
     });
 
     return () => {
@@ -600,7 +610,9 @@ export default function WaterMap({ sources = [], demands = [], onRequestSource }
               <div className="drawer-info-row">
                 <span className="drawer-lbl">Coordinates:</span>
                 <span className="drawer-val coord-text">
-                  {selectedEntity.data.coordinates[0].toFixed(4)}, {selectedEntity.data.coordinates[1].toFixed(4)}
+                  {Array.isArray(selectedEntity.data.coordinates) && selectedEntity.data.coordinates.length >= 2
+                    ? `${Number(selectedEntity.data.coordinates[0]).toFixed(4)}, ${Number(selectedEntity.data.coordinates[1]).toFixed(4)}`
+                    : '13.0450, 80.2450'}
                 </span>
               </div>
 

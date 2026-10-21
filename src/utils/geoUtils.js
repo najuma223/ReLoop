@@ -11,21 +11,34 @@
  * Calculates the straight-line (as-the-crow-flies) distance between two
  * geographic coordinates using the Haversine formula.
  *
- * @param {[number, number]} coord1 - [lat, lng]
- * @param {[number, number]} coord2 - [lat, lng]
+ * @param {[number, number]|{lat: number, lng: number}} coord1 - [lat, lng] or {lat, lng}
+ * @param {[number, number]|{lat: number, lng: number}} coord2 - [lat, lng] or {lat, lng}
  * @returns {number} Distance in kilometres, rounded to 2 decimal places.
  */
 export function calculateStraightLineDistance(coord1, coord2) {
-  const R = 6371; // Earth's radius in km
-  const [lat1, lon1] = coord1;
-  const [lat2, lon2] = coord2;
+  if (!coord1 || !coord2) return 0;
 
-  const dLat = toRad(lat2 - lat1);
-  const dLon = toRad(lon2 - lon1);
+  const lat1 = Array.isArray(coord1) ? coord1[0] : (coord1?.lat ?? coord1?.latitude);
+  const lon1 = Array.isArray(coord1) ? coord1[1] : (coord1?.lng ?? coord1?.lon ?? coord1?.longitude);
+  const lat2 = Array.isArray(coord2) ? coord2[0] : (coord2?.lat ?? coord2?.latitude);
+  const lon2 = Array.isArray(coord2) ? coord2[1] : (coord2?.lng ?? coord2?.lon ?? coord2?.longitude);
+
+  const nLat1 = Number(lat1);
+  const nLon1 = Number(lon1);
+  const nLat2 = Number(lat2);
+  const nLon2 = Number(lon2);
+
+  if (isNaN(nLat1) || isNaN(nLon1) || isNaN(nLat2) || isNaN(nLon2)) {
+    return 0;
+  }
+
+  const R = 6371; // Earth's radius in km
+  const dLat = toRad(nLat2 - nLat1);
+  const dLon = toRad(nLon2 - nLon1);
 
   const a =
     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+    Math.cos(toRad(nLat1)) * Math.cos(toRad(nLat2)) *
     Math.sin(dLon / 2) * Math.sin(dLon / 2);
 
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
@@ -45,8 +58,8 @@ function toRad(deg) {
  * OSRM demo server. Falls back to a straight-line approximation when the
  * network request fails or returns no route.
  *
- * @param {[number, number]} sourceCoords - [lat, lng] of the water supplier.
- * @param {[number, number]} demandCoords - [lat, lng] of the water buyer.
+ * @param {[number, number]|{lat: number, lng: number}} sourceCoords - [lat, lng] of water supplier.
+ * @param {[number, number]|{lat: number, lng: number}} demandCoords - [lat, lng] of water buyer.
  * @returns {Promise<{
  *   polylineCoords: [number, number][],
  *   roadDistanceKm: string,
@@ -56,11 +69,34 @@ function toRad(deg) {
  * }>}
  */
 export async function fetchRoadRoute(sourceCoords, demandCoords) {
-  const straightLineKm = calculateStraightLineDistance(sourceCoords, demandCoords);
+  const parseCoord = (c) => {
+    if (!c) return null;
+    const lat = Array.isArray(c) ? c[0] : (c?.lat ?? c?.latitude);
+    const lon = Array.isArray(c) ? c[1] : (c?.lng ?? c?.lon ?? c?.longitude);
+    const nLat = Number(lat);
+    const nLon = Number(lon);
+    if (isNaN(nLat) || isNaN(nLon)) return null;
+    return [nLat, nLon];
+  };
 
-  // Build OSRM request  (note: OSRM expects lng,lat order)
-  const [sLat, sLng] = sourceCoords;
-  const [dLat, dLng] = demandCoords;
+  const s = parseCoord(sourceCoords);
+  const d = parseCoord(demandCoords);
+
+  if (!s || !d) {
+    return {
+      polylineCoords: [],
+      roadDistanceKm: '0.0',
+      straightLineKm: '0.0',
+      durationMin: '0',
+      routingSource: 'None',
+    };
+  }
+
+  const straightLineKm = calculateStraightLineDistance(s, d);
+
+  // Build OSRM request (note: OSRM expects lng,lat order)
+  const [sLat, sLng] = s;
+  const [dLat, dLng] = d;
   const osrmUrl =
     `https://router.project-osrm.org/route/v1/driving/` +
     `${sLng},${sLat};${dLng},${dLat}` +
@@ -80,7 +116,7 @@ export async function fetchRoadRoute(sourceCoords, demandCoords) {
 
     const route = data.routes[0];
     const roadDistanceKm = (route.distance / 1000).toFixed(1);
-    const durationMin = Math.round(route.duration / 60).toString();
+    const durationMin = Math.max(1, Math.round(route.duration / 60)).toString();
 
     // GeoJSON coords are [lng, lat] — Leaflet polyline needs [lat, lng]
     const polylineCoords = route.geometry.coordinates.map(([lng, lat]) => [lat, lng]);
@@ -93,12 +129,12 @@ export async function fetchRoadRoute(sourceCoords, demandCoords) {
       routingSource: 'OSRM',
     };
   } catch {
-    // Fallback: draw a straight line between the two points
-    const estimatedRoadKm = (straightLineKm * 1.35).toFixed(1); // typical road-factor
-    const estimatedMin = Math.round((parseFloat(estimatedRoadKm) / 30) * 60).toString();
+    // Fallback: safe road estimation with direct polyline coordinates
+    const estimatedRoadKm = (straightLineKm * 1.35).toFixed(1); // typical urban road factor
+    const estimatedMin = Math.max(1, Math.round((parseFloat(estimatedRoadKm) / 30) * 60)).toString();
 
     return {
-      polylineCoords: [sourceCoords, demandCoords],
+      polylineCoords: [s, d],
       roadDistanceKm: estimatedRoadKm,
       straightLineKm: straightLineKm.toFixed(1),
       durationMin: estimatedMin,
@@ -133,10 +169,11 @@ export function evaluateWaterCompatibility(source, demand) {
   const notes = [];
 
   // Quality gate
-  if (source.quality === 'Verified') {
+  const quality = source.quality || 'Pending';
+  if (quality === 'Verified') {
     score += 30;
     notes.push('lab-certified supply');
-  } else if (source.quality === 'Pending') {
+  } else if (quality === 'Pending') {
     score -= 15;
     notes.push('lab certificate pending');
   } else {
@@ -145,12 +182,14 @@ export function evaluateWaterCompatibility(source, demand) {
   }
 
   // Volume match
-  const surplus = (source.quantity || 0) - (demand.quantity || 0);
+  const srcQty = Number(source.quantity) || 0;
+  const demQty = Number(demand.quantity) || 0;
+  const surplus = srcQty - demQty;
   if (surplus >= 0) {
     score += 15;
     notes.push(`supply surplus ${surplus.toLocaleString()} L/d`);
   } else {
-    score += Math.max(-15, Math.round((surplus / (demand.quantity || 1)) * 15));
+    score += Math.max(-15, Math.round((surplus / (demQty || 1)) * 15));
     notes.push(`supply deficit ${Math.abs(surplus).toLocaleString()} L/d`);
   }
 

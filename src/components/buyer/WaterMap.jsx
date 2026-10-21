@@ -1,42 +1,99 @@
 import React, { useEffect, useRef } from 'react';
 import L from 'leaflet';
-import { MapPin, Navigation, Maximize2 } from 'lucide-react';
+import 'leaflet/dist/leaflet.css';
+import { MapPin, Navigation } from 'lucide-react';
+import { fetchRoadRoute } from '../../utils/geoUtils';
 
-export default function WaterMap({ sources, demands, onRequestSource }) {
+export default function WaterMap({ sources = [], demands = [], onRequestSource }) {
   const mapContainerRef = useRef(null);
   const mapInstanceRef = useRef(null);
+  const routeLayerRef = useRef(null);
+  const markersLayerRef = useRef(null);
 
-  // Coordinates
-  const chennaiCenter = [13.0600, 80.2450]; // Chennai
+  // Key Coordinates (Chennai Eco-Corridor)
+  const chennaiCenter = [13.0450, 80.2450];
   const greenParkCoord = [13.0550, 80.2520]; // Green Park (Buyer Destination)
   const factoryACoord = [13.0820, 80.2300];  // Factory A (Industrial Source)
   const stpPlantCoord = [13.0200, 80.2150];  // STP Plant
   const aptComplexCoord = [13.0680, 80.2650]; // Apartment Complex
   const itParkCoord = [12.9850, 80.2450];    // IT Park
 
+  // 1. Initialize Leaflet Map Instance
   useEffect(() => {
     if (!mapContainerRef.current) return;
-    if (mapInstanceRef.current) return; // already initialized
 
-    // Initialize Leaflet Map
+    // Reset stale _leaflet_id if component was remounted
+    if (mapContainerRef.current._leaflet_id) {
+      delete mapContainerRef.current._leaflet_id;
+    }
+
+    if (mapInstanceRef.current) {
+      mapInstanceRef.current.remove();
+      mapInstanceRef.current = null;
+    }
+
+    // Centered on Chennai water reuse corridor (13.0450, 80.2450) with zoom 12
     const map = L.map(mapContainerRef.current, {
-      center: [13.0500, 80.2400],
+      center: chennaiCenter,
       zoom: 12,
       zoomControl: false,
-      attributionControl: false
+      attributionControl: true
     });
 
-    // Clean OpenStreetMap tiles
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    // Real OpenStreetMap Standard Tiles (No API key required)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
-      attribution: '&copy; OpenStreetMap contributors'
+      subdomains: ['a', 'b', 'c'],
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap</a> contributors'
     }).addTo(map);
 
     // Zoom controls at bottom right
     L.control.zoom({ position: 'bottomright' }).addTo(map);
 
-    // Custom Icon Creators
-    const createMarkerIcon = (color, typeText, isDestination = false) => {
+    // Separate Layer Groups for Route Lines and Markers
+    routeLayerRef.current = L.layerGroup().addTo(map);
+    markersLayerRef.current = L.layerGroup().addTo(map);
+
+    mapInstanceRef.current = map;
+
+    // Ensure map tiles render properly after mounting/resizing
+    map.whenReady(() => {
+      map.invalidateSize();
+    });
+
+    const t1 = setTimeout(() => map.invalidateSize(), 150);
+    const t2 = setTimeout(() => map.invalidateSize(), 500);
+
+    let resizeObserver = null;
+    if (window.ResizeObserver && mapContainerRef.current) {
+      resizeObserver = new ResizeObserver(() => {
+        if (mapInstanceRef.current) {
+          mapInstanceRef.current.invalidateSize();
+        }
+      });
+      resizeObserver.observe(mapContainerRef.current);
+    }
+
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      if (resizeObserver) resizeObserver.disconnect();
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.remove();
+        mapInstanceRef.current = null;
+      }
+    };
+  }, []);
+
+  // 2. Render Markers and Dynamic Road Route
+  useEffect(() => {
+    if (!mapInstanceRef.current || !markersLayerRef.current || !routeLayerRef.current) return;
+
+    markersLayerRef.current.clearLayers();
+    routeLayerRef.current.clearLayers();
+
+    // Custom Icon Creator
+    const createMarkerIcon = (color, isDestination = false) => {
       const pinColor = isDestination ? '#10b981' : '#0284c7';
       const innerSvg = isDestination 
         ? `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`
@@ -58,10 +115,10 @@ export default function WaterMap({ sources, demands, onRequestSource }) {
       });
     };
 
-    // Add Destination: Green Park
+    // Buyer Destination: Green Park
     const greenParkMarker = L.marker(greenParkCoord, {
-      icon: createMarkerIcon('#10b981', 'Buyer', true)
-    }).addTo(map);
+      icon: createMarkerIcon('#10b981', true)
+    }).addTo(markersLayerRef.current);
 
     greenParkMarker.bindPopup(`
       <div class="map-custom-card green-park-bubble">
@@ -71,10 +128,10 @@ export default function WaterMap({ sources, demands, onRequestSource }) {
       </div>
     `);
 
-    // Add Factory A Source
+    // Factory A Source
     const factoryAMarker = L.marker(factoryACoord, {
-      icon: createMarkerIcon('#0284c7', 'Factory A', false)
-    }).addTo(map);
+      icon: createMarkerIcon('#0284c7', false)
+    }).addTo(markersLayerRef.current);
 
     factoryAMarker.bindPopup(`
       <div class="map-custom-card source-bubble">
@@ -84,10 +141,10 @@ export default function WaterMap({ sources, demands, onRequestSource }) {
       </div>
     `);
 
-    // Add other sources
+    // STP Plant
     const stpMarker = L.marker(stpPlantCoord, {
-      icon: createMarkerIcon('#0284c7', 'STP', false)
-    }).addTo(map);
+      icon: createMarkerIcon('#0284c7', false)
+    }).addTo(markersLayerRef.current);
     stpMarker.bindPopup(`
       <div class="map-custom-card source-bubble">
         <div class="card-tag source-tag">Treated Wastewater</div>
@@ -96,9 +153,10 @@ export default function WaterMap({ sources, demands, onRequestSource }) {
       </div>
     `);
 
+    // Apartment Complex
     const aptMarker = L.marker(aptComplexCoord, {
-      icon: createMarkerIcon('#0284c7', 'Greywater', false)
-    }).addTo(map);
+      icon: createMarkerIcon('#0284c7', false)
+    }).addTo(markersLayerRef.current);
     aptMarker.bindPopup(`
       <div class="map-custom-card source-bubble">
         <div class="card-tag source-tag">Greywater</div>
@@ -107,37 +165,49 @@ export default function WaterMap({ sources, demands, onRequestSource }) {
       </div>
     `);
 
-    // Draw Recommended Route between Factory A and Green Park (Curved/Waypoint polyline)
-    const routeCoords = [
-      factoryACoord,
-      [13.0780, 80.2370],
-      [13.0720, 80.2450],
-      [13.0640, 80.2490],
-      greenParkCoord
-    ];
+    // IT Park
+    const itParkMarker = L.marker(itParkCoord, {
+      icon: createMarkerIcon('#0284c7', false)
+    }).addTo(markersLayerRef.current);
+    itParkMarker.bindPopup(`
+      <div class="map-custom-card source-bubble">
+        <div class="card-tag source-tag">RO Reject Water</div>
+        <div class="card-name">IT Park</div>
+        <div class="card-stat"><strong>4,000 L</strong> available · 8.1 km</div>
+      </div>
+    `);
 
-    L.polyline(routeCoords, {
-      color: '#0284c7',
-      weight: 3.5,
-      opacity: 0.85,
-      dashArray: '6, 8',
-      lineCap: 'round'
-    }).addTo(map);
-
-    // Open popup for default focus
+    // Automatically open Factory A popup as default active match
     factoryAMarker.openPopup();
 
-    mapInstanceRef.current = map;
+    // 3. Fetch Road-Calibrated Route between Factory A and Green Park
+    let isCancelled = false;
+    fetchRoadRoute(factoryACoord, greenParkCoord).then(res => {
+      if (isCancelled || !routeLayerRef.current) return;
+
+      const polyline = L.polyline(res.polylineCoords, {
+        color: '#0284c7',
+        weight: 3.8,
+        opacity: 0.9,
+        dashArray: '6, 8',
+        lineCap: 'round',
+        lineJoin: 'round'
+      }).addTo(routeLayerRef.current);
+
+      polyline.bindTooltip(`
+        <strong>Factory A → Green Park</strong><br/>
+        Road Route: ${res.roadDistanceKm} km · Transit: ~${res.durationMin} mins
+      `, { sticky: true });
+    });
 
     return () => {
-      map.remove();
-      mapInstanceRef.current = null;
+      isCancelled = true;
     };
   }, []);
 
   const handleRecenter = () => {
     if (mapInstanceRef.current) {
-      mapInstanceRef.current.setView([13.0550, 80.2450], 12, { animate: true });
+      mapInstanceRef.current.setView(chennaiCenter, 12, { animate: true });
     }
   };
 
