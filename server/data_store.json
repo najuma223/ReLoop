@@ -16,14 +16,14 @@
   },
   "stats": {
     "totalDemand": 12000,
-    "matchedQuantity": 7500,
-    "matchedPercent": 62,
-    "freshwaterSaved": 7500,
-    "freshwaterSavedEq": 15000,
-    "unmetDemand": 4500,
-    "activeRequestsCount": 3,
+    "matchedQuantity": 8000,
+    "matchedPercent": 67,
+    "freshwaterSaved": 8000,
+    "freshwaterSavedEq": 16000,
+    "unmetDemand": 4000,
+    "activeRequestsCount": 2,
     "transportCost": 3750,
-    "sourcesUsed": 2
+    "sourcesUsed": 1
   },
   "sources": [
     {
@@ -89,6 +89,19 @@
   ],
   "demands": [
     {
+      "id": "dem-1792604153330",
+      "title": "me",
+      "quantity": 3000,
+      "purpose": "Industrial",
+      "status": "Active",
+      "statusColor": "green",
+      "coordinates": [
+        13.087048333857057,
+        80.24821808789571
+      ],
+      "createdAt": "2026-10-21"
+    },
+    {
       "id": "dem-1",
       "title": "Green Park",
       "quantity": 4000,
@@ -130,6 +143,17 @@
   ],
   "matches": [
     {
+      "id": "mat-1792604027893",
+      "sourceId": "src-1",
+      "sourceName": "Factory A",
+      "demandId": "dem-custom",
+      "destinationName": "Green Park",
+      "quantity": 4000,
+      "distance": 2.8,
+      "status": "Matched",
+      "matchedAt": "Just now"
+    },
+    {
       "id": "mat-1",
       "sourceId": "src-1",
       "sourceName": "Factory A",
@@ -142,6 +166,38 @@
     }
   ],
   "activities": [
+    {
+      "id": "act-1792604153330",
+      "type": "demand",
+      "title": "Demand posted",
+      "detail": "me - 3,000 L (Industrial)",
+      "time": "Just now",
+      "icon": "clipboard"
+    },
+    {
+      "id": "rescue-1792604128882",
+      "type": "rescue",
+      "title": "ReLoop Rescue™ Activated",
+      "detail": "Failover re-routed to Factory A (5,000 L)",
+      "time": "Just now",
+      "icon": "shield-alert"
+    },
+    {
+      "id": "rescue-1792604070704",
+      "type": "rescue",
+      "title": "ReLoop Rescue™ Activated",
+      "detail": "Failover re-routed to Factory A (5,000 L)",
+      "time": "Just now",
+      "icon": "shield-alert"
+    },
+    {
+      "id": "act-1792604027893",
+      "type": "match",
+      "title": "New match requested",
+      "detail": "Factory A → Green Park (4,000 L)",
+      "time": "Just now",
+      "icon": "link"
+    },
     {
       "id": "act-1",
       "type": "match",

@@ -24,7 +24,7 @@ export default function Sidebar({ activeTab, setActiveTab, onOpenRescue, current
     { id: 'find-water', label: 'Find Water', icon: Search },
     { id: 'my-demands', label: 'My Demands', icon: ClipboardList },
     { id: 'my-matches', label: 'My Matches', icon: Link2 },
-    { id: 'reloop-rescue', label: 'ReLoop Rescue', icon: ShieldAlert, onClick: onOpenRescue },
+    { id: 'reloop-rescue', label: 'ReLoop Rescue', icon: ShieldAlert },
     { id: 'impact-reports', label: 'Impact Reports', icon: BarChart3 },
   ];
 

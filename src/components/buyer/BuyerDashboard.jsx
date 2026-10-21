@@ -8,6 +8,13 @@ import SourcesTable from './SourcesTable';
 import ImpactGlance from './ImpactGlance';
 import RightSidebar from './RightSidebar';
 import { CreateDemandModal, RequestModal, RescueModal } from './Modals';
+import { 
+  FindWaterTab, 
+  MyDemandsTab, 
+  MyMatchesTab, 
+  ReloopRescueTab, 
+  ImpactReportsTab 
+} from './BuyerTabs';
 import { api } from '../../services/buyerApi';
 import { CheckCircle2, Info } from 'lucide-react';
 import './BuyerDashboard.css';
@@ -142,67 +149,97 @@ export default function BuyerDashboard({ currentUser, onLogout, onSwitchPortal }
         />
 
         <main className="reloop-dashboard-body">
-          {/* Top Greeting & Weather Banner */}
-          <GreetingBanner 
-            user={user} 
-            onOpenDemandModal={() => setIsDemandModalOpen(true)}
-            onOpenRescueModal={() => setIsRescueModalOpen(true)}
-          />
-
-          {/* 4 Interactive KPI Metric Cards */}
-          <MetricsCards 
-            stats={stats} 
-            onActionClick={(tabKey) => {
-              if (tabKey === 'demands') setIsDemandModalOpen(true);
-              else if (tabKey === 'matches') showToast("Displaying confirmed supplier matches.");
-              else if (tabKey === 'reports') showToast("Generating annual water reuse impact report.");
-              else if (tabKey === 'find-water') {
-                const el = document.querySelector('.sources-table-card');
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-              }
-            }}
-          />
-
-          {/* 2-Column Split: Center Main & Right Sidebar */}
-          <div className="dashboard-grid-content">
-            {/* Center Area: Map, Sources Table, Impact */}
-            <div className="content-center-column">
-              {/* Leaflet Interactive Map */}
-              <WaterMap 
-                sources={sources} 
-                demands={demands} 
-                onRequestSource={handleRequestClick}
+          {/* TAB 1: DASHBOARD OVERVIEW */}
+          {activeTab === 'dashboard' && (
+            <>
+              {/* Top Greeting & Weather Banner */}
+              <GreetingBanner 
+                user={user} 
+                onOpenDemandModal={() => setIsDemandModalOpen(true)}
+                onOpenRescueModal={() => setIsRescueModalOpen(true)}
               />
 
-              {/* Available Water Sources Table */}
-              <SourcesTable 
-                sources={filteredSources} 
-                onRequestClick={handleRequestClick}
-                onViewAll={() => showToast(`Showing all ${sources.length} regional verified suppliers.`)}
+              {/* 4 Interactive KPI Metric Cards */}
+              <MetricsCards 
+                stats={stats} 
+                onActionClick={(tabKey) => {
+                  if (tabKey === 'demands') setActiveTab('my-demands');
+                  else if (tabKey === 'matches') setActiveTab('my-matches');
+                  else if (tabKey === 'reports') setActiveTab('impact-reports');
+                  else if (tabKey === 'find-water') setActiveTab('find-water');
+                }}
               />
 
-              {/* Real-time Environmental Impact Glance */}
-              <ImpactGlance stats={stats} />
-            </div>
+              {/* 2-Column Split: Center Main & Right Sidebar */}
+              <div className="dashboard-grid-content">
+                {/* Center Area: Map, Sources Table, Impact */}
+                <div className="content-center-column">
+                  {/* Leaflet Interactive Map */}
+                  <WaterMap 
+                    sources={sources} 
+                    demands={demands} 
+                    onRequestSource={handleRequestClick}
+                  />
 
-            {/* Right Column: Quick Actions, Demands, Activity, Rescue */}
-            <RightSidebar 
+                  {/* Available Water Sources Table */}
+                  <SourcesTable 
+                    sources={filteredSources} 
+                    onRequestClick={handleRequestClick}
+                    onViewAll={() => setActiveTab('find-water')}
+                  />
+
+                  {/* Real-time Environmental Impact Glance */}
+                  <ImpactGlance stats={stats} />
+                </div>
+
+                {/* Right Column: Quick Actions, Demands, Activity, Rescue */}
+                <RightSidebar 
+                  demands={demands} 
+                  activities={activities}
+                  onQuickAction={(actionId) => {
+                    if (actionId === 'find-water') setActiveTab('find-water');
+                    else if (actionId === 'my-demands') setActiveTab('my-demands');
+                    else if (actionId === 'my-matches') setActiveTab('my-matches');
+                    else if (actionId === 'reloop-rescue') setActiveTab('reloop-rescue');
+                  }}
+                  onOpenDemandModal={() => setIsDemandModalOpen(true)}
+                  onOpenRescueModal={() => setIsRescueModalOpen(true)}
+                />
+              </div>
+            </>
+          )}
+
+          {/* TAB 2: FIND WATER */}
+          {activeTab === 'find-water' && (
+            <FindWaterTab 
+              sources={sources} 
               demands={demands} 
-              activities={activities}
-              onQuickAction={(actionId) => {
-                if (actionId === 'find-water') {
-                  const el = document.querySelector('.sources-table-card');
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                } else if (actionId === 'my-demands') {
-                  setIsDemandModalOpen(true);
-                } else if (actionId === 'my-matches') {
-                  showToast("Checking matching options for Green Park...");
-                }
-              }}
-              onOpenDemandModal={() => setIsDemandModalOpen(true)}
-              onOpenRescueModal={() => setIsRescueModalOpen(true)}
+              onRequestClick={handleRequestClick} 
             />
-          </div>
+          )}
+
+          {/* TAB 3: MY DEMANDS */}
+          {activeTab === 'my-demands' && (
+            <MyDemandsTab 
+              demands={demands} 
+              onOpenCreateDemand={() => setIsDemandModalOpen(true)} 
+            />
+          )}
+
+          {/* TAB 4: MY MATCHES */}
+          {activeTab === 'my-matches' && (
+            <MyMatchesTab showToast={showToast} />
+          )}
+
+          {/* TAB 5: RELOOP RESCUE */}
+          {activeTab === 'reloop-rescue' && (
+            <ReloopRescueTab onOpenRescueModal={() => setIsRescueModalOpen(true)} />
+          )}
+
+          {/* TAB 6: IMPACT REPORTS */}
+          {activeTab === 'impact-reports' && (
+            <ImpactReportsTab stats={stats} showToast={showToast} />
+          )}
         </main>
       </div>
 
