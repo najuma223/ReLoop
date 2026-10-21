@@ -16,8 +16,13 @@ import {
   ImpactReportsTab 
 } from './BuyerTabs';
 import { api } from '../../services/buyerApi';
-import { CheckCircle2, Info } from 'lucide-react';
+import { CheckCircle2, Info, Receipt } from 'lucide-react';
 import ReLoopChatbot from '../common/ReLoopChatbot';
+import PaymentCheckoutModal from '../payment/PaymentCheckoutModal';
+import OrderHistorySidebar from '../payment/OrderHistorySidebar';
+import CancellationRefundModal from '../payment/CancellationRefundModal';
+import { orderService } from '../../services/orderService';
+import '../payment/PaymentModule.css';
 import './BuyerDashboard.css';
 
 export default function BuyerDashboard({ currentUser, onLogout, onSwitchPortal }) {
@@ -46,6 +51,13 @@ export default function BuyerDashboard({ currentUser, onLogout, onSwitchPortal }
   const [isDemandModalOpen, setIsDemandModalOpen] = useState(false);
   const [isRescueModalOpen, setIsRescueModalOpen] = useState(false);
   const [selectedSourceForRequest, setSelectedSourceForRequest] = useState(null);
+
+  // Payment & Order History state
+  const [isOrderSidebarOpen, setIsOrderSidebarOpen] = useState(false);
+  const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState(false);
+  const [checkoutData, setCheckoutData] = useState(null);
+  const [orderToCancel, setOrderToCancel] = useState(null);
+  const [orders, setOrders] = useState(() => orderService.getOrders());
 
   // Toast notification
   const [toast, setToast] = useState(null);
@@ -102,15 +114,47 @@ export default function BuyerDashboard({ currentUser, onLogout, onSwitchPortal }
     setSelectedSourceForRequest(source);
   };
 
+  // Payment Operations Module Handlers
+  const handleOpenCheckout = (payload = null) => {
+    setCheckoutData(payload);
+    setIsCheckoutModalOpen(true);
+  };
+
+  const handlePaymentSuccess = (newOrder) => {
+    const updated = orderService.getOrders();
+    setOrders(updated);
+    showToast(`Payment of ₹${newOrder.costBreakdown.total.toFixed(2)} confirmed! Order #${newOrder.id} dispatched.`, 'success');
+    setIsOrderSidebarOpen(true);
+  };
+
+  const handleInitiateCancel = (order) => {
+    setOrderToCancel(order);
+  };
+
+  const handleConfirmCancellation = (orderId, reason) => {
+    const cancelled = orderService.cancelOrder(orderId, reason);
+    const updated = orderService.getOrders();
+    setOrders(updated);
+    const refund = cancelled?.refundDetails?.refundAmount?.toFixed(2) || '1,000.00';
+    showToast(`Order #${orderId} cancelled. Refund of ₹${refund} initiated to your account.`, 'info');
+  };
+
   const handleConfirmMatch = async (sourceId, demandId, qty, needQualityCheck) => {
+    const demand = demands.find(d => d.id === demandId);
     await api.requestMatch(sourceId, demandId);
     await loadData();
-    if (needQualityCheck) {
-      showToast(`Match requested with ${selectedSourceForRequest?.name || 'supplier'}! Quality Check requested — Lab Verifier assigned.`, 'success');
-    } else {
-      showToast(`Match requested with ${selectedSourceForRequest?.name || 'supplier'}! Direct delivery scheduled without Quality Check.`, 'info');
-    }
+    
+    // Open Payment Operations Module directly with selected source and demand details
+    const payload = {
+      source: selectedSourceForRequest,
+      supplierName: selectedSourceForRequest?.name,
+      waterType: selectedSourceForRequest?.type,
+      volume: Number(qty) || selectedSourceForRequest?.quantity || 4000,
+      destination: demand?.location || demand?.title || 'Green Park Facility Tank #1',
+      needQualityCheck: Boolean(needQualityCheck)
+    };
     setSelectedSourceForRequest(null);
+    handleOpenCheckout(payload);
   };
 
   const handleExecuteRescue = async () => {
@@ -151,6 +195,8 @@ export default function BuyerDashboard({ currentUser, onLogout, onSwitchPortal }
           setSearchQuery={setSearchQuery} 
           onOpenDemandModal={() => setIsDemandModalOpen(true)}
           onOpenRescueModal={() => setIsRescueModalOpen(true)}
+          onOpenOrders={() => setIsOrderSidebarOpen(true)}
+          orderCount={orders.length}
           onNotificationClick={() => showToast("All system alerts are up to date! 3 active demands matched.", "info")}
         />
 
@@ -207,6 +253,7 @@ export default function BuyerDashboard({ currentUser, onLogout, onSwitchPortal }
                     else if (actionId === 'my-demands') setActiveTab('my-demands');
                     else if (actionId === 'my-matches') setActiveTab('my-matches');
                     else if (actionId === 'reloop-rescue') setActiveTab('reloop-rescue');
+                    else if (actionId === 'order-history') setIsOrderSidebarOpen(true);
                   }}
                   onOpenDemandModal={() => setIsDemandModalOpen(true)}
                   onOpenRescueModal={() => setIsRescueModalOpen(true)}
@@ -249,6 +296,18 @@ export default function BuyerDashboard({ currentUser, onLogout, onSwitchPortal }
         </main>
       </div>
 
+      {/* Persistent Right-Side Order History Trigger Pill */}
+      <button
+        type="button"
+        className="persistent-order-trigger-btn"
+        onClick={() => setIsOrderSidebarOpen(true)}
+        title="Open Order History & Transactions"
+      >
+        <Receipt size={17} />
+        <span className="order-trigger-badge">{orders.length}</span>
+        <span className="order-trigger-vertical-text">Orders</span>
+      </button>
+
       {/* Modals */}
       <CreateDemandModal 
         isOpen={isDemandModalOpen}
@@ -268,6 +327,31 @@ export default function BuyerDashboard({ currentUser, onLogout, onSwitchPortal }
         isOpen={isRescueModalOpen}
         onClose={() => setIsRescueModalOpen(false)}
         onExecuteRescue={handleExecuteRescue}
+      />
+
+      {/* Payment Operations Module: Floating Checkout Interface */}
+      <PaymentCheckoutModal 
+        isOpen={isCheckoutModalOpen}
+        onClose={() => setIsCheckoutModalOpen(false)}
+        onSuccess={handlePaymentSuccess}
+        checkoutData={checkoutData}
+      />
+
+      {/* Persistent Toggleable Order History Sidebar & Granular Detail View */}
+      <OrderHistorySidebar 
+        isOpen={isOrderSidebarOpen}
+        onClose={() => setIsOrderSidebarOpen(false)}
+        orders={orders}
+        onOpenCheckout={() => handleOpenCheckout(null)}
+        onInitiateCancel={handleInitiateCancel}
+      />
+
+      {/* redBus-Style Floating Cancellation & Exact Refund Confirmation Modal */}
+      <CancellationRefundModal 
+        isOpen={Boolean(orderToCancel)}
+        onClose={() => setOrderToCancel(null)}
+        order={orderToCancel}
+        onConfirmCancellation={handleConfirmCancellation}
       />
 
       {/* 24/7 AI Water Copilot Chatbot */}

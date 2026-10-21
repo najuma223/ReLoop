@@ -9,7 +9,8 @@ import {
   CheckCircle2, 
   Clock, 
   Sparkles,
-  RefreshCw
+  RefreshCw,
+  Receipt
 } from 'lucide-react';
 
 export default function RightSidebar({ 
@@ -78,6 +79,19 @@ export default function RightSidebar({
             <div className="action-text">
               <div className="action-name">ReLoop Rescue</div>
               <div className="action-desc">Find alternative sources →</div>
+            </div>
+          </button>
+
+          <button 
+            className="quick-action-item action-amber"
+            onClick={() => onQuickAction('order-history')}
+          >
+            <div className="action-circle bg-amber-100 text-amber-700">
+              <Receipt size={16} />
+            </div>
+            <div className="action-text">
+              <div className="action-name">Order History & Refunds</div>
+              <div className="action-desc">View receipts & cancellations →</div>
             </div>
           </button>
         </div>
