@@ -1,4 +1,15 @@
 {
+  "name": "reloop-platform",
+  "version": "1.0.0",
+  "description": "ReLoop — Water Reuse Management Platform",
+  "scripts": {
+    "dev:backend": "cd backend && npm start",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build"
+  },
+  "keywords": ["water-reuse", "react", "express", "leaflet", "nodejs", "sustainability"],
+  "author": "Antigravity",
+  "license": "MIT"
   "name": "reloop",
   "private": true,
   "version": "1.0.0",
