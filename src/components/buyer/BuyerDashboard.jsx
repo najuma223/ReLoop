@@ -16,7 +16,7 @@ import {
   ImpactReportsTab 
 } from './BuyerTabs';
 import { api } from '../../services/buyerApi';
-import { CheckCircle2, Info, Receipt, Droplet, ShieldAlert, RefreshCw } from 'lucide-react';
+import { CheckCircle2, Info, Droplet, ShieldAlert, RefreshCw } from 'lucide-react';
 import ReLoopChatbot from '../common/ReLoopChatbot';
 import PaymentCheckoutModal from '../payment/PaymentCheckoutModal';
 import OrderHistorySidebar from '../payment/OrderHistorySidebar';
@@ -342,18 +342,6 @@ export default function BuyerDashboard({ currentUser, onLogout, onSwitchPortal }
           )}
         </main>
       </div>
-
-      {/* Persistent Right-Side Order History Trigger Pill */}
-      <button
-        type="button"
-        className="persistent-order-trigger-btn"
-        onClick={() => setIsOrderSidebarOpen(true)}
-        title="Open Order History & Transactions"
-      >
-        <Receipt size={17} />
-        <span className="order-trigger-badge">{orders.length}</span>
-        <span className="order-trigger-vertical-text">Orders</span>
-      </button>
 
       {/* Modals */}
       <CreateDemandModal 
