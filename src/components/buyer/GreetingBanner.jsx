@@ -30,7 +30,7 @@ export default function GreetingBanner({ user }) {
           <Leaf size={22} className="leaf-svg" />
         </div>
         <div className="banner-titles">
-          <h1 className="banner-heading">Good morning, {user?.name || "Green Park"}!</h1>
+          <h1 className="banner-heading">Welcome, Nivi world!</h1>
           <p className="banner-subtext">Find, request and track reusable water for a greener tomorrow.</p>
         </div>
       </div>

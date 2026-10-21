@@ -25,9 +25,9 @@ export default function BuyerDashboard({ currentUser, onLogout, onSwitchPortal }
   
   // Data state
   const [user, setUser] = useState({
-    name: currentUser?.fullName || currentUser?.organization || "Green Park",
+    name: currentUser?.fullName || "Nivi world",
     role: "Buyer",
-    initials: (currentUser?.fullName || "GP").slice(0, 2).toUpperCase(),
+    initials: "NW",
     location: "Chennai, Tamil Nadu",
     weather: {
       temp: "32°C",
@@ -93,17 +93,22 @@ export default function BuyerDashboard({ currentUser, onLogout, onSwitchPortal }
   const handleCreateDemand = async (newDemand) => {
     const created = await api.createDemand(newDemand);
     await loadData();
-    showToast(`Demand created for ${created.title} (${created.quantity.toLocaleString()} L)!`);
+    const qcText = newDemand.needQualityCheck ? " (Quality Check Required)" : " (Standard Supply)";
+    showToast(`Demand created for ${created.title} (${created.quantity.toLocaleString()} L)${qcText}!`);
   };
 
   const handleRequestClick = (source) => {
     setSelectedSourceForRequest(source);
   };
 
-  const handleConfirmMatch = async (sourceId, demandId, qty) => {
+  const handleConfirmMatch = async (sourceId, demandId, qty, needQualityCheck) => {
     await api.requestMatch(sourceId, demandId);
     await loadData();
-    showToast(`Match requested with ${selectedSourceForRequest?.name || 'supplier'}! Allocation in progress.`);
+    if (needQualityCheck) {
+      showToast(`Match requested with ${selectedSourceForRequest?.name || 'supplier'}! Quality Check requested — Lab Verifier assigned.`, 'success');
+    } else {
+      showToast(`Match requested with ${selectedSourceForRequest?.name || 'supplier'}! Direct delivery scheduled without Quality Check.`, 'info');
+    }
     setSelectedSourceForRequest(null);
   };
 

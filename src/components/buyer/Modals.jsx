@@ -3,6 +3,7 @@ import {
   X, 
   Droplet, 
   ShieldAlert, 
+  ShieldCheck,
   CheckCircle2, 
   MapPin, 
   Zap, 
@@ -15,6 +16,7 @@ export function CreateDemandModal({ isOpen, onClose, onSubmit }) {
   const [quantity, setQuantity] = useState(3000);
   const [purpose, setPurpose] = useState('Irrigation');
   const [location, setLocation] = useState('Chennai, Tamil Nadu');
+  const [needQualityCheck, setNeedQualityCheck] = useState(true);
 
   if (!isOpen) return null;
 
@@ -25,7 +27,8 @@ export function CreateDemandModal({ isOpen, onClose, onSubmit }) {
       title: title.trim(),
       quantity: Number(quantity),
       purpose,
-      location
+      location,
+      needQualityCheck
     });
     setTitle('');
     onClose();
@@ -104,7 +107,31 @@ export function CreateDemandModal({ isOpen, onClose, onSubmit }) {
             </div>
           </div>
 
-          <div className="modal-actions">
+          {/* Quality Check Option */}
+          <div className="qc-question-section" style={{ marginTop: '12px' }}>
+            <label className="form-label" style={{ fontWeight: 700, fontSize: '13px', color: '#0f172a', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <ShieldCheck size={16} className="text-emerald-600" />
+              Do you need a Quality Check for this demand?
+            </label>
+            <div className="quality-check-toggle-row">
+              <button
+                type="button"
+                className={`btn-toggle-qc ${needQualityCheck ? 'active' : ''}`}
+                onClick={() => setNeedQualityCheck(true)}
+              >
+                ✓ Yes, Require Quality Check
+              </button>
+              <button
+                type="button"
+                className={`btn-toggle-qc ${!needQualityCheck ? 'active' : ''}`}
+                onClick={() => setNeedQualityCheck(false)}
+              >
+                ✕ No, Direct Supply
+              </button>
+            </div>
+          </div>
+
+          <div className="modal-actions" style={{ marginTop: '20px' }}>
             <button type="button" className="btn-cancel" onClick={onClose}>Cancel</button>
             <button type="submit" className="btn-primary">Submit Demand Request</button>
           </div>
@@ -117,17 +144,18 @@ export function CreateDemandModal({ isOpen, onClose, onSubmit }) {
 export function RequestModal({ isOpen, onClose, source, demands, onConfirm }) {
   const [selectedDemandId, setSelectedDemandId] = useState(demands[0]?.id || '');
   const [requestedLiters, setRequestedLiters] = useState(source?.quantity || 4000);
+  const [needQualityCheck, setNeedQualityCheck] = useState(true);
 
   if (!isOpen || !source) return null;
 
   const handleConfirm = () => {
-    onConfirm(source.id, selectedDemandId, requestedLiters);
+    onConfirm(source.id, selectedDemandId, requestedLiters, needQualityCheck);
     onClose();
   };
 
   return (
     <div className="modal-backdrop">
-      <div className="modal-container">
+      <div className="modal-container request-allocation-modal">
         <div className="modal-header">
           <div className="modal-title-wrap">
             <div className="modal-icon-badge bg-emerald-100 text-emerald-600">
@@ -193,6 +221,52 @@ export function RequestModal({ isOpen, onClose, source, demands, onConfirm }) {
               value={requestedLiters}
               onChange={(e) => setRequestedLiters(e.target.value)}
             />
+          </div>
+
+          {/* Quality Check Decision Question */}
+          <div className="qc-question-section">
+            <div className="qc-question-header">
+              <ShieldCheck size={18} className="qc-question-icon" />
+              <div>
+                <h4 className="qc-question-title">Do you need a Quality Check before delivery?</h4>
+                <p className="qc-question-desc">Choose whether an accredited verifier should inspect and certify this batch.</p>
+              </div>
+            </div>
+
+            <div className="qc-choices-grid">
+              <button
+                type="button"
+                className={`qc-choice-btn ${needQualityCheck === true ? 'selected-yes' : ''}`}
+                onClick={() => setNeedQualityCheck(true)}
+              >
+                <div className="qc-radio-bullet">{needQualityCheck === true ? '✓' : '○'}</div>
+                <div className="qc-choice-content">
+                  <div className="qc-choice-title">
+                    <span>Yes, I need Quality Check</span>
+                    <span className="qc-pill-badge">Recommended</span>
+                  </div>
+                  <p className="qc-choice-sub">
+                    Accredited Verifier tests TDS, pH, and BOD levels with digital CPCB certification before tanker dispatch.
+                  </p>
+                </div>
+              </button>
+
+              <button
+                type="button"
+                className={`qc-choice-btn ${needQualityCheck === false ? 'selected-no' : ''}`}
+                onClick={() => setNeedQualityCheck(false)}
+              >
+                <div className="qc-radio-bullet">{needQualityCheck === false ? '✓' : '○'}</div>
+                <div className="qc-choice-content">
+                  <div className="qc-choice-title">
+                    <span>No Quality Check needed</span>
+                  </div>
+                  <p className="qc-choice-sub">
+                    Direct dispatch based on supplier self-declared specs. Faster turnaround without lab test.
+                  </p>
+                </div>
+              </button>
+            </div>
           </div>
         </div>
 
