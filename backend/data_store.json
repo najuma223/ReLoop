@@ -15,15 +15,15 @@
     }
   },
   "stats": {
-    "totalDemand": 12000,
-    "matchedQuantity": 7500,
-    "matchedPercent": 62,
-    "freshwaterSaved": 7500,
-    "freshwaterSavedEq": 15000,
-    "unmetDemand": 4500,
-    "activeRequestsCount": 3,
+    "totalDemand": 9000,
+    "matchedQuantity": 8000,
+    "matchedPercent": 89,
+    "freshwaterSaved": 8000,
+    "freshwaterSavedEq": 16000,
+    "unmetDemand": 1000,
+    "activeRequestsCount": 1,
     "transportCost": 3750,
-    "sourcesUsed": 2
+    "sourcesUsed": 1
   },
   "sources": [
     {
@@ -130,6 +130,17 @@
   ],
   "matches": [
     {
+      "id": "mat-1792601870868",
+      "sourceId": "src-1",
+      "sourceName": "Factory A",
+      "demandId": "dem-1",
+      "destinationName": "Green Park",
+      "quantity": 4000,
+      "distance": 2.8,
+      "status": "Matched",
+      "matchedAt": "Just now"
+    },
+    {
       "id": "mat-1",
       "sourceId": "src-1",
       "sourceName": "Factory A",
@@ -142,6 +153,14 @@
     }
   ],
   "activities": [
+    {
+      "id": "act-1792601870868",
+      "type": "match",
+      "title": "New match confirmed",
+      "detail": "Factory A → Green Park",
+      "time": "Just now",
+      "icon": "link"
+    },
     {
       "id": "act-1",
       "type": "match",
