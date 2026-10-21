@@ -1,62 +1,60 @@
-# ReLoop 2.0 — Sustainable Water Reuse Platform
+# ReLoop 2.0 — Sustainable Water Reuse Platform 💧🌱
 
 An intelligent, transparent, and scalable water-reuse matching and safety-verification platform connecting **Suppliers**, **Buyers**, **Transporters**, and **Verifiers** to reduce freshwater dependency and eliminate water wastage.
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Technology Stack
 
-- **Frontend:** React.js, modern CSS, Lucide icons
+- **Frontend:** React.js, modern Vanilla CSS, Lucide icons
 - **Runtime:** Node.js
-- **Backend:** Express.js (REST API, JWT Authentication)
-- **Database:** MongoDB (Mongoose with in-memory resilient fallback)
-- **Mapping:** Leaflet Maps (for tracking supply routes & tankers)
+- **Backend:** Express.js (REST API, JWT Authentication, ReLoop Rescue™ failover)
+- **Database:** MongoDB (Mongoose with persistent data store)
+- **Mapping:** Leaflet Maps (interactive spatial map tracking suppliers, buyers, and delivery tankers)
+
+---
+
+## 🌟 Key Platform Modules & Dashboards
+
+1. **Role-Based Authentication & Portal Switcher**:
+   - Split-screen design with secure role matching across *Buyer*, *Supplier*, *Verifier*, and *Transporter*.
+   - Strict 10-digit mobile number validation and JWT authentication.
+
+2. **Buyer Dashboard**:
+   - Total Demand, Matched Quantity, Freshwater Saved, and Unmet Demand metrics.
+   - Interactive Leaflet Map tracking suppliers and delivery routes.
+   - Real-time filterable available water sources (*Verified* vs *Pending*).
+   - **ReLoop Rescue™**: Automated backup water source allocation within a 10 km radius if a primary supplier becomes unavailable.
+   - Environmental Impact Ledger.
+
+3. **Supplier / Seller Dashboard**:
+   - Listing STP treated water supply, scheduling quality audits, and monitoring payouts.
+
+4. **Verifier Dashboard**:
+   - Water quality certificate approvals and lab safety validation gates.
+
+5. **Transporter Portal**:
+   - Real-time tanker delivery jobs, GPS routes, and volume confirmation.
 
 ---
 
 ## 🚀 How to Run the Project
 
-### 1. Install Dependencies (first time only)
+### 1. Install Dependencies
 ```bash
 npm install
 ```
 
-### 2. Run Both Backend & Frontend Simultaneously (Recommended)
+### 2. Run Both Backend & Frontend Simultaneously
 ```bash
 npm run dev:all
 ```
-This single command runs:
 - **Express Backend:** `http://localhost:5000`
 - **React Frontend:** `http://localhost:5173`
 
 ---
 
-### Alternative: Run Separately in Two Terminals
-
-#### Terminal 1 — Backend:
-```bash
-npm run server
-```
-*(Starts Express server on `http://localhost:5000` & connects to MongoDB)*
-
-#### Terminal 2 — Frontend:
-```bash
-npm run dev
-```
-*(Starts Vite React dev server on `http://localhost:5173`)*
-
----
-
-## 🌐 Accessing the Application
-
-Open your browser and navigate to:
-**[http://localhost:5173](http://localhost:5173)**
-
----
-
 ## 🔑 Demo Test Accounts
-
-You can test logging in or registering with any of the 4 roles:
 
 | Role | Email | Password | Name / Organization |
 | :--- | :--- | :--- | :--- |
@@ -71,19 +69,11 @@ You can test logging in or registering with any of the 4 roles:
 
 ```
 ReLoop/
-├── index.html            # Main HTML entry with Inter fonts
-├── package.json          # Dependencies & npm scripts
+├── index.html            # Main HTML entry
+├── package.json          # Root dependencies & scripts
 ├── vite.config.js        # Vite config with API proxy to port 5000
-├── src/
-│   ├── main.jsx          # React DOM entry
-│   ├── App.jsx           # ReLoop 2.0 Auth & Dashboard Hub
-│   ├── App.css           # Pixel-accurate component styles
-│   └── index.css         # Global design system & variables
-└── server/
-    ├── index.js          # Express server entry point
-    ├── db.js             # MongoDB connection with resilient fallback
-    ├── models/
-    │   └── User.js       # User Mongoose schema (roles: buyer, supplier, transporter, verifier)
-    └── routes/
-        └── auth.js       # Register, login, and profile JWT endpoints
+├── src/                  # React Frontend (Login & Portal Hub)
+├── server/               # Express Backend & MongoDB Models
+├── frontend/             # Buyer Dashboard React components & Leaflet Map
+└── backend/              # Water matching & ReLoop Rescue APIs
 ```
