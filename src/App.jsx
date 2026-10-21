@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import "./App.css";
 import WaterDashboard from "./components/WaterDashboard";
+import BuyerDashboard from "./components/buyer/BuyerDashboard";
 
 // Exact SVG Icons matching the reference design
 function DropletIcon() {
@@ -139,6 +140,7 @@ export default function App() {
 
   // Authenticated state
   const [currentUser, setCurrentUser] = useState(null);
+  const [activePortalView, setActivePortalView] = useState('auto'); // 'auto' | 'hub' | 'buyer'
 
   // Clicking a role ONLY updates the selection state without modifying input values
   const handleSelectRole = (roleKey) => {
@@ -363,14 +365,29 @@ export default function App() {
 
   const handleLogout = () => {
     setCurrentUser(null);
+    setActivePortalView('auto');
     setAlert(null);
     setPassword("");
     setConfirmPassword("");
   };
 
-  // If user is logged in, show the complete ReLoop Dashboard
+  // Show the appropriate dashboard for the logged-in user.
   if (currentUser) {
-    return <WaterDashboard currentUser={currentUser} onLogout={handleLogout} />;
+    if (currentUser.role === "buyer") {
+      return (
+        <BuyerDashboard
+          currentUser={currentUser}
+          onLogout={handleLogout}
+        />
+      );
+    }
+
+    return (
+      <WaterDashboard
+        currentUser={currentUser}
+        onLogout={handleLogout}
+      />
+    );
   }
 
   return (

@@ -1,0 +1,318 @@
+{
+  "user": {
+    "name": "Green Park",
+    "role": "Buyer",
+    "initials": "GP",
+    "location": "Chennai, Tamil Nadu",
+    "coordinates": [
+      13.0827,
+      80.2707
+    ],
+    "weather": {
+      "temp": "32°C",
+      "condition": "Partly cloudy",
+      "date": "Tue, 22 Apr 2025"
+    }
+  },
+  "stats": {
+    "totalDemand": 12000,
+    "matchedQuantity": 22000,
+    "matchedPercent": 183,
+    "freshwaterSaved": 22000,
+    "freshwaterSavedEq": 44000,
+    "unmetDemand": 0,
+    "activeRequestsCount": 2,
+    "transportCost": 3750,
+    "sourcesUsed": 2
+  },
+  "sources": [
+    {
+      "id": "src-1",
+      "name": "Factory A",
+      "type": "Industrial",
+      "iconType": "factory",
+      "quantity": 5000,
+      "distance": 2.8,
+      "quality": "Verified",
+      "coordinates": [
+        13.0878,
+        80.2785
+      ],
+      "available": true,
+      "description": "Treated cooling tower blowdown, suitable for industrial reuse and irrigation."
+    },
+    {
+      "id": "src-2",
+      "name": "STP Plant",
+      "type": "Treated Wastewater",
+      "iconType": "leaf-water",
+      "quantity": 7000,
+      "distance": 6.5,
+      "quality": "Pending",
+      "coordinates": [
+        13.045,
+        80.24
+      ],
+      "available": true,
+      "description": "Tertiary treated municipal wastewater, lab analysis verification in progress."
+    },
+    {
+      "id": "src-3",
+      "name": "IT Park",
+      "type": "RO Reject Water",
+      "iconType": "building",
+      "quantity": 4000,
+      "distance": 8.1,
+      "quality": "Verified",
+      "coordinates": [
+        12.98,
+        80.22
+      ],
+      "available": true,
+      "description": "High TDS reverse osmosis reject water, suitable for flushing & dust suppression."
+    },
+    {
+      "id": "src-4",
+      "name": "Apartment Complex",
+      "type": "Greywater",
+      "iconType": "apartment",
+      "quantity": 3000,
+      "distance": 4.2,
+      "quality": "Verified",
+      "coordinates": [
+        13.01,
+        80.26
+      ],
+      "available": true,
+      "description": "Residential greywater system filtered through sand & carbon media."
+    }
+  ],
+  "demands": [
+    {
+      "id": "dem-1792604153330",
+      "title": "me",
+      "quantity": 3000,
+      "purpose": "Industrial",
+      "status": "Active",
+      "statusColor": "green",
+      "coordinates": [
+        13.087048333857057,
+        80.24821808789571
+      ],
+      "createdAt": "2026-10-21"
+    },
+    {
+      "id": "dem-1",
+      "title": "Green Park",
+      "quantity": 4000,
+      "purpose": "Irrigation",
+      "status": "Active",
+      "statusColor": "green",
+      "coordinates": [
+        13.0827,
+        80.2707
+      ],
+      "createdAt": "2025-04-20"
+    },
+    {
+      "id": "dem-2",
+      "title": "Sports Complex",
+      "quantity": 2000,
+      "purpose": "Construction",
+      "status": "Pending",
+      "statusColor": "blue",
+      "coordinates": [
+        13.06,
+        80.25
+      ],
+      "createdAt": "2025-04-21"
+    },
+    {
+      "id": "dem-3",
+      "title": "Community Garden",
+      "quantity": 3000,
+      "purpose": "Irrigation",
+      "status": "Matching",
+      "statusColor": "amber",
+      "coordinates": [
+        13.03,
+        80.23
+      ],
+      "createdAt": "2025-04-22"
+    }
+  ],
+  "matches": [
+    {
+      "id": "mat-1792607121779",
+      "sourceId": "src-2",
+      "sourceName": "STP Plant",
+      "demandId": "dem-custom",
+      "destinationName": "Green Park",
+      "quantity": 4000,
+      "distance": 6.5,
+      "status": "Matched",
+      "matchedAt": "Just now"
+    },
+    {
+      "id": "mat-1792607102361",
+      "sourceId": "src-1",
+      "sourceName": "Factory A",
+      "demandId": "dem-custom",
+      "destinationName": "Green Park",
+      "quantity": 4000,
+      "distance": 2.8,
+      "status": "Matched",
+      "matchedAt": "Just now"
+    },
+    {
+      "id": "mat-1792606277520",
+      "sourceId": "src-2",
+      "sourceName": "STP Plant",
+      "demandId": "dem-1792604153330",
+      "destinationName": "me",
+      "quantity": 3000,
+      "distance": 6.5,
+      "status": "Matched",
+      "matchedAt": "Just now"
+    },
+    {
+      "id": "mat-1792606230385",
+      "sourceId": "src-1",
+      "sourceName": "Factory A",
+      "demandId": "dem-1792604153330",
+      "destinationName": "me",
+      "quantity": 3000,
+      "distance": 2.8,
+      "status": "Matched",
+      "matchedAt": "Just now"
+    },
+    {
+      "id": "mat-1792604027893",
+      "sourceId": "src-1",
+      "sourceName": "Factory A",
+      "demandId": "dem-custom",
+      "destinationName": "Green Park",
+      "quantity": 4000,
+      "distance": 2.8,
+      "status": "Matched",
+      "matchedAt": "Just now"
+    },
+    {
+      "id": "mat-1",
+      "sourceId": "src-1",
+      "sourceName": "Factory A",
+      "demandId": "dem-1",
+      "destinationName": "Green Park",
+      "quantity": 4000,
+      "distance": 2.8,
+      "status": "Matched",
+      "matchedAt": "2h ago"
+    }
+  ],
+  "activities": [
+    {
+      "id": "act-1792607121779",
+      "type": "match",
+      "title": "New match requested",
+      "detail": "STP Plant → Green Park (4,000 L)",
+      "time": "Just now",
+      "icon": "link"
+    },
+    {
+      "id": "act-1792607102361",
+      "type": "match",
+      "title": "New match requested",
+      "detail": "Factory A → Green Park (4,000 L)",
+      "time": "Just now",
+      "icon": "link"
+    },
+    {
+      "id": "rescue-1792607067300",
+      "type": "rescue",
+      "title": "ReLoop Rescue™ Activated",
+      "detail": "Failover re-routed to Factory A (5,000 L)",
+      "time": "Just now",
+      "icon": "shield-alert"
+    },
+    {
+      "id": "act-1792606277520",
+      "type": "match",
+      "title": "New match requested",
+      "detail": "STP Plant → me (3,000 L)",
+      "time": "Just now",
+      "icon": "link"
+    },
+    {
+      "id": "act-1792606230385",
+      "type": "match",
+      "title": "New match requested",
+      "detail": "Factory A → me (3,000 L)",
+      "time": "Just now",
+      "icon": "link"
+    },
+    {
+      "id": "act-1792604153330",
+      "type": "demand",
+      "title": "Demand posted",
+      "detail": "me - 3,000 L (Industrial)",
+      "time": "Just now",
+      "icon": "clipboard"
+    },
+    {
+      "id": "rescue-1792604128882",
+      "type": "rescue",
+      "title": "ReLoop Rescue™ Activated",
+      "detail": "Failover re-routed to Factory A (5,000 L)",
+      "time": "Just now",
+      "icon": "shield-alert"
+    },
+    {
+      "id": "rescue-1792604070704",
+      "type": "rescue",
+      "title": "ReLoop Rescue™ Activated",
+      "detail": "Failover re-routed to Factory A (5,000 L)",
+      "time": "Just now",
+      "icon": "shield-alert"
+    },
+    {
+      "id": "act-1792604027893",
+      "type": "match",
+      "title": "New match requested",
+      "detail": "Factory A → Green Park (4,000 L)",
+      "time": "Just now",
+      "icon": "link"
+    },
+    {
+      "id": "act-1",
+      "type": "match",
+      "title": "New match found",
+      "detail": "Factory A → Green Park",
+      "time": "2h ago",
+      "icon": "link"
+    },
+    {
+      "id": "act-2",
+      "type": "approval",
+      "title": "Demand approved",
+      "detail": "Green Park - 4,000 L (Irrigation)",
+      "time": "4h ago",
+      "icon": "file-text"
+    },
+    {
+      "id": "act-3",
+      "type": "source",
+      "title": "New source added",
+      "detail": "STP Plant - 7,000 L",
+      "time": "5h ago",
+      "icon": "droplet"
+    },
+    {
+      "id": "act-4",
+      "type": "complete",
+      "title": "Match completed",
+      "detail": "Apartment Complex → Sports Center",
+      "time": "1d ago",
+      "icon": "check-circle"
+    }
+  ]
+}
