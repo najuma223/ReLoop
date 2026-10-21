@@ -1,0 +1,490 @@
+/* =====================================================================
+   ReLoop 2.0 - Auth Page & Layout Styles (Pixel-Accurate)
+   ===================================================================== */
+
+.auth-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100vw;
+  background-color: #ffffff;
+  overflow-x: hidden;
+}
+
+/* ---------------------------------------------------------------------
+   LEFT HERO PANEL (Smooth Atmospheric Gradient)
+   --------------------------------------------------------------------- */
+.left-hero-panel {
+  flex: 1;
+  width: 50%;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 72px 72px;
+  /* Exact smooth gradient matching reference screenshot: sage/slate-teal to deep navy */
+  background: linear-gradient(168deg, #748b93 0%, #547185 22%, #26466f 50%, #152c5a 78%, #0d1e46 100%);
+  color: #ffffff;
+  box-sizing: border-box;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 540px;
+}
+
+/* HACKHERWAY Pill Badge */
+.brand-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 9999px;
+  padding: 5px 14px 5px 6px;
+  margin-bottom: 28px;
+  backdrop-filter: blur(10px);
+}
+
+.brand-pill-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(6, 182, 212, 0.28);
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #38bdf8;
+}
+
+.brand-pill-text {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+/* Hero Title */
+.hero-title {
+  font-family: var(--font-heading);
+  font-size: 46px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  color: #ffffff;
+  margin: 0 0 24px 0;
+}
+
+/* Accent Quote / Statement Block */
+.hero-statement {
+  display: flex;
+  align-items: stretch;
+  gap: 16px;
+  margin-bottom: 56px;
+  max-width: 440px;
+}
+
+.hero-accent-bar {
+  width: 3px;
+  background: #06b6d4;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.hero-statement-text {
+  font-size: 15.5px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 400;
+  margin: 0;
+}
+
+/* Footer Tagline */
+.hero-meta {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: #38bdf8;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* ---------------------------------------------------------------------
+   RIGHT FORM PANEL (Clean White)
+   --------------------------------------------------------------------- */
+.right-form-panel {
+  flex: 1;
+  width: 50%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 48px;
+  background-color: #ffffff;
+  box-sizing: border-box;
+}
+
+.form-card {
+  width: 100%;
+  max-width: 440px;
+}
+
+.form-header {
+  margin-bottom: 24px;
+}
+
+.form-title {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  margin: 0 0 6px 0;
+}
+
+.form-subtitle {
+  font-size: 13.5px;
+  color: #64748b;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Section label */
+.section-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: #475569;
+  margin-bottom: 10px;
+}
+
+/* ---------------------------------------------------------------------
+   ROLE SELECTOR GRID (2x2)
+   --------------------------------------------------------------------- */
+.role-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.role-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 16px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.role-card:hover {
+  border-color: #cbd5e1;
+  background-color: #fafbfc;
+}
+
+.role-card.active {
+  border: 1.5px solid #2563eb;
+  background-color: #f7faff;
+}
+
+.role-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background-color: #f8fafc;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.role-card.active .role-icon-box {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.role-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #334155;
+}
+
+.role-card.active .role-label {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* Checkmark indicator for selected role */
+.role-check-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #2563eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------------------------------------------------------------------
+   INPUT FIELDS
+   --------------------------------------------------------------------- */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.input-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: #334155;
+  margin-bottom: 6px;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  transition: all 0.15s ease;
+}
+
+.input-wrapper:hover {
+  border-color: #cbd5e1;
+}
+
+.input-wrapper:focus-within {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.input-icon-left {
+  position: absolute;
+  left: 14px;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.form-input {
+  width: 100%;
+  height: 42px;
+  padding: 0 14px 0 40px;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 13.5px;
+  color: #0f172a;
+  border-radius: 8px;
+}
+
+.form-input::placeholder {
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 12px;
+  padding: 6px;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease;
+}
+
+.password-toggle-btn:hover {
+  color: #475569;
+}
+
+/* 2-Column row for Sign Up */
+.form-row-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.form-row-2col .form-group {
+  margin-bottom: 0;
+}
+
+/* Options Row (Remember Me & Forgot Password) */
+.options-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+  margin-bottom: 20px;
+  font-size: 13px;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  color: #475569;
+  font-size: 13px;
+}
+
+.checkbox-container input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  accent-color: #2563eb;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.forgot-password-link {
+  color: #2563eb;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.forgot-password-link:hover {
+  text-decoration: underline;
+}
+
+/* Terms row */
+.terms-row {
+  margin-top: 4px;
+  margin-bottom: 18px;
+}
+
+.terms-row .checkbox-container {
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: #475569;
+}
+
+.terms-row a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.terms-row a:hover {
+  text-decoration: underline;
+}
+
+/* ---------------------------------------------------------------------
+   PRIMARY ACTION BUTTON
+   --------------------------------------------------------------------- */
+.btn-primary-action {
+  width: 100%;
+  height: 44px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 14.5px;
+  font-weight: 600;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.btn-primary-action:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.btn-primary-action:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-primary-action:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Switcher between Login and Sign Up */
+.switch-mode-box {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.switch-mode-btn {
+  color: #2563eb;
+  font-weight: 600;
+  margin-left: 5px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.switch-mode-btn:hover {
+  text-decoration: underline;
+}
+
+/* Alert Notification */
+.alert-box {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.alert-error {
+  background-color: #fef2f2;
+  border: 1px solid #fee2e2;
+  color: #b91c1c;
+}
+
+.alert-success {
+  background-color: #f0fdf4;
+  border: 1px solid #dcfce7;
+  color: #15803d;
+}
+
+/* ---------------------------------------------------------------------
+   RESPONSIVENESS
+   --------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .auth-container {
+    flex-direction: column;
+  }
+
+  .left-hero-panel {
+    width: 100%;
+    min-height: auto;
+    padding: 48px 28px;
+  }
+
+  .hero-title {
+    font-size: 34px;
+  }
+
+  .right-form-panel {
+    width: 100%;
+    min-height: auto;
+    padding: 36px 20px;
+  }
+
+  .form-row-2col {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
