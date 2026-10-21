@@ -600,7 +600,7 @@ export default function App() {
                     </span>
                     <input
                       type={showPassword ? "text" : "password"}
-                      className="form-input"
+                      className="form-input has-toggle"
                       placeholder="••••••••"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
@@ -684,7 +684,7 @@ export default function App() {
                       </span>
                       <input
                         type={showPassword ? "text" : "password"}
-                        className="form-input"
+                        className="form-input has-toggle"
                         placeholder="••••••••"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
@@ -712,7 +712,7 @@ export default function App() {
                       </span>
                       <input
                         type={showConfirmPassword ? "text" : "password"}
-                        className="form-input"
+                        className="form-input has-toggle"
                         placeholder="••••••••"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
