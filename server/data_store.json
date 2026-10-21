@@ -16,14 +16,14 @@
   },
   "stats": {
     "totalDemand": 12000,
-    "matchedQuantity": 8000,
-    "matchedPercent": 67,
-    "freshwaterSaved": 8000,
-    "freshwaterSavedEq": 16000,
-    "unmetDemand": 4000,
+    "matchedQuantity": 22000,
+    "matchedPercent": 183,
+    "freshwaterSaved": 22000,
+    "freshwaterSavedEq": 44000,
+    "unmetDemand": 0,
     "activeRequestsCount": 2,
     "transportCost": 3750,
-    "sourcesUsed": 1
+    "sourcesUsed": 2
   },
   "sources": [
     {
@@ -143,6 +143,50 @@
   ],
   "matches": [
     {
+      "id": "mat-1792607121779",
+      "sourceId": "src-2",
+      "sourceName": "STP Plant",
+      "demandId": "dem-custom",
+      "destinationName": "Green Park",
+      "quantity": 4000,
+      "distance": 6.5,
+      "status": "Matched",
+      "matchedAt": "Just now"
+    },
+    {
+      "id": "mat-1792607102361",
+      "sourceId": "src-1",
+      "sourceName": "Factory A",
+      "demandId": "dem-custom",
+      "destinationName": "Green Park",
+      "quantity": 4000,
+      "distance": 2.8,
+      "status": "Matched",
+      "matchedAt": "Just now"
+    },
+    {
+      "id": "mat-1792606277520",
+      "sourceId": "src-2",
+      "sourceName": "STP Plant",
+      "demandId": "dem-1792604153330",
+      "destinationName": "me",
+      "quantity": 3000,
+      "distance": 6.5,
+      "status": "Matched",
+      "matchedAt": "Just now"
+    },
+    {
+      "id": "mat-1792606230385",
+      "sourceId": "src-1",
+      "sourceName": "Factory A",
+      "demandId": "dem-1792604153330",
+      "destinationName": "me",
+      "quantity": 3000,
+      "distance": 2.8,
+      "status": "Matched",
+      "matchedAt": "Just now"
+    },
+    {
       "id": "mat-1792604027893",
       "sourceId": "src-1",
       "sourceName": "Factory A",
@@ -166,6 +210,46 @@
     }
   ],
   "activities": [
+    {
+      "id": "act-1792607121779",
+      "type": "match",
+      "title": "New match requested",
+      "detail": "STP Plant → Green Park (4,000 L)",
+      "time": "Just now",
+      "icon": "link"
+    },
+    {
+      "id": "act-1792607102361",
+      "type": "match",
+      "title": "New match requested",
+      "detail": "Factory A → Green Park (4,000 L)",
+      "time": "Just now",
+      "icon": "link"
+    },
+    {
+      "id": "rescue-1792607067300",
+      "type": "rescue",
+      "title": "ReLoop Rescue™ Activated",
+      "detail": "Failover re-routed to Factory A (5,000 L)",
+      "time": "Just now",
+      "icon": "shield-alert"
+    },
+    {
+      "id": "act-1792606277520",
+      "type": "match",
+      "title": "New match requested",
+      "detail": "STP Plant → me (3,000 L)",
+      "time": "Just now",
+      "icon": "link"
+    },
+    {
+      "id": "act-1792606230385",
+      "type": "match",
+      "title": "New match requested",
+      "detail": "Factory A → me (3,000 L)",
+      "time": "Just now",
+      "icon": "link"
+    },
     {
       "id": "act-1792604153330",
       "type": "demand",
