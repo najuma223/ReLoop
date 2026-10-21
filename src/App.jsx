@@ -8,7 +8,7 @@ import {
   Phone,
   CheckCircle2,
   LogOut,
-  Package,
+  AlertCircle,
 } from 'lucide-react';
 import './App.css';
 
@@ -54,41 +54,13 @@ function VerifierShieldIcon() {
   );
 }
 
-// Sample test accounts
-const DEMO_ACCOUNTS = {
-  buyer: {
-    email: 'buyer@reloop.org',
-    password: 'Password123!',
-    name: 'Green Valley Apartments',
-    phone: '+91 98765 43210',
-  },
-  supplier: {
-    email: 'supplier@reloop.org',
-    password: 'Password123!',
-    name: 'Apex Tech Park STP',
-    phone: '+91 98111 22334',
-  },
-  transporter: {
-    email: 'transporter@reloop.org',
-    password: 'Password123!',
-    name: 'EcoFlow Logistics Fleet',
-    phone: '+91 98777 66554',
-  },
-  verifier: {
-    email: 'verifier@reloop.org',
-    password: 'Password123!',
-    name: 'AquaCert Labs Quality Assurance',
-    phone: '+91 98444 33221',
-  },
-};
-
 export default function App() {
   // 'login' | 'signup'
   const [mode, setMode] = useState('login');
   // 'supplier' | 'buyer' | 'transporter' | 'verifier'
   const [selectedRole, setSelectedRole] = useState('buyer');
 
-  // Form State
+  // Form State (strictly empty by default - showing only placeholders)
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -106,34 +78,35 @@ export default function App() {
   // Authenticated state
   const [currentUser, setCurrentUser] = useState(null);
 
+  // Clicking a role ONLY updates the selection state without modifying input values
   const handleSelectRole = (roleKey) => {
     setSelectedRole(roleKey);
-    // Prefill demo credentials for testing convenience if empty or previous demo
-    if (!email || email.includes('@reloop.org') || email === 'name@company.com') {
-      const demo = DEMO_ACCOUNTS[roleKey];
-      if (demo) {
-        setEmail(demo.email);
-        setPassword(demo.password);
-        if (mode === 'signup') {
-          setFullName(demo.name);
-          setPhone(demo.phone);
-          setConfirmPassword(demo.password);
-        }
-      }
-    }
+  };
+
+  // Phone input handler: strictly numbers, maximum 10 digits
+  const handlePhoneChange = (e) => {
+    const rawVal = e.target.value;
+    const digitsOnly = rawVal.replace(/\D/g, ''); // strip non-numeric characters
+    const maxTenDigits = digitsOnly.slice(0, 10); // cap at 10 digits
+    setPhone(maxTenDigits);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setAlert(null);
 
+    // SIGN UP VALIDATION
     if (mode === 'signup') {
       if (!fullName.trim()) {
         setAlert({ type: 'error', message: 'Please enter your Full Name or Organization Name.' });
         return;
       }
       if (!email.trim()) {
-        setAlert({ type: 'error', message: 'Please enter your email address.' });
+        setAlert({ type: 'error', message: 'Please enter an email address.' });
+        return;
+      }
+      if (phone && phone.length !== 10) {
+        setAlert({ type: 'error', message: 'Phone number must be exactly 10 digits (no country code or symbols).' });
         return;
       }
       if (!password) {
@@ -149,8 +122,9 @@ export default function App() {
         return;
       }
     } else {
+      // SIGN IN VALIDATION
       if (!email.trim() || !password) {
-        setAlert({ type: 'error', message: 'Please enter both email and password.' });
+        setAlert({ type: 'error', message: 'Please enter your email address and password.' });
         return;
       }
     }
@@ -161,8 +135,8 @@ export default function App() {
       const endpoint = mode === 'signup' ? '/api/auth/register' : '/api/auth/login';
       const payload =
         mode === 'signup'
-          ? { role: selectedRole, fullName, email, phone, password }
-          : { role: selectedRole, email, password };
+          ? { role: selectedRole, fullName: fullName.trim(), email: email.trim(), phone, password }
+          : { role: selectedRole, email: email.trim(), password };
 
       const response = await fetch(endpoint, {
         method: 'POST',
@@ -173,36 +147,122 @@ export default function App() {
       const data = await response.json();
 
       if (!response.ok) {
+        // Fallback: check localStorage for accounts registered during this session
+        const localAccounts = JSON.parse(localStorage.getItem('reloop_users') || '[]');
+        if (mode === 'login') {
+          const matched = localAccounts.find(
+            (u) =>
+              (u.email.toLowerCase() === email.trim().toLowerCase() || (phone && u.phone === phone)) &&
+              u.password === password
+          );
+
+          if (matched) {
+            setAlert({ type: 'success', message: 'Login successful! Redirecting to dashboard...' });
+            setTimeout(() => {
+              setCurrentUser({
+                id: matched.id,
+                role: matched.role,
+                fullName: matched.fullName,
+                email: matched.email,
+                phone: matched.phone,
+              });
+              setLoading(false);
+            }, 400);
+            return;
+          }
+        }
         throw new Error(data.error || 'Authentication failed');
       }
 
-      setAlert({
-        type: 'success',
-        message: mode === 'signup' ? 'Account created successfully!' : 'Login successful! Redirecting...',
-      });
-
-      setTimeout(() => {
-        setCurrentUser(data.user || { role: selectedRole, email, fullName: fullName || email.split('@')[0] });
-        setLoading(false);
-      }, 500);
-    } catch (err) {
-      console.warn('API connection fallback:', err);
-      setTimeout(() => {
-        const fallbackUser = {
+      // If registration succeeded:
+      if (mode === 'signup') {
+        // Save to client localStorage as a persistent backup
+        const localAccounts = JSON.parse(localStorage.getItem('reloop_users') || '[]');
+        const newUserObj = {
+          id: data.user.id || 'user-' + Date.now(),
           role: selectedRole,
-          email,
-          fullName: fullName || DEMO_ACCOUNTS[selectedRole]?.name || email.split('@')[0],
+          fullName: fullName.trim(),
+          email: email.trim(),
           phone,
+          password,
         };
-        setCurrentUser(fallbackUser);
+        // Update or push
+        const existingIdx = localAccounts.findIndex((u) => u.email.toLowerCase() === email.trim().toLowerCase());
+        if (existingIdx >= 0) {
+          localAccounts[existingIdx] = newUserObj;
+        } else {
+          localAccounts.push(newUserObj);
+        }
+        localStorage.setItem('reloop_users', JSON.stringify(localAccounts));
+
+        setAlert({
+          type: 'success',
+          message: 'Account created successfully! Please select your account type and sign in.',
+        });
+
+        // DO NOT automatically log in. Switch to login screen as requested!
+        setMode('login');
+        setPassword('');
+        setConfirmPassword('');
         setLoading(false);
-      }, 400);
+        return;
+      } else {
+        // LOGIN SUCCEEDED
+        setAlert({
+          type: 'success',
+          message: 'Login successful! Redirecting to dashboard...',
+        });
+
+        setTimeout(() => {
+          setCurrentUser(data.user);
+          setLoading(false);
+        }, 400);
+      }
+    } catch (err) {
+      // Local account fallback check
+      const localAccounts = JSON.parse(localStorage.getItem('reloop_users') || '[]');
+      if (mode === 'login') {
+        const matched = localAccounts.find(
+          (u) =>
+            (u.email.toLowerCase() === email.trim().toLowerCase() || (u.phone && u.phone === email.trim())) &&
+            u.password === password
+        );
+
+        if (matched) {
+          // Strict role matching check
+          if (matched.role.toLowerCase() !== selectedRole.toLowerCase()) {
+            const regCap = matched.role.charAt(0).toUpperCase() + matched.role.slice(1);
+            const selCap = selectedRole.charAt(0).toUpperCase() + selectedRole.slice(1);
+            setAlert({
+              type: 'error',
+              message: `Role Mismatch: This account is registered as "${regCap}", but you selected "${selCap}". Please select "${regCap}" to sign in.`,
+            });
+            setLoading(false);
+            return;
+          }
+
+          setAlert({ type: 'success', message: 'Login successful! Redirecting to dashboard...' });
+          setTimeout(() => {
+            setCurrentUser(matched);
+            setLoading(false);
+          }, 400);
+          return;
+        }
+      }
+
+      setAlert({
+        type: 'error',
+        message: err.message || 'Unable to authenticate. Please check your credentials.',
+      });
+      setLoading(false);
     }
   };
 
   const handleLogout = () => {
     setCurrentUser(null);
     setAlert(null);
+    setPassword('');
+    setConfirmPassword('');
   };
 
   // If user is logged in, show the Dashboard Hub overview and ready-state for the other 4 dashboards
@@ -355,7 +415,7 @@ export default function App() {
   return (
     <div className="auth-container">
       {/* -------------------------------------------------------------
-          LEFT HERO PANEL (Gradient & Branding matching image)
+          LEFT HERO PANEL (Smooth gradient & Branding matching image)
           ------------------------------------------------------------- */}
       <div className="left-hero-panel">
         <div className="hero-content">
@@ -420,6 +480,7 @@ export default function App() {
           {/* Alert Message Banner */}
           {alert && (
             <div className={`alert-box ${alert.type === 'error' ? 'alert-error' : 'alert-success'}`}>
+              {alert.type === 'error' ? <AlertCircle size={16} /> : <CheckCircle2 size={16} />}
               <span>{alert.message}</span>
             </div>
           )}
@@ -528,7 +589,7 @@ export default function App() {
                       <Mail size={16} />
                     </span>
                     <input
-                      type="email"
+                      type="text"
                       className="form-input"
                       placeholder="name@company.com"
                       value={email}
@@ -608,9 +669,10 @@ export default function App() {
                       <input
                         type="tel"
                         className="form-input"
-                        placeholder="+91 98765 43210"
+                        placeholder="9876543210"
+                        maxLength={10}
                         value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
+                        onChange={handlePhoneChange}
                       />
                     </div>
                   </div>
@@ -695,9 +757,6 @@ export default function App() {
                 <span>Create Account</span>
               )}
             </button>
-
-            {/* Note: Social logins (Google, GitHub, Facebook, Apple)
-                are completely removed per instructions */}
 
             {/* Switch between Sign In and Sign Up */}
             <div className="switch-mode-box">
