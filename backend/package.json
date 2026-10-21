@@ -1,0 +1,15 @@
+{
+  "name": "reloop-backend",
+  "version": "1.0.0",
+  "description": "ReLoop Backend API - Water Reuse Management Platform",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
+}
