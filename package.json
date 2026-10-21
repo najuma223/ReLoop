@@ -6,7 +6,7 @@
   "description": "ReLoop 2.0 — Sustainable Water Reuse Management Platform",
   "scripts": {
     "dev": "vite",
-    "server": "node server/index.js",
+    "server": "node --watch server/index.js",
     "dev:all": "concurrently \"npm run server\" \"npm run dev\"",
     "build": "vite build",
     "lint": "oxlint",

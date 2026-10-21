@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth.js';
+import dashboardRoutes from './routes/dashboard.js';
 import buyerRoutes from './routes/buyer.js';
 import chatbotRoutes from './routes/chatbot.js';
 import { connectDB, isDbConnected } from './db.js';
@@ -19,6 +20,7 @@ connectDB();
 
 // API Routes
 app.use('/api/auth', authRoutes);
+app.use('/api', dashboardRoutes);
 app.use('/api', buyerRoutes);
 app.use('/api/chatbot', chatbotRoutes);
 
