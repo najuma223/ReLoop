@@ -17,6 +17,7 @@ import {
 } from './BuyerTabs';
 import { api } from '../../services/buyerApi';
 import { CheckCircle2, Info } from 'lucide-react';
+import ReLoopChatbot from '../common/ReLoopChatbot';
 import './BuyerDashboard.css';
 
 export default function BuyerDashboard({ currentUser, onLogout, onSwitchPortal }) {
@@ -268,6 +269,9 @@ export default function BuyerDashboard({ currentUser, onLogout, onSwitchPortal }
         onClose={() => setIsRescueModalOpen(false)}
         onExecuteRescue={handleExecuteRescue}
       />
+
+      {/* 24/7 AI Water Copilot Chatbot */}
+      <ReLoopChatbot onNavigateTab={(tab) => setActiveTab(tab)} />
     </div>
   );
 }

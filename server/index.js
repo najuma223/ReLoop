@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth.js';
 import buyerRoutes from './routes/buyer.js';
+import chatbotRoutes from './routes/chatbot.js';
 import { connectDB, isDbConnected } from './db.js';
 
 dotenv.config();
@@ -19,6 +20,7 @@ connectDB();
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api', buyerRoutes);
+app.use('/api/chatbot', chatbotRoutes);
 
 app.get('/api/health', (req, res) => {
   res.json({
