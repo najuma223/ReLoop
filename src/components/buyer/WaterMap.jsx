@@ -23,13 +23,14 @@ export default function WaterMap({ sources, demands, onRequestSource }) {
       center: [13.0500, 80.2400],
       zoom: 12,
       zoomControl: false,
-      attributionControl: false
+      attributionControl: true
     });
 
-    // Clean OpenStreetMap tiles
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    // Real OpenStreetMap Standard Tiles (No API Key Required, No Watermark)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
-      attribution: '&copy; OpenStreetMap contributors'
+      subdomains: ['a', 'b', 'c'],
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap</a> contributors'
     }).addTo(map);
 
     // Zoom controls at bottom right
