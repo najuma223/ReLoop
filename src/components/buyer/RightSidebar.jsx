@@ -192,47 +192,6 @@ export default function RightSidebar({
           ))}
         </div>
       </div>
-
-      {/* 5. Need More Water Card */}
-      <div className="side-card need-water-card">
-        <div className="need-water-leaf-art">
-          <Droplet size={20} className="text-emerald-500" />
-        </div>
-        <div className="need-water-title">Need more water?</div>
-        <p className="need-water-desc">
-          Find better matches, explore nearby sources or create a new request.
-        </p>
-        <button 
-          className="find-water-btn"
-          onClick={() => onQuickAction('find-water')}
-        >
-          Find Water →
-        </button>
-      </div>
-
-      {/* 6. ReLoop Rescue Card */}
-      <div className="side-card rescue-promo-card">
-        <div className="rescue-card-top">
-          <div className="rescue-shield-icon">
-            <ShieldAlert size={20} className="text-white" />
-          </div>
-          <button className="rescue-sync-icon" onClick={onOpenRescueModal} title="Refresh Backup">
-            <RefreshCw size={17} />
-          </button>
-        </div>
-
-        <h4 className="rescue-heading">ReLoop Rescue</h4>
-        <p className="rescue-desc">
-          A source becomes unavailable? We'll find an alternative for you.
-        </p>
-
-        <button 
-          className="try-rescue-btn"
-          onClick={onOpenRescueModal}
-        >
-          Try Rescue →
-        </button>
-      </div>
     </aside>
   );
 }

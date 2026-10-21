@@ -16,7 +16,7 @@ import {
   ImpactReportsTab 
 } from './BuyerTabs';
 import { api } from '../../services/buyerApi';
-import { CheckCircle2, Info, Receipt } from 'lucide-react';
+import { CheckCircle2, Info, Receipt, Droplet, ShieldAlert, RefreshCw } from 'lucide-react';
 import ReLoopChatbot from '../common/ReLoopChatbot';
 import PaymentCheckoutModal from '../payment/PaymentCheckoutModal';
 import OrderHistorySidebar from '../payment/OrderHistorySidebar';
@@ -242,6 +242,53 @@ export default function BuyerDashboard({ currentUser, onLogout, onSwitchPortal }
 
                   {/* Real-time Environmental Impact Glance */}
                   <ImpactGlance stats={stats} />
+
+                  {/* Horizontal 2-Card Row: Need More Water & ReLoop Rescue */}
+                  <div className="horizontal-promo-cards-row">
+                    {/* 1. Need More Water Card */}
+                    <div className="side-card need-water-card horizontal-box">
+                      <div className="promo-box-top">
+                        <div className="need-water-leaf-art">
+                          <Droplet size={22} className="text-emerald-500" />
+                        </div>
+                        <span className="promo-pill-category">Water Sourcing</span>
+                      </div>
+                      <div className="need-water-title">Need more water?</div>
+                      <p className="need-water-desc">
+                        Find better matches, explore nearby sources or create a new request.
+                      </p>
+                      <button 
+                        className="find-water-btn"
+                        onClick={() => setActiveTab('find-water')}
+                      >
+                        Find Water →
+                      </button>
+                    </div>
+
+                    {/* 2. ReLoop Rescue Card */}
+                    <div className="side-card rescue-promo-card horizontal-box">
+                      <div className="rescue-card-top">
+                        <div className="rescue-shield-icon">
+                          <ShieldAlert size={20} className="text-white" />
+                        </div>
+                        <button className="rescue-sync-icon" onClick={() => setIsRescueModalOpen(true)} title="Refresh Backup">
+                          <RefreshCw size={17} />
+                        </button>
+                      </div>
+
+                      <h4 className="rescue-heading">ReLoop Rescue</h4>
+                      <p className="rescue-desc">
+                        A source becomes unavailable? We'll find an alternative for you within 10 km.
+                      </p>
+
+                      <button 
+                        className="try-rescue-btn"
+                        onClick={() => setIsRescueModalOpen(true)}
+                      >
+                        Try Rescue →
+                      </button>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Right Column: Quick Actions, Demands, Activity, Rescue */}
