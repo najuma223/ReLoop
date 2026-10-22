@@ -490,6 +490,83 @@
   color: #15803d;
 }
 
+/* Quick Demo Credentials Box */
+.demo-credentials-box {
+  margin-top: 18px;
+  padding: 12px 14px;
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.demo-credentials-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.demo-buttons-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.demo-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.demo-pill-btn:hover {
+  border-color: #0c6e5d;
+  background: #f0fdf4;
+}
+
+.demo-pill-badge {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.demo-pill-badge.badge-seller {
+  background: #0c6e5d;
+  color: #ffffff;
+}
+
+.demo-pill-badge.badge-buyer {
+  background: #0284c7;
+  color: #ffffff;
+}
+
+.demo-pill-text {
+  font-weight: 600;
+  color: #334155;
+}
+
+.demo-pwd-note {
+  font-size: 11px;
+  color: #64748b;
+}
+
+.demo-pwd-note strong {
+  color: #0f172a;
+}
+
 /* ---------------------------------------------------------------------
    RESPONSIVENESS
    --------------------------------------------------------------------- */

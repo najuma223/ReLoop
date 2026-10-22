@@ -13,6 +13,7 @@ import {
 import "./App.css";
 import WaterDashboard from "./components/WaterDashboard";
 import BuyerDashboard from "./components/buyer/BuyerDashboard";
+import SellerDashboard from "./components/seller/SellerDashboard";
 
 // Exact SVG Icons matching the reference design
 function DropletIcon() {
@@ -147,6 +148,22 @@ export default function App() {
     setSelectedRole(roleKey);
   };
 
+  // Quick fill demo credentials
+  const handleFillDemo = (roleKey) => {
+    setSelectedRole(roleKey);
+    const demo = DEMO_ACCOUNTS[roleKey];
+    if (demo) {
+      setEmail(demo.email);
+      setPassword(demo.password);
+      if (mode === "signup") {
+        setFullName(demo.name);
+        setPhone(demo.phone ? demo.phone.replace(/\D/g, "").slice(0, 10) : "");
+        setConfirmPassword(demo.password);
+        setAgreeTerms(true);
+      }
+    }
+  };
+
   // Phone input handler: strictly numbers, maximum 10 digits
   const handlePhoneChange = (e) => {
     const rawVal = e.target.value;
@@ -266,12 +283,9 @@ export default function App() {
 
       // If registration succeeded:
       if (mode === "signup") {
-        // Save to client localStorage as a persistent backup
-        const localAccounts = JSON.parse(
-          localStorage.getItem("reloop_users") || "[]",
-        );
+        // Auto-login newly registered user directly into their role dashboard
         const newUserObj = {
-          id: data.user.id || "user-" + Date.now(),
+          id: data.user?.id || "user-" + Date.now(),
           role: selectedRole,
           fullName: fullName.trim(),
           email: email.trim(),
@@ -292,14 +306,14 @@ export default function App() {
         setAlert({
           type: "success",
           message:
-            "Account created successfully! Please select your account type and sign in.",
+            "Account registered successfully! Redirecting directly to your dashboard...",
         });
 
-        // DO NOT automatically log in. Switch to login screen as requested!
-        setMode("login");
-        setPassword("");
-        setConfirmPassword("");
-        setLoading(false);
+        // Automatically route to the Seller/Buyer dashboard
+        setTimeout(() => {
+          setCurrentUser(newUserObj);
+          setLoading(false);
+        }, 400);
         return;
       } else {
         // LOGIN SUCCEEDED
@@ -376,6 +390,15 @@ export default function App() {
     if (currentUser.role === "buyer") {
       return (
         <BuyerDashboard
+          currentUser={currentUser}
+          onLogout={handleLogout}
+        />
+      );
+    }
+
+    if (currentUser.role === "supplier" || currentUser.role === "seller") {
+      return (
+        <SellerDashboard
           currentUser={currentUser}
           onLogout={handleLogout}
         />
@@ -806,6 +829,32 @@ export default function App() {
                   </button>
                 </span>
               )}
+            </div>
+
+            {/* Quick Demo Credentials Helper */}
+            <div className="demo-credentials-box">
+              <span className="demo-credentials-title">Quick Demo Login:</span>
+              <div className="demo-buttons-row">
+                <button
+                  type="button"
+                  className="demo-pill-btn seller-demo-pill"
+                  onClick={() => handleFillDemo("supplier")}
+                  title="Auto-fill Supplier / Seller credentials"
+                >
+                  <span className="demo-pill-badge badge-seller">Seller</span>
+                  <span className="demo-pill-text">supplier@reloop.org</span>
+                </button>
+                <button
+                  type="button"
+                  className="demo-pill-btn buyer-demo-pill"
+                  onClick={() => handleFillDemo("buyer")}
+                  title="Auto-fill Buyer credentials"
+                >
+                  <span className="demo-pill-badge badge-buyer">Buyer</span>
+                  <span className="demo-pill-text">buyer@reloop.org</span>
+                </button>
+              </div>
+              <span className="demo-pwd-note">Demo Password: <strong>Password123!</strong></span>
             </div>
           </form>
         </div>

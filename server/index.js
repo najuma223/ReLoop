@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import authRoutes from './routes/auth.js';
 import dashboardRoutes from './routes/dashboard.js';
 import buyerRoutes from './routes/buyer.js';
+import sellerRoutes from './routes/seller.js';
 import chatbotRoutes from './routes/chatbot.js';
 import { connectDB, isDbConnected } from './db.js';
 
@@ -22,6 +23,7 @@ connectDB();
 app.use('/api/auth', authRoutes);
 app.use('/api', dashboardRoutes);
 app.use('/api', buyerRoutes);
+app.use('/api/seller', sellerRoutes);
 app.use('/api/chatbot', chatbotRoutes);
 
 app.get('/api/health', (req, res) => {
@@ -33,6 +35,10 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`[ReLoop Server] Running at http://localhost:${PORT}`);
+});
+
+server.on('error', (err) => {
+  console.error('[ReLoop Server Error]', err);
 });
