@@ -10,6 +10,15 @@ const JWT_SECRET = process.env.JWT_SECRET || 'reloop-sustainable-water-secret-20
 // Persistent memory store with seed demo accounts
 export const memoryUsers = [
   {
+    _id: 'seed-admin-1',
+    role: 'admin',
+    fullName: 'Admin',
+    email: 'admin@reloop.org',
+    phone: '9900011223',
+    passwordHash: bcrypt.hashSync('Password123!', 10),
+    organization: 'ReLoop Water Reuse Authority',
+  },
+  {
     _id: 'seed-buyer-1',
     role: 'buyer',
     fullName: 'Green Valley Apartments',

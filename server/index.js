@@ -5,7 +5,9 @@ import authRoutes from './routes/auth.js';
 import dashboardRoutes from './routes/dashboard.js';
 import buyerRoutes from './routes/buyer.js';
 import chatbotRoutes from './routes/chatbot.js';
+import adminRoutes from './routes/adminRoutes.js';
 import { connectDB, isDbConnected } from './db.js';
+import { seedInitialData } from './seed.js';
 
 dotenv.config();
 
@@ -15,11 +17,15 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Connect to MongoDB
-connectDB();
+// Connect to MongoDB and seed initial data
+connectDB().then(() => {
+  seedInitialData();
+});
 
 // API Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api', adminRoutes); // Mount at /api so /api/matches, /api/deliveries, etc. resolve directly
 app.use('/api', dashboardRoutes);
 app.use('/api', buyerRoutes);
 app.use('/api/chatbot', chatbotRoutes);

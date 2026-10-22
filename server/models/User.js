@@ -33,9 +33,22 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: '',
     },
+    accountStatus: {
+      type: String,
+      enum: ['active', 'suspended', 'pending_verification'],
+      default: 'active',
+    },
     verified: {
       type: Boolean,
-      default: false,
+      default: true,
+    },
+    location: {
+      address: { type: String, default: 'Chennai, Tamil Nadu' },
+      coordinates: { type: [Number], default: [13.0827, 80.2707] }, // [latitude, longitude]
+    },
+    lastActive: {
+      type: Date,
+      default: Date.now,
     },
   },
   {

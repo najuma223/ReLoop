@@ -9,10 +9,12 @@ import {
   CheckCircle2,
   LogOut,
   AlertCircle,
+  Shield,
 } from "lucide-react";
 import "./App.css";
 import WaterDashboard from "./components/WaterDashboard";
 import BuyerDashboard from "./components/buyer/BuyerDashboard";
+import AdminLayout from "./components/admin/AdminLayout";
 
 // Exact SVG Icons matching the reference design
 function DropletIcon() {
@@ -92,6 +94,12 @@ function VerifierShieldIcon() {
   );
 }
 const DEMO_ACCOUNTS = {
+  admin: {
+    email: "admin@reloop.org",
+    password: "Password123!",
+    name: "Admin",
+    phone: "+91 99000 11223",
+  },
   buyer: {
     email: "buyer@reloop.org",
     password: "Password123!",
@@ -373,6 +381,15 @@ export default function App() {
 
   // Show the appropriate dashboard for the logged-in user.
   if (currentUser) {
+    if (currentUser.role === "admin") {
+      return (
+        <AdminLayout
+          currentUser={currentUser}
+          onLogout={handleLogout}
+        />
+      );
+    }
+
     if (currentUser.role === "buyer") {
       return (
         <BuyerDashboard
@@ -476,12 +493,45 @@ export default function App() {
           )}
 
           <form onSubmit={handleSubmit}>
-            {/* Account Type Selector Label */}
-            <span className="section-label">
-              {mode === "login" ? "Select Account Type" : "I am joining as a:"}
-            </span>
+            {/* Account Type Selector Label & Demo Quick Fill */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+              <span className="section-label" style={{ marginBottom: 0 }}>
+                {mode === "login" ? "Select Account Type" : "I am joining as a:"}
+              </span>
+            </div>
 
-            {/* 4 Role Selector Cards in 2x2 Grid */}
+            {/* Quick Demo Fill Switcher */}
+            {mode === "login" && (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap', marginBottom: '14px' }}>
+                <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 600 }}>Demo Quick Fill:</span>
+                {['admin', 'buyer', 'supplier', 'transporter', 'verifier'].map((r) => (
+                  <button
+                    key={r}
+                    type="button"
+                    onClick={() => {
+                      setSelectedRole(r);
+                      setEmail(DEMO_ACCOUNTS[r].email);
+                      setPassword(DEMO_ACCOUNTS[r].password);
+                    }}
+                    style={{
+                      fontSize: '11px',
+                      fontWeight: 600,
+                      padding: '3px 8px',
+                      borderRadius: '6px',
+                      background: selectedRole === r ? '#0c6e5d' : '#f1f5f9',
+                      color: selectedRole === r ? '#ffffff' : '#334155',
+                      border: '1px solid #e2e8f0',
+                      cursor: 'pointer',
+                      textTransform: 'capitalize'
+                    }}
+                  >
+                    {r === 'admin' ? '🛡️ Admin' : r}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {/* 5 Platform Role Selector Cards */}
             <div className="role-grid">
               {/* 1. Supplier */}
               <div
@@ -541,6 +591,32 @@ export default function App() {
                 </div>
                 <span className="role-label">Verifier</span>
                 {selectedRole === "verifier" && (
+                  <div className="role-check-badge">
+                    <CheckCircle2 size={16} strokeWidth={1.8} />
+                  </div>
+                )}
+              </div>
+
+              {/* 5. Admin */}
+              <div
+                className={`role-card ${selectedRole === "admin" ? "active" : ""}`}
+                style={{ gridColumn: 'span 2' }}
+                onClick={() => handleSelectRole("admin")}
+              >
+                <div
+                  className="role-icon-box"
+                  style={{
+                    backgroundColor: selectedRole === "admin" ? '#0c6e5d' : '#f8fafc',
+                    color: selectedRole === "admin" ? '#ffffff' : '#475569',
+                  }}
+                >
+                  <Shield size={18} strokeWidth={1.8} />
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  <span className="role-label">Platform Administrator</span>
+                  <span style={{ fontSize: '11px', color: '#64748b' }}>Operations oversight, matching approvals, lab audits & metrics</span>
+                </div>
+                {selectedRole === "admin" && (
                   <div className="role-check-badge">
                     <CheckCircle2 size={16} strokeWidth={1.8} />
                   </div>
