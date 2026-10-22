@@ -3,6 +3,7 @@ import cors from 'cors';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import sellerRoutes from '../server/routes/seller.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -12,6 +13,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+app.use('/api/seller', sellerRoutes);
 
 // In-memory & JSON backed data store (MongoDB schema structure)
 const DB_FILE = path.join(__dirname, 'data_store.json');

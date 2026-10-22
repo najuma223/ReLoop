@@ -85,6 +85,21 @@
       ],
       "available": true,
       "description": "Residential greywater system filtered through sand & carbon media."
+    },
+    {
+      "id": "src-seller-1792689421612",
+      "name": "South Basin Secondary STP",
+      "type": "Treated Wastewater",
+      "iconType": "factory",
+      "quantity": 10000,
+      "distance": 5.5,
+      "quality": "Pending",
+      "coordinates": [
+        12.980242331523705,
+        80.22167612648643
+      ],
+      "available": false,
+      "description": "Registered water reuse source awaiting verification."
     }
   ],
   "demands": [
@@ -142,6 +157,17 @@
     }
   ],
   "matches": [
+    {
+      "id": "mat-s-1792689421559",
+      "sourceId": "src-seller-2",
+      "sourceName": "Factory A Cooling Blowdown",
+      "demandId": "req-102",
+      "destinationName": "Metro Infrastructure Corp",
+      "quantity": 3000,
+      "distance": 4.8,
+      "status": "Matched",
+      "matchedAt": "Just now"
+    },
     {
       "id": "mat-1792607121779",
       "sourceId": "src-2",
@@ -210,6 +236,14 @@
     }
   ],
   "activities": [
+    {
+      "id": "act-1792689421578",
+      "type": "match",
+      "title": "Seller accepted buyer request",
+      "detail": "Factory A Cooling Blowdown → Metro Infrastructure Corp (3,000 L)",
+      "time": "Just now",
+      "icon": "link"
+    },
     {
       "id": "act-1792607121779",
       "type": "match",
@@ -313,6 +347,571 @@
       "detail": "Apartment Complex → Sports Center",
       "time": "1d ago",
       "icon": "check-circle"
+    }
+  ],
+  "sellerProfile": {
+    "id": "seed-supplier-1",
+    "name": "Apex Tech Park STP",
+    "organization": "Apex Commercial Facilities Ltd.",
+    "role": "Seller / Water Supplier",
+    "initials": "AT",
+    "email": "supplier@reloop.org",
+    "phone": "+91 98111 22334",
+    "facilityAddress": "Plot 14-B, OMR IT Expressway, Sholinganallur",
+    "city": "Chennai",
+    "region": "Tamil Nadu",
+    "postalCode": "600119",
+    "coordinates": [
+      12.98,
+      80.22
+    ],
+    "operatingHours": "24/7 Continuous Treatment",
+    "contactPerson": "Dr. Rajesh Sundaram, Plant Operations Director",
+    "notificationsEnabled": true,
+    "emailAlerts": true,
+    "smsAlerts": false
+  },
+  "sellerSources": [
+    {
+      "id": "src-seller-1792689421612",
+      "name": "South Basin Secondary STP",
+      "type": "Treated Wastewater",
+      "category": "Treated Wastewater",
+      "totalRegisteredQuantity": 12000,
+      "quantity": 10000,
+      "minSupply": 1000,
+      "maxSupply": 12000,
+      "location": "Perungudi Industrial Park, Chennai",
+      "coordinates": [
+        12.980242331523705,
+        80.22167612648643
+      ],
+      "intendedUses": [
+        "Landscaping",
+        "Construction"
+      ],
+      "description": "Registered water reuse source awaiting verification.",
+      "replenishmentSchedule": "Daily replenishment",
+      "quality": "Pending Review",
+      "verificationStatus": "Pending Verification",
+      "availabilityStatus": "Pending Verification",
+      "available": false,
+      "reportExpiry": "Awaiting Verification",
+      "lastUpdated": "2026-10-22",
+      "labReport": null
+    },
+    {
+      "id": "src-seller-1",
+      "name": "Apex Tech Park STP",
+      "type": "Treated Wastewater",
+      "category": "STP Treated Effluent",
+      "totalRegisteredQuantity": 15000,
+      "quantity": 9000,
+      "minSupply": 1000,
+      "maxSupply": 15000,
+      "location": "Sholinganallur, OMR, Chennai",
+      "coordinates": [
+        12.98,
+        80.22
+      ],
+      "intendedUses": [
+        "Landscaping",
+        "HVAC Cooling",
+        "Construction",
+        "Toilet Flushing"
+      ],
+      "quality": "Verified",
+      "verificationStatus": "Verified",
+      "availabilityStatus": "Available",
+      "available": true,
+      "reportExpiry": "2027-04-15",
+      "lastUpdated": "2026-10-21",
+      "description": "State-of-the-art Membrane Bioreactor (MBR) followed by UV disinfection, yielding clear, low-turbidity non-potable water.",
+      "indicativePrice": "₹0.12/L",
+      "replenishmentSchedule": "Daily continuous output (~12,000 L/day)",
+      "labReport": {
+        "certId": "LAB-2026-098",
+        "labName": "AquaCert Labs Quality Assurance",
+        "testDate": "2026-09-15",
+        "expiryDate": "2027-04-15",
+        "status": "Verified",
+        "ph": 7.2,
+        "turbidity": "1.1 NTU",
+        "tds": "410 ppm",
+        "bod": "4.2 mg/L",
+        "cod": "18 mg/L",
+        "notes": "Compliant with CPCB Class B Standards for non-contact reuse."
+      }
+    },
+    {
+      "id": "src-seller-2",
+      "name": "Factory A Cooling Blowdown",
+      "type": "Industrial",
+      "category": "Industrial Cooling Effluent",
+      "totalRegisteredQuantity": 8000,
+      "quantity": 2000,
+      "minSupply": 2000,
+      "maxSupply": 8000,
+      "location": "Ambattur Industrial Estate, Chennai",
+      "coordinates": [
+        13.0878,
+        80.2785
+      ],
+      "intendedUses": [
+        "Industrial Cooling",
+        "Dust Suppression",
+        "Ash Handling"
+      ],
+      "quality": "Verified",
+      "verificationStatus": "Verified",
+      "availabilityStatus": "Suspended",
+      "available": false,
+      "reportExpiry": "2027-02-28",
+      "lastUpdated": "2026-10-22",
+      "description": "Secondary blowdown from closed-loop cooling towers, filtered and neutral pH.",
+      "indicativePrice": "₹0.09/L",
+      "replenishmentSchedule": "Weekly batch replenishment (8,000 L every Friday)",
+      "labReport": {
+        "certId": "LAB-2026-044",
+        "labName": "State Environmental Testing Laboratory",
+        "testDate": "2026-08-20",
+        "expiryDate": "2027-02-28",
+        "status": "Verified",
+        "ph": 7.5,
+        "turbidity": "1.8 NTU",
+        "tds": "680 ppm",
+        "bod": "6.0 mg/L",
+        "cod": "24 mg/L",
+        "notes": "Approved for thermal power and manufacturing site reuse."
+      }
+    },
+    {
+      "id": "src-seller-3",
+      "name": "Apex Central Greywater Bank",
+      "type": "Greywater",
+      "category": "Residential & Commercial Greywater",
+      "totalRegisteredQuantity": 6000,
+      "quantity": 3500,
+      "minSupply": 1000,
+      "maxSupply": 6000,
+      "location": "Perungudi Tech Zone, Chennai",
+      "coordinates": [
+        12.965,
+        80.242
+      ],
+      "intendedUses": [
+        "Irrigation",
+        "Park Maintenance",
+        "Road Washing"
+      ],
+      "quality": "Pending Review",
+      "verificationStatus": "Pending Verification",
+      "availabilityStatus": "Pending Verification",
+      "available": false,
+      "reportExpiry": "Awaiting Lab Clearance",
+      "lastUpdated": "2026-10-22",
+      "description": "Filtered sink and wash water treated through activated sand and dual-stage carbon filters.",
+      "indicativePrice": "₹0.08/L",
+      "replenishmentSchedule": "Daily 3,000 L generation",
+      "labReport": {
+        "certId": "LAB-2026-112",
+        "labName": "Metropolitan Testing Facility",
+        "testDate": "2026-10-18",
+        "expiryDate": "2027-04-18",
+        "status": "Pending Review",
+        "ph": 6.9,
+        "turbidity": "3.2 NTU",
+        "tds": "530 ppm",
+        "bod": "8.5 mg/L",
+        "cod": "32 mg/L",
+        "notes": "Audit sample submitted on 18 Oct 2026. Awaiting final bacterial pathogen panel."
+      }
+    },
+    {
+      "id": "src-seller-4",
+      "name": "North Yard Rainwater Reservoir",
+      "type": "Rainwater",
+      "category": "Harvested Rainwater",
+      "totalRegisteredQuantity": 10000,
+      "quantity": 0,
+      "minSupply": 1500,
+      "maxSupply": 10000,
+      "location": "Kattankulathur Catchment, Chennai",
+      "coordinates": [
+        12.823,
+        80.045
+      ],
+      "intendedUses": [
+        "Landscaping",
+        "Construction"
+      ],
+      "quality": "Expired Documentation",
+      "verificationStatus": "Expired Documentation",
+      "availabilityStatus": "Unavailable",
+      "available": false,
+      "reportExpiry": "2026-09-01 (Expired)",
+      "lastUpdated": "2026-09-15",
+      "description": "Surface retention reservoir. Temporarily suspended pending post-monsoon water testing audit.",
+      "indicativePrice": "₹0.10/L",
+      "replenishmentSchedule": "Seasonal rainwater catchment",
+      "labReport": {
+        "certId": "LAB-2025-089",
+        "labName": "EcoSafe Laboratory Solutions",
+        "testDate": "2025-08-25",
+        "expiryDate": "2026-09-01",
+        "status": "Expired",
+        "ph": 7.1,
+        "turbidity": "2.5 NTU",
+        "tds": "220 ppm",
+        "bod": "3.0 mg/L",
+        "cod": "12 mg/L",
+        "notes": "Documentation expired. Requires re-certification before matches can be fulfilled."
+      }
+    }
+  ],
+  "sellerRequests": [
+    {
+      "id": "req-101",
+      "buyerName": "Green Valley Residential Society",
+      "buyerOrg": "Green Valley Apartments",
+      "sourceId": "src-seller-1",
+      "sourceName": "Apex Tech Park STP",
+      "requestedQuantity": 4000,
+      "intendedReuse": "Irrigation & Landscaping",
+      "deliveryLocation": "Green Valley Towers, 2nd Main Rd, Anna Nagar, Chennai",
+      "requestedDate": "2026-10-23",
+      "timeWindow": "09:00 AM - 12:00 PM",
+      "estimatedDistance": 6.4,
+      "estimatedDeliveryCost": 1450,
+      "suitabilityStatus": "Fully Compliant",
+      "status": "Pending",
+      "createdAt": "2026-10-22T08:30:00.000Z",
+      "notes": "Require 4,000 L of treated water for maintaining 4 acres of apartment community lawns."
+    },
+    {
+      "id": "req-102",
+      "buyerName": "Metro Infrastructure Corp",
+      "buyerOrg": "Chennai Metro Line Extension Site",
+      "sourceId": "src-seller-2",
+      "sourceName": "Factory A Cooling Blowdown",
+      "requestedQuantity": 3000,
+      "intendedReuse": "Dust Suppression & Compaction",
+      "deliveryLocation": "Metro Pier 104, Guindy Industrial Corridor, Chennai",
+      "requestedDate": "2026-10-23",
+      "timeWindow": "02:00 PM - 05:00 PM",
+      "estimatedDistance": 4.8,
+      "estimatedDeliveryCost": 1100,
+      "suitabilityStatus": "Fully Compliant",
+      "status": "Accepted",
+      "createdAt": "2026-10-22T10:15:00.000Z",
+      "notes": "Daily spraying required to control construction dust along corridor.",
+      "acceptedAt": "2026-10-22T17:17:01.559Z"
+    },
+    {
+      "id": "req-103",
+      "buyerName": "Olympia Horizon Commercial Park",
+      "buyerOrg": "Olympia Facilities Management",
+      "sourceId": "src-seller-1",
+      "sourceName": "Apex Tech Park STP",
+      "requestedQuantity": 5000,
+      "intendedReuse": "HVAC Cooling Towers",
+      "deliveryLocation": "Olympia Tech Park, Guindy, Chennai",
+      "requestedDate": "2026-10-21",
+      "timeWindow": "08:00 AM - 11:00 AM",
+      "estimatedDistance": 7.2,
+      "estimatedDeliveryCost": 1800,
+      "suitabilityStatus": "Fully Compliant",
+      "status": "Accepted",
+      "createdAt": "2026-10-21T09:00:00.000Z",
+      "notes": "Secondary supply for centralized chilled water cooling loops."
+    },
+    {
+      "id": "req-104",
+      "buyerName": "Kallikuppam Brick Works",
+      "buyerOrg": "Kallikuppam Clay & Concrete",
+      "sourceId": "src-seller-4",
+      "sourceName": "North Yard Rainwater Reservoir",
+      "requestedQuantity": 6000,
+      "intendedReuse": "Brick Curing",
+      "deliveryLocation": "Kallikuppam Industrial Belt, Chennai",
+      "requestedDate": "2026-10-20",
+      "timeWindow": "Full Day Delivery",
+      "estimatedDistance": 14.5,
+      "estimatedDeliveryCost": 2900,
+      "suitabilityStatus": "Ineligible (Expired Certificate)",
+      "status": "Rejected",
+      "rejectionReason": "Source documentation expired; pending re-audit.",
+      "createdAt": "2026-10-20T11:45:00.000Z",
+      "notes": "Rejected due to safety protocol requirements."
+    }
+  ],
+  "sellerMatches": [
+    {
+      "id": "mat-s-1792689421559",
+      "requestId": "req-102",
+      "buyerName": "Chennai Metro Line Extension Site",
+      "buyerContact": "+91 98765 43210",
+      "sourceId": "src-seller-2",
+      "sourceName": "Factory A Cooling Blowdown",
+      "matchedQuantity": 3000,
+      "intendedReuse": "Dust Suppression & Compaction",
+      "matchDate": "2026-10-22",
+      "status": "Scheduled",
+      "deliveryMethod": "Tanker Fleet Delivery",
+      "deliveryRef": "DLV-421559",
+      "driverName": "Assigned upon dispatch",
+      "driverPhone": "+91 98400 12345",
+      "tankerCapacity": "3000 L",
+      "pickupLocation": "Factory A Cooling Blowdown Loading Dock, Ambattur Industrial Estate, Chennai",
+      "destinationLocation": "Metro Pier 104, Guindy Industrial Corridor, Chennai",
+      "estimatedCost": 1100,
+      "scheduledDeliveryDate": "2026-10-23",
+      "instructions": "Delivery of 3,000 L to Metro Infrastructure Corp for Dust Suppression & Compaction."
+    },
+    {
+      "id": "mat-s-501",
+      "requestId": "req-103",
+      "buyerName": "Olympia Tech Park Facilities",
+      "buyerContact": "+91 98450 11223",
+      "sourceId": "src-seller-1",
+      "sourceName": "Apex Tech Park STP",
+      "matchedQuantity": 5000,
+      "intendedReuse": "HVAC Cooling Towers",
+      "matchDate": "2026-10-21",
+      "status": "In Transit",
+      "deliveryMethod": "Dedicated Tanker Fleet",
+      "deliveryRef": "DLV-TN09-8841",
+      "driverName": "Senthil Kumar (TN-09-CV-8841)",
+      "driverPhone": "+91 97890 44556",
+      "tankerCapacity": "6,000 L",
+      "pickupLocation": "Apex Tech Park STP Outlet Bay 2",
+      "destinationLocation": "Olympia Tech Park, Guindy, Chennai",
+      "estimatedCost": 1800,
+      "scheduledDeliveryDate": "2026-10-22",
+      "dispatchedAt": "2026-10-22T09:15:00.000Z",
+      "instructions": "Discharge into Underground Cooling Basin #3. Driver holds safety gate pass."
+    },
+    {
+      "id": "mat-s-502",
+      "requestId": "req-prev-99",
+      "buyerName": "Green Valley Apartments",
+      "buyerContact": "+91 98765 43210",
+      "sourceId": "src-seller-1",
+      "sourceName": "Apex Tech Park STP",
+      "matchedQuantity": 4000,
+      "intendedReuse": "Irrigation",
+      "matchDate": "2026-10-19",
+      "status": "Completed",
+      "deliveryMethod": "Tanker Delivery",
+      "deliveryRef": "DLV-TN07-2231",
+      "driverName": "Murugan P. (TN-07-AL-2231)",
+      "driverPhone": "+91 98401 77889",
+      "tankerCapacity": "5,000 L",
+      "pickupLocation": "Apex Tech Park STP Bay 1",
+      "destinationLocation": "Green Valley Towers, Anna Nagar",
+      "estimatedCost": 1350,
+      "scheduledDeliveryDate": "2026-10-19",
+      "completedAt": "2026-10-19T14:30:00.000Z",
+      "confirmedReusedQuantity": 4000,
+      "instructions": "Unloaded into garden sprinkler holding tank. Water quality checklist signed by resident manager."
+    },
+    {
+      "id": "mat-s-503",
+      "requestId": "req-prev-98",
+      "buyerName": "Southline Construction Hub",
+      "buyerContact": "+91 98123 99887",
+      "sourceId": "src-seller-2",
+      "sourceName": "Factory A Cooling Blowdown",
+      "matchedQuantity": 5000,
+      "intendedReuse": "Concrete Curing",
+      "matchDate": "2026-10-18",
+      "status": "Completed",
+      "deliveryMethod": "Tanker Delivery",
+      "deliveryRef": "DLV-TN02-7711",
+      "driverName": "Ramesh Babu (TN-02-BQ-7711)",
+      "driverPhone": "+91 98222 33445",
+      "tankerCapacity": "5,000 L",
+      "pickupLocation": "Ambattur Plant Gate 4",
+      "destinationLocation": "Southline Project Site, Porur",
+      "estimatedCost": 1650,
+      "scheduledDeliveryDate": "2026-10-18",
+      "completedAt": "2026-10-18T16:00:00.000Z",
+      "confirmedReusedQuantity": 5000,
+      "instructions": "Delivered directly into curing sprinkler system."
+    }
+  ],
+  "sellerDocuments": [
+    {
+      "id": "doc-101",
+      "sourceId": "src-seller-1",
+      "sourceName": "Apex Tech Park STP",
+      "title": "Comprehensive Tertiary Treated Water Quality Audit",
+      "labName": "AquaCert Labs Quality Assurance",
+      "accreditation": "NABL / ISO 17025 Certified",
+      "reportNumber": "LAB-2026-098",
+      "issueDate": "2026-09-15",
+      "expiryDate": "2027-04-15",
+      "status": "Verified",
+      "parameters": {
+        "ph": 7.2,
+        "turbidity": "1.1 NTU",
+        "tds": "410 ppm",
+        "bod": "4.2 mg/L",
+        "cod": "18 mg/L",
+        "totalColiform": "< 2 MPN/100mL"
+      },
+      "fileUrl": "/docs/apex_stp_cert_2026.pdf",
+      "fileSize": "1.4 MB",
+      "verificationNotes": "All tested parameters meet or exceed standards for non-potable urban reuse."
+    },
+    {
+      "id": "doc-102",
+      "sourceId": "src-seller-2",
+      "sourceName": "Factory A Cooling Blowdown",
+      "title": "Heavy Metal & Mineral Content Screening Certificate",
+      "labName": "State Environmental Testing Laboratory",
+      "accreditation": "TNPCB Recognized",
+      "reportNumber": "LAB-2026-044",
+      "issueDate": "2026-08-20",
+      "expiryDate": "2027-02-28",
+      "status": "Verified",
+      "parameters": {
+        "ph": 7.5,
+        "turbidity": "1.8 NTU",
+        "tds": "680 ppm",
+        "bod": "6.0 mg/L",
+        "cod": "24 mg/L",
+        "heavyMetals": "Below detection limits"
+      },
+      "fileUrl": "/docs/factory_a_screening_2026.pdf",
+      "fileSize": "890 KB",
+      "verificationNotes": "Approved for industrial dust suppression, cooling towers, and construction use."
+    },
+    {
+      "id": "doc-103",
+      "sourceId": "src-seller-3",
+      "sourceName": "Apex Central Greywater Bank",
+      "title": "Microbiological & Pathogen Safety Assay",
+      "labName": "Metropolitan Testing Facility",
+      "accreditation": "NABL Certified",
+      "reportNumber": "LAB-2026-112",
+      "issueDate": "2026-10-18",
+      "expiryDate": "2027-04-18",
+      "status": "Pending Review",
+      "parameters": {
+        "ph": 6.9,
+        "turbidity": "3.2 NTU",
+        "tds": "530 ppm",
+        "bod": "8.5 mg/L",
+        "cod": "32 mg/L"
+      },
+      "fileUrl": "/docs/greywater_assay_pending.pdf",
+      "fileSize": "1.1 MB",
+      "verificationNotes": "Submitted on Oct 18. Official verification officer review scheduled within 48 hours."
+    },
+    {
+      "id": "doc-104",
+      "sourceId": "src-seller-4",
+      "sourceName": "North Yard Rainwater Reservoir",
+      "title": "Annual Retention Basin Water Quality Certificate",
+      "labName": "EcoSafe Laboratory Solutions",
+      "accreditation": "NABL Certified",
+      "reportNumber": "LAB-2025-089",
+      "issueDate": "2025-08-25",
+      "expiryDate": "2026-09-01",
+      "status": "Expired",
+      "parameters": {
+        "ph": 7.1,
+        "turbidity": "2.5 NTU",
+        "tds": "220 ppm",
+        "bod": "3.0 mg/L",
+        "cod": "12 mg/L"
+      },
+      "fileUrl": "/docs/rainwater_cert_2025.pdf",
+      "fileSize": "620 KB",
+      "verificationNotes": "Expired on 01 Sep 2026. Source is currently suspended until a current test report is uploaded and verified."
+    }
+  ],
+  "sellerNotifications": [
+    {
+      "id": "notif-s-1792689421628",
+      "title": "ReLoop Rescue™ Triggered",
+      "message": "Factory A Cooling Blowdown suspended (Scheduled cooling tower pipe replacement). Alternative Apex Tech Park STP flagged as backup.",
+      "time": "Just now",
+      "timestamp": "2026-10-22T17:17:01.628Z",
+      "read": false,
+      "type": "rescue",
+      "targetTab": "my-sources"
+    },
+    {
+      "id": "notif-s-1792689421612",
+      "title": "New Water Source Registered",
+      "message": "South Basin Secondary STP (10,000 L) registered and submitted for quality verification.",
+      "time": "Just now",
+      "timestamp": "2026-10-22T17:17:01.612Z",
+      "read": false,
+      "type": "source",
+      "targetTab": "my-sources"
+    },
+    {
+      "id": "notif-s-1792689421578",
+      "title": "Request Accepted & Match Scheduled",
+      "message": "Accepted request from Metro Infrastructure Corp for 3,000 L. Allocated from Factory A Cooling Blowdown.",
+      "time": "Just now",
+      "timestamp": "2026-10-22T17:17:01.578Z",
+      "read": false,
+      "type": "match",
+      "targetTab": "my-matches"
+    },
+    {
+      "id": "notif-s-1",
+      "title": "New Buyer Request Received",
+      "message": "Green Valley Apartments requested 4,000 L of STP treated water for lawn irrigation.",
+      "time": "15 minutes ago",
+      "timestamp": "2026-10-22T17:02:01.559Z",
+      "read": false,
+      "type": "request",
+      "targetTab": "incoming-requests"
+    },
+    {
+      "id": "notif-s-2",
+      "title": "New Dust Suppression Request",
+      "message": "Metro Infrastructure Corp placed a request for 3,000 L from Factory A.",
+      "time": "2 hours ago",
+      "timestamp": "2026-10-22T15:17:01.559Z",
+      "read": false,
+      "type": "request",
+      "targetTab": "incoming-requests"
+    },
+    {
+      "id": "notif-s-3",
+      "title": "Delivery Dispatched",
+      "message": "Tanker TN-09-CV-8841 is in transit carrying 5,000 L to Olympia Tech Park.",
+      "time": "3 hours ago",
+      "timestamp": "2026-10-22T14:17:01.559Z",
+      "read": true,
+      "type": "delivery",
+      "targetTab": "delivery-tracking"
+    },
+    {
+      "id": "notif-s-4",
+      "title": "Quality Certificate Approaching Expiry",
+      "message": "Factory A screening certificate LAB-2026-044 expires in 4 months (Feb 2027).",
+      "time": "1 day ago",
+      "timestamp": "2026-10-21T17:17:01.559Z",
+      "read": true,
+      "type": "verification",
+      "targetTab": "quality-verification"
+    },
+    {
+      "id": "notif-s-5",
+      "title": "Match Completed & Water Reused",
+      "message": "Delivery DLV-TN07-2231 successfully fulfilled 4,000 L to Green Valley Apartments.",
+      "time": "3 days ago",
+      "timestamp": "2026-10-19T17:17:01.559Z",
+      "read": true,
+      "type": "match",
+      "targetTab": "my-matches"
     }
   ]
 }

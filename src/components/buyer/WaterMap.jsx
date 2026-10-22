@@ -40,7 +40,7 @@ export default function WaterMap({ sources = [], demands = [], onRequestSource }
       attributionControl: true
     });
 
-    // Real OpenStreetMap Standard Tiles (No API key required)
+    // Real OpenStreetMap Standard Tiles (No API Key Required, No Watermark)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       subdomains: ['a', 'b', 'c'],
