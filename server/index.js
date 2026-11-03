@@ -7,6 +7,7 @@ import buyerRoutes from './routes/buyer.js';
 import sellerRoutes from './routes/seller.js';
 import chatbotRoutes from './routes/chatbot.js';
 import adminRoutes from './routes/adminRoutes.js';
+import rescueRoutes from './routes/rescue.js';
 import { connectDB, isDbConnected } from './db.js';
 import { seedInitialData } from './seed.js';
 
@@ -24,6 +25,7 @@ connectDB().then(() => {
 });
 
 // API Routes
+app.use('/api/rescue', rescueRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api', adminRoutes); // Mount at /api so /api/matches, /api/deliveries, etc. resolve directly
