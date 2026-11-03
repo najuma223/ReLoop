@@ -28,3 +28,4 @@ src = src.replace(oldHeading, newHeading);
 
 fs.writeFileSync(filePath, src, 'utf8');
 console.log('SUCCESS: GreetingBanner.jsx patched — Welcome greeting now uses user.name from prop.');
+
