@@ -337,13 +337,29 @@ export function MyMatchesTab({
   onPayAndDispatch,
   onOpenRescue, 
   onRefresh, 
+  isRefreshing = false,
   showToast 
 }) {
   const [activeSection, setActiveSection] = useState('all'); // 'all' | 'matches' | 'requests'
+  const [localRefreshing, setLocalRefreshing] = useState(false);
 
   const completedCount = matches.filter(m => m.status === 'Completed').length;
   const inTransitCount = matches.filter(m => m.status === 'In Transit' || m.status === 'Scheduled' || m.status === 'Confirmed').length;
   const pendingRequests = requests.filter(r => r.status === 'Pending').length;
+
+  const refreshing = isRefreshing || localRefreshing;
+
+  const handleManualRefresh = async () => {
+    if (refreshing || !onRefresh) return;
+    setLocalRefreshing(true);
+    try {
+      await onRefresh(true);
+    } catch (err) {
+      if (showToast) showToast('Failed to refresh status: ' + (err.message || 'Network error'), 'error');
+    } finally {
+      setLocalRefreshing(false);
+    }
+  };
 
   return (
     <div className="tab-page-container">
@@ -356,12 +372,28 @@ export function MyMatchesTab({
         </div>
         {onRefresh && (
           <button 
-            className="btn-outline-sm"
-            onClick={onRefresh}
-            style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
+            className="btn-outline-sm refresh-status-btn"
+            onClick={handleManualRefresh}
+            disabled={refreshing}
+            title={refreshing ? "Fetching real-time statuses from backend..." : "Fetch latest match, delivery, and request data"}
+            style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: '8px',
+              padding: '8px 16px',
+              borderRadius: '8px',
+              fontWeight: 600,
+              fontSize: '13px',
+              cursor: refreshing ? 'not-allowed' : 'pointer',
+              opacity: refreshing ? 0.75 : 1,
+              transition: 'all 0.2s ease',
+              backgroundColor: '#fff',
+              border: '1px solid #cbd5e1',
+              color: '#0f172a'
+            }}
           >
-            <RefreshCw size={14} />
-            Refresh Status
+            <RefreshCw size={14} className={refreshing ? 'reloop-spin-icon' : ''} style={{ color: '#0d9488' }} />
+            <span>{refreshing ? 'Refreshing Status...' : 'Refresh Status'}</span>
           </button>
         )}
       </div>
@@ -435,9 +467,32 @@ export function MyMatchesTab({
                         Waybill: <strong>{m.deliveryRef}</strong>
                       </span>
                     )}
+                    {m.isRescue && (
+                      <span style={{ 
+                        fontSize: '11px', 
+                        color: '#065f46', 
+                        background: '#d1fae5', 
+                        border: '1px solid #6ee7b7', 
+                        padding: '2px 8px', 
+                        borderRadius: '4px', 
+                        fontWeight: 700, 
+                        marginLeft: '8px',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '4px'
+                      }}>
+                        <ShieldAlert size={12} className="text-emerald-700" />
+                        ReLoop Rescue™ Rerouted
+                      </span>
+                    )}
                     <h3 className="match-route-title" style={{ marginTop: '4px' }}>
                       {m.sourceName || m.source} ➔ {m.destinationName || m.buyerName || m.destination}
                     </h3>
+                    {m.previousSourceName && (
+                      <p style={{ margin: '2px 0 0', fontSize: '12px', color: '#b45309' }}>
+                        ⚠️ Disrupted supplier failover: <span style={{ textDecoration: 'line-through' }}>{m.previousSourceName}</span>
+                      </p>
+                    )}
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
                     <span className={`match-status-badge ${isCompleted ? 'completed' : isConfirmed ? 'completed' : isInTransit ? 'transit' : 'scheduled'}`}>

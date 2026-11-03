@@ -666,26 +666,66 @@ export async function resolveRescueIncident(incidentId) {
     failedSourceInDB.availabilityStatus = 'Suspended (Rescue Failover)';
   }
 
-  // Create authoritative match record
-  const newMatch = {
-    id: `mat-rescue-${Date.now()}`,
-    sourceId: winningAlternative.sourceId,
-    sourceName: `${winningAlternative.sourceName} (ReLoop Rescue™)`,
-    demandId: targetDemand.id,
-    destinationName: targetDemand.title,
-    quantity: routeReassignment.dispatchedVolumeLiters,
-    matchedQuantity: routeReassignment.dispatchedVolumeLiters,
-    distanceKm: winningAlternative.distanceKm,
-    status: 'In Transit',
-    matchedAt: 'Just now',
-    isRescue: true,
-    waybill: routeReassignment.waybillNumber,
-    driverName: routeReassignment.driverName,
-    driverPhone: routeReassignment.driverContact
-  };
-
+  // Check if an existing match exists for this demand or disrupted supplier
   db.matches = db.matches || [];
-  db.matches.unshift(newMatch);
+  let existingMatch = db.matches.find(m => 
+    (m.demandId === targetDemand.id || m.sourceId === active.incident.affectedSupplier.id) &&
+    m.status !== 'Completed' && m.status !== 'Cancelled'
+  );
+
+  let newMatch;
+  if (existingMatch) {
+    // Update existing match in-place without creating orphan duplicate records
+    existingMatch.previousSourceName = existingMatch.sourceName;
+    existingMatch.sourceId = winningAlternative.sourceId;
+    existingMatch.sourceName = `${winningAlternative.sourceName} (ReLoop Rescue™)`;
+    existingMatch.quantity = routeReassignment.dispatchedVolumeLiters;
+    existingMatch.matchedQuantity = routeReassignment.dispatchedVolumeLiters;
+    existingMatch.distanceKm = winningAlternative.distanceKm;
+    existingMatch.status = 'In Transit';
+    existingMatch.isRescue = true;
+    existingMatch.rescueIncidentId = active.incident.incidentId;
+    existingMatch.deliveryRef = routeReassignment.waybillNumber;
+    existingMatch.waybill = routeReassignment.waybillNumber;
+    existingMatch.deliveryReference = routeReassignment.waybillNumber;
+    existingMatch.driverName = routeReassignment.driverName;
+    existingMatch.driverPhone = routeReassignment.driverContact;
+    existingMatch.updatedAt = new Date().toISOString();
+    newMatch = existingMatch;
+
+    // Mirror to sellerMatches
+    const sMatch = (db.sellerMatches || []).find(m => m.id === existingMatch.id);
+    if (sMatch) Object.assign(sMatch, existingMatch);
+  } else {
+    // Create new match if none exists
+    newMatch = {
+      id: `mat-rescue-${Date.now()}`,
+      sourceId: winningAlternative.sourceId,
+      sourceName: `${winningAlternative.sourceName} (ReLoop Rescue™)`,
+      demandId: targetDemand.id,
+      destinationName: targetDemand.title || targetDemand.buyerName || 'Green Park Facility',
+      buyerName: targetDemand.buyerName || 'Green Park Facilities',
+      quantity: routeReassignment.dispatchedVolumeLiters,
+      matchedQuantity: routeReassignment.dispatchedVolumeLiters,
+      distanceKm: winningAlternative.distanceKm,
+      status: 'In Transit',
+      matchedAt: 'Just now',
+      isRescue: true,
+      rescueIncidentId: active.incident.incidentId,
+      deliveryRef: routeReassignment.waybillNumber,
+      waybill: routeReassignment.waybillNumber,
+      deliveryReference: routeReassignment.waybillNumber,
+      driverName: routeReassignment.driverName,
+      driverPhone: routeReassignment.driverContact,
+      tankerCapacity: `${routeReassignment.dispatchedVolumeLiters} L`,
+      estimatedCost: routeReassignment.freightCostInr || 1200,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+    db.matches.unshift(newMatch);
+    db.sellerMatches = db.sellerMatches || [];
+    db.sellerMatches.unshift(newMatch);
+  }
 
   // Sync with MongoDB if available
   if (isDbConnected()) {
