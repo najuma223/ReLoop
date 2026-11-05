@@ -190,3 +190,4 @@ fs.writeFileSync(dashRoutePath, dashRoute, 'utf8');
 console.log('✅ Bug 3 fixed: GET /demands/:id/matches route added to dashboard.js');
 
 console.log('\n✅ All 3 bugs fixed. Run: npm run build');
+

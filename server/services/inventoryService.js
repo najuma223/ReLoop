@@ -824,10 +824,20 @@ export async function updateMatchStatus(matchId, newStatus, details = {}) {
       throw new Error(`Match record #${matchId} not found.`);
     }
 
+    // Normalize legacy/admin statuses to canonical equivalents before transition check
+    const statusAliases = {
+      'Admin Approved': 'Confirmed',
+      'Rerouted': 'Confirmed',
+      'Rescued': 'In Transit'
+    };
+    if (statusAliases[match.status]) {
+      match.status = statusAliases[match.status];
+    }
+
     const validTransitions = {
-      'Pending': ['Accepted', 'Scheduled', 'Confirmed', 'Cancelled'],
+      'Pending': ['Accepted', 'Scheduled', 'Confirmed', 'In Transit', 'Cancelled'],
       'Accepted': ['Scheduled', 'Confirmed', 'In Transit', 'Cancelled'],
-      'Scheduled': ['Confirmed', 'In Transit', 'Cancelled'],
+      'Scheduled': ['Confirmed', 'In Transit', 'Completed', 'Cancelled'],
       'Confirmed': ['In Transit', 'Delivered', 'Completed', 'Cancelled'],
       'In Transit': ['Delivered', 'Completed', 'Cancelled', 'Failed'],
       'Delivered': ['Completed', 'Failed'],

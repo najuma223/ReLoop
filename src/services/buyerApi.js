@@ -151,7 +151,9 @@ export const buyerApi = {
 
   async confirmMatchAgreement(identifier) {
     try {
-      const res = await fetch(`${API_BASE}/matches/${identifier}/confirm`, {
+      // /confirm-agreement → sets status to 'Confirmed' (Scheduled → Confirmed)
+      // /confirm           → sets status to 'Completed' (only valid after In Transit)
+      const res = await fetch(`${API_BASE}/matches/${identifier}/confirm-agreement`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' }
       });
