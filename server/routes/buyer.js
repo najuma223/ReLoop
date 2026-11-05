@@ -55,6 +55,31 @@ router.get('/requests', handleGetRequests);
 router.get('/buyer/requests', handleGetRequests);
 
 /**
+ * POST /api/requests (and /api/buyer/requests)
+ * Buyer submits a water allocation request to a specific supplier source.
+ * createWaterRequest() saves to db.requests AND db.sellerRequests so the
+ * supplier sees it immediately on their Incoming Requests page.
+ */
+router.post('/requests', async (req, res) => {
+  try {
+    const request = await createWaterRequest(req.body);
+    res.status(201).json(request);
+  } catch (err) {
+    console.error('[POST /requests]', err.message);
+    res.status(400).json({ error: err.message });
+  }
+});
+router.post('/buyer/requests', async (req, res) => {
+  try {
+    const request = await createWaterRequest(req.body);
+    res.status(201).json(request);
+  } catch (err) {
+    console.error('[POST /buyer/requests]', err.message);
+    res.status(400).json({ error: err.message });
+  }
+});
+
+/**
  * GET /api/matches (and /api/buyer/matches)
  * Fetches shared persistent match records with canonical shape
  */

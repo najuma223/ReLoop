@@ -296,17 +296,15 @@ export default function BuyerDashboard({ currentUser, onLogout, onSwitchPortal }
         demandId = demand.id;
       }
 
-      await api.requestMatch(
-        sourceId, 
-        demandId || (demand ? demand.id : ''), 
-        qty, 
-        `Allocation request for ${demand?.title || customDemandData?.demandTitle || 'Water'}`,
-        {
-          demandTitle: demand?.title || customDemandData?.demandTitle,
-          purpose: demand?.purpose || customDemandData?.purpose,
-          deliveryLocation: demand?.location || demand?.deliveryLocation || customDemandData?.deliveryLocation
-        }
-      );
+      await api.requestWater({
+        sourceId,
+        demandId: demandId || (demand ? demand.id : ''),
+        requestedQuantity: qty,
+        notes: `Allocation request for ${demand?.title || customDemandData?.demandTitle || 'Water'}`,
+        demandTitle: demand?.title || customDemandData?.demandTitle,
+        purpose: demand?.purpose || customDemandData?.purpose,
+        deliveryLocation: demand?.location || demand?.deliveryLocation || customDemandData?.deliveryLocation
+      });
 
       await loadData();
 
