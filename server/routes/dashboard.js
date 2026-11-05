@@ -1,5 +1,6 @@
 import express from 'express';
-import { getCanonicalSources, loadDB, saveDB, createDemand } from '../services/inventoryService.js';
+import { getCanonicalSources, loadDB, saveDB, createDemand, getDemandById } from '../services/inventoryService.js';
+import { findMatchesForDemand } from '../services/matchingService.js';
 
 const router = express.Router();
 
@@ -79,6 +80,33 @@ router.post('/demands', async (req, res) => {
   } catch (err) {
     console.error("[dashboardRoutes] Error creating demand:", err.message);
     res.status(400).json({ error: err.message });
+  }
+});
+
+/**
+ * GET /api/demands/:id/matches
+ * Runs the matching engine for a specific demand and returns ranked eligible sources.
+ * Called by buyerApi.findMatchesForDemand(demandId).
+ */
+router.get('/demands/:id/matches', async (req, res) => {
+  try {
+    const demandId = req.params.id;
+    const demand = await getDemandById(demandId);
+    if (!demand) {
+      return res.status(404).json({ error: `Demand ${demandId} not found.` });
+    }
+    const allSources = await getCanonicalSources();
+    const result = findMatchesForDemand(demand, allSources);
+    res.json({
+      demandId,
+      demand,
+      totalEligible: result.totalEligible,
+      matches: result.eligibleMatches,
+      partialFulfillmentPlan: result.partialFulfillmentPlan
+    });
+  } catch (err) {
+    console.error('[GET /demands/:id/matches]', err.message);
+    res.status(500).json({ error: err.message });
   }
 });
 

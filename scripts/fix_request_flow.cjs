@@ -39,3 +39,4 @@ fs.writeFileSync(buyerPath, buyer, 'utf8');
 console.log('✅ Fix 2 applied: buyer.js — POST /requests + POST /buyer/requests routes added');
 
 console.log('\nAll fixes applied. Run: npm run build && node server/index.js');
+

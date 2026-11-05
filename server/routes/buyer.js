@@ -140,6 +140,38 @@ router.post('/matches/:id/confirm', async (req, res) => {
 });
 
 /**
+ * POST /api/matches/:id/deliver
+ * Buyer confirms they received the delivered water — marks match as Completed.
+ * Called by buyerApi.confirmDelivery(matchId).
+ */
+router.post('/matches/:id/deliver', async (req, res) => {
+  try {
+    const matchId = req.params.id;
+    const db = loadDB();
+
+    // Resolve match by id or requestId
+    let match = (db.matches || []).find(m => m.id === matchId || m.requestId === matchId);
+    if (!match) {
+      return res.status(404).json({ error: `Match ${matchId} not found for delivery confirmation.` });
+    }
+
+    const updated = await updateMatchStatus(match.id, 'Completed', {
+      confirmedReusedQuantity: match.matchedQuantity || match.quantity,
+      instructions: 'Buyer confirmed receipt. Delivery complete.'
+    });
+
+    res.json({
+      success: true,
+      message: `Delivery confirmed for ${(updated.matchedQuantity || updated.quantity || 0).toLocaleString()} L. Freshwater savings recorded!`,
+      match: updated
+    });
+  } catch (err) {
+    console.error('[POST /matches/:id/deliver]', err.message);
+    res.status(400).json({ error: err.message });
+  }
+});
+
+/**
  * POST /api/buyer/matches/:id/confirm-agreement
  * Buyer accepts / confirms the match agreement (transitions to Confirmed)
  */

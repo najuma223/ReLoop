@@ -46,6 +46,55 @@
   },
   "sources": [
     {
+      "id": "src-seller-1793854924111",
+      "name": "apex tech",
+      "type": "Treated Wastewater",
+      "category": "Treated Wastewater",
+      "supplierId": "seed-supplier-1",
+      "supplierName": "Apex Commercial Facilities Ltd.",
+      "totalRegisteredQuantity": 10000,
+      "quantity": 6000,
+      "reservedQuantity": 4000,
+      "deliveredQuantity": 0,
+      "minSupply": 1000,
+      "maxSupply": 10000,
+      "distance": 5.5,
+      "indicativePrice": "₹0.10/L",
+      "pricePerLitre": 0.1,
+      "location": "Plot 14-B, OMR IT Expressway, Sholinganallur, Chennai, Tamil Nadu",
+      "coordinates": [
+        12.98,
+        80.22
+      ],
+      "intendedUses": [
+        "Landscaping",
+        "Construction",
+        "Toilet Flushing"
+      ],
+      "description": "Treated water source registered by Apex Commercial Facilities Ltd..",
+      "replenishmentSchedule": "Daily continuous output (5,000 L/day)",
+      "quality": "Verified",
+      "verificationStatus": "Verified",
+      "availabilityStatus": "Available",
+      "available": true,
+      "reportExpiry": "2027-04-30",
+      "lastUpdated": "2026-11-05",
+      "labReport": {
+        "certId": "LAB-924080",
+        "labName": "AquaCert Labs Quality Assurance",
+        "testDate": "2026-11-05",
+        "expiryDate": "2027-04-30",
+        "status": "Verified",
+        "ph": 7.2,
+        "turbidity": "1.2 NTU",
+        "tds": "420 ppm",
+        "bod": "4.5 mg/L",
+        "cod": "18 mg/L",
+        "notes": "Uploaded documentation: water_quality_test_report.pdf"
+      },
+      "availableQuantity": 6000
+    },
+    {
       "id": "test-src-g-1793726176652",
       "name": "Cancellation Test STP",
       "type": "Treated Wastewater",
@@ -461,11 +510,11 @@
       "buyerOrg": "Green Park Facilities",
       "quantity": 4000,
       "requiredQuantity": 4000,
-      "allocatedQuantity": 0,
+      "allocatedQuantity": 4000,
       "fulfilledQuantity": 0,
-      "remainingQuantity": 4000,
+      "remainingQuantity": 0,
       "purpose": "Irrigation",
-      "status": "Active",
+      "status": "Matched",
       "statusColor": "green",
       "deliveryLocation": "Chennai, Tamil Nadu",
       "coordinates": [
@@ -476,7 +525,7 @@
       "budgetPerLitre": 0.15,
       "requiredDate": "2026-11-06",
       "createdAt": "2026-11-03",
-      "updatedAt": "2026-11-03T17:16:16.668Z"
+      "updatedAt": "2026-11-05T05:48:10.902Z"
     },
     {
       "id": "dem-1793726176638",
@@ -1006,6 +1055,34 @@
   ],
   "requests": [
     {
+      "id": "req-1793857669167",
+      "demandId": "dem-1793726176657",
+      "demandTitle": "Cancel Demand Test",
+      "sourceId": "src-seller-1793854924111",
+      "sourceName": "apex tech",
+      "supplierId": "seed-supplier-1",
+      "supplierName": "Apex Commercial Facilities Ltd.",
+      "buyerName": "Green Park",
+      "buyerOrg": "Green Park Facilities",
+      "requestedQuantity": 4000,
+      "intendedReuse": "Irrigation",
+      "deliveryLocation": "Chennai, Tamil Nadu",
+      "coordinates": [
+        13.0827,
+        80.2707
+      ],
+      "requestedDate": "2026-11-06",
+      "timeWindow": "Morning (09:00 AM - 12:00 PM)",
+      "estimatedDistance": 5.5,
+      "estimatedDeliveryCost": 1055,
+      "status": "Accepted",
+      "notes": "Allocation request for Cancel Demand Test",
+      "createdAt": "2026-11-05T05:47:49.167Z",
+      "updatedAt": "2026-11-05T05:47:49.167Z",
+      "acceptedAt": "2026-11-05T05:48:10.902Z",
+      "matchId": "mat-1793857690902"
+    },
+    {
       "id": "req-1793726176663",
       "demandId": "dem-1793726176657",
       "demandTitle": "Cancel Demand Test",
@@ -1373,6 +1450,37 @@
     }
   ],
   "matches": [
+    {
+      "id": "mat-1793857690902",
+      "requestId": "req-1793857669167",
+      "demandId": "dem-1793726176657",
+      "sourceId": "src-seller-1793854924111",
+      "sourceName": "apex tech",
+      "buyerName": "Green Park Facilities",
+      "buyerContact": "+91 98765 43210",
+      "supplierId": "seed-supplier-1",
+      "supplierName": "Apex Commercial Facilities Ltd.",
+      "matchedQuantity": 4000,
+      "quantity": 4000,
+      "intendedReuse": "Irrigation",
+      "distanceKm": 5.5,
+      "distance": 5.5,
+      "destinationLocation": "Chennai, Tamil Nadu",
+      "destinationName": "Cancel Demand Test",
+      "pickupLocation": "apex tech Loading Dock, Plot 14-B, OMR IT Expressway, Sholinganallur, Chennai, Tamil Nadu",
+      "status": "Scheduled",
+      "deliveryMethod": "Tanker Fleet Delivery",
+      "deliveryRef": "DLV-690902",
+      "driverName": "Senthil Kumar (TN-09-CV-8841)",
+      "driverPhone": "+91 97890 44556",
+      "tankerCapacity": "4000 L",
+      "estimatedCost": 1055,
+      "matchDate": "2026-11-05",
+      "scheduledDeliveryDate": "2026-11-06",
+      "instructions": "Transport 4,000 L from apex tech to Green Park for Irrigation.",
+      "createdAt": "2026-11-05T05:48:10.952Z",
+      "updatedAt": "2026-11-05T05:48:10.952Z"
+    },
     {
       "id": "mat-rescue-1793726177801",
       "sourceId": "test-src-e-1793726176608",
@@ -1794,6 +1902,28 @@
   ],
   "sellerDocuments": [
     {
+      "id": "doc-1793854924111",
+      "sourceId": "src-seller-1793854924111",
+      "sourceName": "apex tech",
+      "title": "apex tech Safety & Quality Report",
+      "labName": "AquaCert Labs Quality Assurance",
+      "accreditation": "NABL Accredited",
+      "reportNumber": "LAB-924080",
+      "issueDate": "2026-11-05",
+      "expiryDate": "2027-04-30",
+      "status": "Verified",
+      "parameters": {
+        "ph": 7.2,
+        "turbidity": "1.2 NTU",
+        "tds": "420 ppm",
+        "bod": "4.5 mg/L",
+        "cod": "18 mg/L"
+      },
+      "fileUrl": "/docs/sample_water_quality_report.pdf",
+      "fileSize": "1.2 MB",
+      "verificationNotes": "Uploaded by seller and verified for safe industrial/non-potable reuse."
+    },
+    {
       "id": "doc-1792772734290",
       "sourceId": "src-seller-1792772734289",
       "sourceName": "Multimiton water",
@@ -1817,6 +1947,51 @@
     }
   ],
   "activities": [
+    {
+      "id": "act-rescue-1793857777161",
+      "type": "rescue",
+      "title": "ReLoop Rescue™: Contamination Alert: Optical Turbidity Spike",
+      "detail": "Continuous Supply Shield safely rerouted 4,000 L from Cancellation Test STP to Cancel Demand Test.",
+      "time": "Just now",
+      "timestamp": "2026-11-05T05:49:37.161Z",
+      "icon": "shield-alert"
+    },
+    {
+      "id": "act-rescue-1793857775070",
+      "type": "rescue",
+      "title": "ReLoop Rescue™: Contamination Alert: Optical Turbidity Spike",
+      "detail": "Continuous Supply Shield safely rerouted 3,000 L from Cancellation Test STP to Reject Scenario Demand.",
+      "time": "Just now",
+      "timestamp": "2026-11-05T05:49:35.070Z",
+      "icon": "shield-alert"
+    },
+    {
+      "id": "act-1793857690953",
+      "type": "match",
+      "title": "Match Accepted & Water Reserved",
+      "detail": "apex tech → Green Park (4,000 L)",
+      "time": "Just now",
+      "timestamp": "2026-11-05T05:48:10.953Z",
+      "icon": "link"
+    },
+    {
+      "id": "act-1793857669245",
+      "type": "request",
+      "title": "Water request sent",
+      "detail": "Green Park → apex tech (4,000 L)",
+      "time": "Just now",
+      "timestamp": "2026-11-05T05:47:49.245Z",
+      "icon": "send"
+    },
+    {
+      "id": "act-rescue-1793853361629",
+      "type": "rescue",
+      "title": "ReLoop Rescue™: Contamination Alert: Optical Turbidity Spike",
+      "detail": "Continuous Supply Shield safely rerouted 4,000 L from Reject Scenario STP to Cancel Demand Test.",
+      "time": "Just now",
+      "timestamp": "2026-11-05T04:36:01.629Z",
+      "icon": "shield-alert"
+    },
     {
       "id": "act-rescue-1793726177816",
       "type": "rescue",
@@ -2396,6 +2571,16 @@
   ],
   "notifications": [
     {
+      "id": "notif-1793857690952",
+      "title": "Water Request Accepted!",
+      "message": "apex tech accepted your request for 4,000 L. Delivery scheduled.",
+      "time": "Just now",
+      "timestamp": "2026-11-05T05:48:10.952Z",
+      "read": false,
+      "type": "match",
+      "targetTab": "my-matches"
+    },
+    {
       "id": "notif-1793726176669",
       "title": "Water Request Accepted!",
       "message": "Cancellation Test STP accepted your request for 4,000 L. Delivery scheduled.",
@@ -2527,6 +2712,55 @@
     }
   ],
   "sellerSources": [
+    {
+      "id": "src-seller-1793854924111",
+      "name": "apex tech",
+      "type": "Treated Wastewater",
+      "category": "Treated Wastewater",
+      "supplierId": "seed-supplier-1",
+      "supplierName": "Apex Commercial Facilities Ltd.",
+      "totalRegisteredQuantity": 10000,
+      "quantity": 6000,
+      "reservedQuantity": 4000,
+      "deliveredQuantity": 0,
+      "minSupply": 1000,
+      "maxSupply": 10000,
+      "distance": 5.5,
+      "indicativePrice": "₹0.10/L",
+      "pricePerLitre": 0.1,
+      "location": "Plot 14-B, OMR IT Expressway, Sholinganallur, Chennai, Tamil Nadu",
+      "coordinates": [
+        12.98,
+        80.22
+      ],
+      "intendedUses": [
+        "Landscaping",
+        "Construction",
+        "Toilet Flushing"
+      ],
+      "description": "Treated water source registered by Apex Commercial Facilities Ltd..",
+      "replenishmentSchedule": "Daily continuous output (5,000 L/day)",
+      "quality": "Verified",
+      "verificationStatus": "Verified",
+      "availabilityStatus": "Available",
+      "available": true,
+      "reportExpiry": "2027-04-30",
+      "lastUpdated": "2026-11-05",
+      "labReport": {
+        "certId": "LAB-924080",
+        "labName": "AquaCert Labs Quality Assurance",
+        "testDate": "2026-11-05",
+        "expiryDate": "2027-04-30",
+        "status": "Verified",
+        "ph": 7.2,
+        "turbidity": "1.2 NTU",
+        "tds": "420 ppm",
+        "bod": "4.5 mg/L",
+        "cod": "18 mg/L",
+        "notes": "Uploaded documentation: water_quality_test_report.pdf"
+      },
+      "availableQuantity": 6000
+    },
     {
       "id": "test-src-g-1793726176652",
       "name": "Cancellation Test STP",
@@ -2936,6 +3170,34 @@
   ],
   "sellerRequests": [
     {
+      "id": "req-1793857669167",
+      "demandId": "dem-1793726176657",
+      "demandTitle": "Cancel Demand Test",
+      "sourceId": "src-seller-1793854924111",
+      "sourceName": "apex tech",
+      "supplierId": "seed-supplier-1",
+      "supplierName": "Apex Commercial Facilities Ltd.",
+      "buyerName": "Green Park",
+      "buyerOrg": "Green Park Facilities",
+      "requestedQuantity": 4000,
+      "intendedReuse": "Irrigation",
+      "deliveryLocation": "Chennai, Tamil Nadu",
+      "coordinates": [
+        13.0827,
+        80.2707
+      ],
+      "requestedDate": "2026-11-06",
+      "timeWindow": "Morning (09:00 AM - 12:00 PM)",
+      "estimatedDistance": 5.5,
+      "estimatedDeliveryCost": 1055,
+      "status": "Accepted",
+      "notes": "Allocation request for Cancel Demand Test",
+      "createdAt": "2026-11-05T05:47:49.167Z",
+      "updatedAt": "2026-11-05T05:47:49.167Z",
+      "acceptedAt": "2026-11-05T05:48:10.902Z",
+      "matchId": "mat-1793857690902"
+    },
+    {
       "id": "req-1793726176663",
       "demandId": "dem-1793726176657",
       "demandTitle": "Cancel Demand Test",
@@ -3303,6 +3565,37 @@
     }
   ],
   "sellerMatches": [
+    {
+      "id": "mat-1793857690902",
+      "requestId": "req-1793857669167",
+      "demandId": "dem-1793726176657",
+      "sourceId": "src-seller-1793854924111",
+      "sourceName": "apex tech",
+      "buyerName": "Green Park Facilities",
+      "buyerContact": "+91 98765 43210",
+      "supplierId": "seed-supplier-1",
+      "supplierName": "Apex Commercial Facilities Ltd.",
+      "matchedQuantity": 4000,
+      "quantity": 4000,
+      "intendedReuse": "Irrigation",
+      "distanceKm": 5.5,
+      "distance": 5.5,
+      "destinationLocation": "Chennai, Tamil Nadu",
+      "destinationName": "Cancel Demand Test",
+      "pickupLocation": "apex tech Loading Dock, Plot 14-B, OMR IT Expressway, Sholinganallur, Chennai, Tamil Nadu",
+      "status": "Scheduled",
+      "deliveryMethod": "Tanker Fleet Delivery",
+      "deliveryRef": "DLV-690902",
+      "driverName": "Senthil Kumar (TN-09-CV-8841)",
+      "driverPhone": "+91 97890 44556",
+      "tankerCapacity": "4000 L",
+      "estimatedCost": 1055,
+      "matchDate": "2026-11-05",
+      "scheduledDeliveryDate": "2026-11-06",
+      "instructions": "Transport 4,000 L from apex tech to Green Park for Irrigation.",
+      "createdAt": "2026-11-05T05:48:10.952Z",
+      "updatedAt": "2026-11-05T05:48:10.952Z"
+    },
     {
       "id": "mat-rescue-1793726177801",
       "sourceId": "test-src-e-1793726176608",
@@ -3724,6 +4017,36 @@
   ],
   "sellerNotifications": [
     {
+      "id": "notif-s-1793857690952",
+      "title": "Request Accepted & Reserved",
+      "message": "Allocated 4,000 L from apex tech to Green Park. Waybill DLV-690902.",
+      "time": "Just now",
+      "timestamp": "2026-11-05T05:48:10.953Z",
+      "read": false,
+      "type": "match",
+      "targetTab": "my-matches"
+    },
+    {
+      "id": "notif-s-1793857669167",
+      "title": "New Water Request Received",
+      "message": "Green Park requested 4,000 L from apex tech for Irrigation.",
+      "time": "Just now",
+      "timestamp": "2026-11-05T05:47:49.245Z",
+      "read": false,
+      "type": "request",
+      "targetTab": "incoming-requests"
+    },
+    {
+      "id": "notif-s-1793854924111",
+      "title": "New Water Source Registered",
+      "message": "apex tech (8,000 L) registered and submitted for quality verification.",
+      "time": "Just now",
+      "timestamp": "2026-11-05T05:02:04.172Z",
+      "read": false,
+      "type": "source",
+      "targetTab": "my-sources"
+    },
+    {
       "id": "notif-s-1793726176669",
       "title": "Request Accepted & Reserved",
       "message": "Allocated 4,000 L from Cancellation Test STP to Green Park. Waybill DLV-176669.",
@@ -3966,8 +4289,2028 @@
   ],
   "auditLogs": [],
   "rescueData": {
-    "activeIncident": null,
+    "activeIncident": {
+      "incident": {
+        "incidentId": "INC-777160",
+        "timestamp": "2026-11-05T05:49:37.160Z",
+        "isSimulated": true,
+        "scenarioId": "CONTAMINATION_TURBIDITY",
+        "failureType": "Contamination Alert: Optical Turbidity Spike",
+        "category": "Water Quality Failure",
+        "severity": "Critical",
+        "sensorSource": "In-line IoT Nephelometric Optical Sensor #TURB-409",
+        "sensorMetric": "Turbidity",
+        "sensorValue": "14.8 NTU",
+        "safeThreshold": "≤ 5.0 NTU (CPCB Class-C Non-potable Reuse)",
+        "affectedSupplier": {
+          "id": "src-seller-1793854924111",
+          "name": "apex tech",
+          "type": "Treated Wastewater",
+          "coordinates": [
+            12.98,
+            80.22
+          ]
+        },
+        "affectedBuyer": {
+          "id": "dem-1793726176657",
+          "title": "Cancel Demand Test",
+          "purpose": "Irrigation",
+          "requiredQuantity": 4000,
+          "coordinates": [
+            13.0827,
+            80.2707
+          ]
+        },
+        "description": "Automated in-line turbidity probe detected critical particulate suspension. Risk of microbiological pathogen breakthrough. Primary supplier suspended immediately.",
+        "actionRequired": "Automated shutoff engaged; trigger Safe Reuse Gate failover to certified backup node."
+      },
+      "outcome": "AUTOMATIC_RECOVERY",
+      "searchRadiusKm": 10,
+      "evaluatedCandidates": [
+        {
+          "sourceId": "test-src-g-1793726176652",
+          "sourceName": "Cancellation Test STP",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 5,
+          "availableQuantity": 10000,
+          "fulfillmentPercentage": 100,
+          "isFullFulfillment": true,
+          "transportCost": 1000,
+          "estimatedDeliveryMins": 25,
+          "score": 94,
+          "eligible": true,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "No Expiry Recorded",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Irrigation",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": null,
+          "scoreBreakdown": {
+            "qualityScore": 95,
+            "quantityScore": 100,
+            "proximityScore": 90,
+            "costScore": 85,
+            "timingScore": 98
+          },
+          "reasons": [
+            "Safe Reuse Gate: 100% Passed (Treated Wastewater water suitable for Irrigation).",
+            "Full volume coverage: 10,000 L available covers 100% of demand (4,000 L).",
+            "Proximity: 5 km from buyer (25 min delivery time).",
+            "Logistics: ₹1,000 estimated transport cost."
+          ],
+          "coordinates": [
+            13.045,
+            80.245
+          ],
+          "indicativePrice": "₹0.12/L"
+        },
+        {
+          "sourceId": "test-src-e-1793726176608",
+          "sourceName": "Reject Scenario STP",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 5,
+          "availableQuantity": 6000,
+          "fulfillmentPercentage": 100,
+          "isFullFulfillment": true,
+          "transportCost": 1000,
+          "estimatedDeliveryMins": 25,
+          "score": 94,
+          "eligible": true,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "No Expiry Recorded",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Irrigation",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": null,
+          "scoreBreakdown": {
+            "qualityScore": 95,
+            "quantityScore": 100,
+            "proximityScore": 90,
+            "costScore": 85,
+            "timingScore": 98
+          },
+          "reasons": [
+            "Safe Reuse Gate: 100% Passed (Treated Wastewater water suitable for Irrigation).",
+            "Full volume coverage: 6,000 L available covers 100% of demand (4,000 L).",
+            "Proximity: 5 km from buyer (25 min delivery time).",
+            "Logistics: ₹1,000 estimated transport cost."
+          ],
+          "coordinates": [
+            13.045,
+            80.245
+          ],
+          "indicativePrice": "₹0.12/L"
+        },
+        {
+          "sourceId": "test-src-b-1793726176557",
+          "sourceName": "Limited Inventory Source",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 5,
+          "availableQuantity": 4000,
+          "fulfillmentPercentage": 100,
+          "isFullFulfillment": true,
+          "transportCost": 1000,
+          "estimatedDeliveryMins": 25,
+          "score": 94,
+          "eligible": true,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "No Expiry Recorded",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Irrigation",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": null,
+          "scoreBreakdown": {
+            "qualityScore": 95,
+            "quantityScore": 100,
+            "proximityScore": 90,
+            "costScore": 85,
+            "timingScore": 98
+          },
+          "reasons": [
+            "Safe Reuse Gate: 100% Passed (Treated Wastewater water suitable for Irrigation).",
+            "Full volume coverage: 4,000 L available covers 100% of demand (4,000 L).",
+            "Proximity: 5 km from buyer (25 min delivery time).",
+            "Logistics: ₹1,000 estimated transport cost."
+          ],
+          "coordinates": [
+            13.045,
+            80.245
+          ],
+          "indicativePrice": "₹0.12/L"
+        },
+        {
+          "sourceId": "test-src-g-1793725299703",
+          "sourceName": "Cancellation Test STP",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 5,
+          "availableQuantity": 10000,
+          "fulfillmentPercentage": 100,
+          "isFullFulfillment": true,
+          "transportCost": 1000,
+          "estimatedDeliveryMins": 25,
+          "score": 94,
+          "eligible": true,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "No Expiry Recorded",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Irrigation",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": null,
+          "scoreBreakdown": {
+            "qualityScore": 95,
+            "quantityScore": 100,
+            "proximityScore": 90,
+            "costScore": 85,
+            "timingScore": 98
+          },
+          "reasons": [
+            "Safe Reuse Gate: 100% Passed (Treated Wastewater water suitable for Irrigation).",
+            "Full volume coverage: 10,000 L available covers 100% of demand (4,000 L).",
+            "Proximity: 5 km from buyer (25 min delivery time).",
+            "Logistics: ₹1,000 estimated transport cost."
+          ],
+          "coordinates": [
+            13.045,
+            80.245
+          ],
+          "indicativePrice": "₹0.12/L"
+        },
+        {
+          "sourceId": "test-src-e-1793725299668",
+          "sourceName": "Reject Scenario STP",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 5,
+          "availableQuantity": 6000,
+          "fulfillmentPercentage": 100,
+          "isFullFulfillment": true,
+          "transportCost": 1000,
+          "estimatedDeliveryMins": 25,
+          "score": 94,
+          "eligible": true,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "No Expiry Recorded",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Irrigation",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": null,
+          "scoreBreakdown": {
+            "qualityScore": 95,
+            "quantityScore": 100,
+            "proximityScore": 90,
+            "costScore": 85,
+            "timingScore": 98
+          },
+          "reasons": [
+            "Safe Reuse Gate: 100% Passed (Treated Wastewater water suitable for Irrigation).",
+            "Full volume coverage: 6,000 L available covers 100% of demand (4,000 L).",
+            "Proximity: 5 km from buyer (25 min delivery time).",
+            "Logistics: ₹1,000 estimated transport cost."
+          ],
+          "coordinates": [
+            13.045,
+            80.245
+          ],
+          "indicativePrice": "₹0.12/L"
+        },
+        {
+          "sourceId": "test-src-b-1793725299624",
+          "sourceName": "Limited Inventory Source",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 5,
+          "availableQuantity": 4000,
+          "fulfillmentPercentage": 100,
+          "isFullFulfillment": true,
+          "transportCost": 1000,
+          "estimatedDeliveryMins": 25,
+          "score": 94,
+          "eligible": true,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "No Expiry Recorded",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Irrigation",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": null,
+          "scoreBreakdown": {
+            "qualityScore": 95,
+            "quantityScore": 100,
+            "proximityScore": 90,
+            "costScore": 85,
+            "timingScore": 98
+          },
+          "reasons": [
+            "Safe Reuse Gate: 100% Passed (Treated Wastewater water suitable for Irrigation).",
+            "Full volume coverage: 4,000 L available covers 100% of demand (4,000 L).",
+            "Proximity: 5 km from buyer (25 min delivery time).",
+            "Logistics: ₹1,000 estimated transport cost."
+          ],
+          "coordinates": [
+            13.045,
+            80.245
+          ],
+          "indicativePrice": "₹0.12/L"
+        },
+        {
+          "sourceId": "test-src-g-1793725095076",
+          "sourceName": "Cancellation Test STP",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 5,
+          "availableQuantity": 10000,
+          "fulfillmentPercentage": 100,
+          "isFullFulfillment": true,
+          "transportCost": 1000,
+          "estimatedDeliveryMins": 25,
+          "score": 94,
+          "eligible": true,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "No Expiry Recorded",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Irrigation",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": null,
+          "scoreBreakdown": {
+            "qualityScore": 95,
+            "quantityScore": 100,
+            "proximityScore": 90,
+            "costScore": 85,
+            "timingScore": 98
+          },
+          "reasons": [
+            "Safe Reuse Gate: 100% Passed (Treated Wastewater water suitable for Irrigation).",
+            "Full volume coverage: 10,000 L available covers 100% of demand (4,000 L).",
+            "Proximity: 5 km from buyer (25 min delivery time).",
+            "Logistics: ₹1,000 estimated transport cost."
+          ],
+          "coordinates": [
+            13.045,
+            80.245
+          ],
+          "indicativePrice": "₹0.12/L"
+        },
+        {
+          "sourceId": "test-src-e-1793725095044",
+          "sourceName": "Reject Scenario STP",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 5,
+          "availableQuantity": 6000,
+          "fulfillmentPercentage": 100,
+          "isFullFulfillment": true,
+          "transportCost": 1000,
+          "estimatedDeliveryMins": 25,
+          "score": 94,
+          "eligible": true,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "No Expiry Recorded",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Irrigation",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": null,
+          "scoreBreakdown": {
+            "qualityScore": 95,
+            "quantityScore": 100,
+            "proximityScore": 90,
+            "costScore": 85,
+            "timingScore": 98
+          },
+          "reasons": [
+            "Safe Reuse Gate: 100% Passed (Treated Wastewater water suitable for Irrigation).",
+            "Full volume coverage: 6,000 L available covers 100% of demand (4,000 L).",
+            "Proximity: 5 km from buyer (25 min delivery time).",
+            "Logistics: ₹1,000 estimated transport cost."
+          ],
+          "coordinates": [
+            13.045,
+            80.245
+          ],
+          "indicativePrice": "₹0.12/L"
+        },
+        {
+          "sourceId": "test-src-b-1793725095010",
+          "sourceName": "Limited Inventory Source",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 5,
+          "availableQuantity": 4000,
+          "fulfillmentPercentage": 100,
+          "isFullFulfillment": true,
+          "transportCost": 1000,
+          "estimatedDeliveryMins": 25,
+          "score": 94,
+          "eligible": true,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "No Expiry Recorded",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Irrigation",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": null,
+          "scoreBreakdown": {
+            "qualityScore": 95,
+            "quantityScore": 100,
+            "proximityScore": 90,
+            "costScore": 85,
+            "timingScore": 98
+          },
+          "reasons": [
+            "Safe Reuse Gate: 100% Passed (Treated Wastewater water suitable for Irrigation).",
+            "Full volume coverage: 4,000 L available covers 100% of demand (4,000 L).",
+            "Proximity: 5 km from buyer (25 min delivery time).",
+            "Logistics: ₹1,000 estimated transport cost."
+          ],
+          "coordinates": [
+            13.045,
+            80.245
+          ],
+          "indicativePrice": "₹0.12/L"
+        },
+        {
+          "sourceId": "test-src-1793726176491",
+          "sourceName": "Scenario A Test STP Facility",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 5,
+          "availableQuantity": 3000,
+          "fulfillmentPercentage": 75,
+          "isFullFulfillment": false,
+          "transportCost": 1000,
+          "estimatedDeliveryMins": 25,
+          "score": 88,
+          "eligible": true,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "2027-12-31",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Irrigation, Construction, Toilet Flushing",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": null,
+          "scoreBreakdown": {
+            "qualityScore": 95,
+            "quantityScore": 75,
+            "proximityScore": 90,
+            "costScore": 85,
+            "timingScore": 98
+          },
+          "reasons": [
+            "Safe Reuse Gate: 100% Passed (Treated Wastewater water suitable for Irrigation).",
+            "Partial volume: Covers 75% (3,000 L of 4,000 L).",
+            "Proximity: 5 km from buyer (25 min delivery time).",
+            "Logistics: ₹1,000 estimated transport cost."
+          ],
+          "coordinates": [
+            13.045,
+            80.245
+          ],
+          "indicativePrice": "₹0.12/L"
+        },
+        {
+          "sourceId": "test-src-1793725299561",
+          "sourceName": "Scenario A Test STP Facility",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 5,
+          "availableQuantity": 3000,
+          "fulfillmentPercentage": 75,
+          "isFullFulfillment": false,
+          "transportCost": 1000,
+          "estimatedDeliveryMins": 25,
+          "score": 88,
+          "eligible": true,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "2027-12-31",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Irrigation, Construction, Toilet Flushing",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": null,
+          "scoreBreakdown": {
+            "qualityScore": 95,
+            "quantityScore": 75,
+            "proximityScore": 90,
+            "costScore": 85,
+            "timingScore": 98
+          },
+          "reasons": [
+            "Safe Reuse Gate: 100% Passed (Treated Wastewater water suitable for Irrigation).",
+            "Partial volume: Covers 75% (3,000 L of 4,000 L).",
+            "Proximity: 5 km from buyer (25 min delivery time).",
+            "Logistics: ₹1,000 estimated transport cost."
+          ],
+          "coordinates": [
+            13.045,
+            80.245
+          ],
+          "indicativePrice": "₹0.12/L"
+        },
+        {
+          "sourceId": "test-src-1793725094949",
+          "sourceName": "Scenario A Test STP Facility",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 5,
+          "availableQuantity": 3000,
+          "fulfillmentPercentage": 75,
+          "isFullFulfillment": false,
+          "transportCost": 1000,
+          "estimatedDeliveryMins": 25,
+          "score": 88,
+          "eligible": true,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "2027-12-31",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Irrigation, Construction, Toilet Flushing",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": null,
+          "scoreBreakdown": {
+            "qualityScore": 95,
+            "quantityScore": 75,
+            "proximityScore": 90,
+            "costScore": 85,
+            "timingScore": 98
+          },
+          "reasons": [
+            "Safe Reuse Gate: 100% Passed (Treated Wastewater water suitable for Irrigation).",
+            "Partial volume: Covers 75% (3,000 L of 4,000 L).",
+            "Proximity: 5 km from buyer (25 min delivery time).",
+            "Logistics: ₹1,000 estimated transport cost."
+          ],
+          "coordinates": [
+            13.045,
+            80.245
+          ],
+          "indicativePrice": "₹0.12/L"
+        },
+        {
+          "sourceId": "test-src-d-shared-1793726176572",
+          "sourceName": "Shared High Demand STP Basin",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 5,
+          "availableQuantity": 2000,
+          "fulfillmentPercentage": 50,
+          "isFullFulfillment": false,
+          "transportCost": 1000,
+          "estimatedDeliveryMins": 25,
+          "score": 82,
+          "eligible": true,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "No Expiry Recorded",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Irrigation",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": null,
+          "scoreBreakdown": {
+            "qualityScore": 95,
+            "quantityScore": 50,
+            "proximityScore": 90,
+            "costScore": 85,
+            "timingScore": 98
+          },
+          "reasons": [
+            "Safe Reuse Gate: 100% Passed (Treated Wastewater water suitable for Irrigation).",
+            "Partial volume: Covers 50% (2,000 L of 4,000 L).",
+            "Proximity: 5 km from buyer (25 min delivery time).",
+            "Logistics: ₹1,000 estimated transport cost."
+          ],
+          "coordinates": [
+            13.045,
+            80.245
+          ],
+          "indicativePrice": "₹0.12/L"
+        },
+        {
+          "sourceId": "test-src-d-shared-1793725299637",
+          "sourceName": "Shared High Demand STP Basin",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 5,
+          "availableQuantity": 2000,
+          "fulfillmentPercentage": 50,
+          "isFullFulfillment": false,
+          "transportCost": 1000,
+          "estimatedDeliveryMins": 25,
+          "score": 82,
+          "eligible": true,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "No Expiry Recorded",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Irrigation",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": null,
+          "scoreBreakdown": {
+            "qualityScore": 95,
+            "quantityScore": 50,
+            "proximityScore": 90,
+            "costScore": 85,
+            "timingScore": 98
+          },
+          "reasons": [
+            "Safe Reuse Gate: 100% Passed (Treated Wastewater water suitable for Irrigation).",
+            "Partial volume: Covers 50% (2,000 L of 4,000 L).",
+            "Proximity: 5 km from buyer (25 min delivery time).",
+            "Logistics: ₹1,000 estimated transport cost."
+          ],
+          "coordinates": [
+            13.045,
+            80.245
+          ],
+          "indicativePrice": "₹0.12/L"
+        },
+        {
+          "sourceId": "test-src-d-shared-1793725095020",
+          "sourceName": "Shared High Demand STP Basin",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 5,
+          "availableQuantity": 2000,
+          "fulfillmentPercentage": 50,
+          "isFullFulfillment": false,
+          "transportCost": 1000,
+          "estimatedDeliveryMins": 25,
+          "score": 82,
+          "eligible": true,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "No Expiry Recorded",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Irrigation",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": null,
+          "scoreBreakdown": {
+            "qualityScore": 95,
+            "quantityScore": 50,
+            "proximityScore": 90,
+            "costScore": 85,
+            "timingScore": 98
+          },
+          "reasons": [
+            "Safe Reuse Gate: 100% Passed (Treated Wastewater water suitable for Irrigation).",
+            "Partial volume: Covers 50% (2,000 L of 4,000 L).",
+            "Proximity: 5 km from buyer (25 min delivery time).",
+            "Logistics: ₹1,000 estimated transport cost."
+          ],
+          "coordinates": [
+            13.045,
+            80.245
+          ],
+          "indicativePrice": "₹0.12/L"
+        },
+        {
+          "sourceId": "src-seller-1792772734289",
+          "sourceName": "Multimiton water",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 12.7,
+          "availableQuantity": 6000,
+          "fulfillmentPercentage": 100,
+          "isFullFulfillment": true,
+          "transportCost": 1847,
+          "estimatedDeliveryMins": 40,
+          "score": 35,
+          "eligible": false,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "2027-04-30",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Landscaping, Construction, Toilet Flushing",
+                "passed": true
+              },
+              {
+                "name": "pH Neutrality Index",
+                "standard": "6.5 – 8.5 pH",
+                "observed": "7.2 pH",
+                "passed": true
+              },
+              {
+                "name": "Turbidity Clarity Index",
+                "standard": "≤ 5.0 NTU",
+                "observed": "1.2 NTU",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": "Distance (12.7 km) exceeds configured rescue radius (10 km).",
+          "scoreBreakdown": {
+            "qualityScore": 98,
+            "quantityScore": 100,
+            "proximityScore": 60,
+            "costScore": 55,
+            "timingScore": 85
+          },
+          "reasons": [
+            "Safe Reuse Gate: REJECTED – Distance (12.7 km) exceeds configured rescue radius (10 km)."
+          ],
+          "coordinates": [
+            12.98,
+            80.22
+          ],
+          "indicativePrice": "₹0.10/L"
+        }
+      ],
+      "eligibleAlternatives": [
+        {
+          "sourceId": "test-src-g-1793726176652",
+          "sourceName": "Cancellation Test STP",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 5,
+          "availableQuantity": 10000,
+          "fulfillmentPercentage": 100,
+          "isFullFulfillment": true,
+          "transportCost": 1000,
+          "estimatedDeliveryMins": 25,
+          "score": 94,
+          "eligible": true,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "No Expiry Recorded",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Irrigation",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": null,
+          "scoreBreakdown": {
+            "qualityScore": 95,
+            "quantityScore": 100,
+            "proximityScore": 90,
+            "costScore": 85,
+            "timingScore": 98
+          },
+          "reasons": [
+            "Safe Reuse Gate: 100% Passed (Treated Wastewater water suitable for Irrigation).",
+            "Full volume coverage: 10,000 L available covers 100% of demand (4,000 L).",
+            "Proximity: 5 km from buyer (25 min delivery time).",
+            "Logistics: ₹1,000 estimated transport cost."
+          ],
+          "coordinates": [
+            13.045,
+            80.245
+          ],
+          "indicativePrice": "₹0.12/L"
+        },
+        {
+          "sourceId": "test-src-e-1793726176608",
+          "sourceName": "Reject Scenario STP",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 5,
+          "availableQuantity": 6000,
+          "fulfillmentPercentage": 100,
+          "isFullFulfillment": true,
+          "transportCost": 1000,
+          "estimatedDeliveryMins": 25,
+          "score": 94,
+          "eligible": true,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "No Expiry Recorded",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Irrigation",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": null,
+          "scoreBreakdown": {
+            "qualityScore": 95,
+            "quantityScore": 100,
+            "proximityScore": 90,
+            "costScore": 85,
+            "timingScore": 98
+          },
+          "reasons": [
+            "Safe Reuse Gate: 100% Passed (Treated Wastewater water suitable for Irrigation).",
+            "Full volume coverage: 6,000 L available covers 100% of demand (4,000 L).",
+            "Proximity: 5 km from buyer (25 min delivery time).",
+            "Logistics: ₹1,000 estimated transport cost."
+          ],
+          "coordinates": [
+            13.045,
+            80.245
+          ],
+          "indicativePrice": "₹0.12/L"
+        },
+        {
+          "sourceId": "test-src-b-1793726176557",
+          "sourceName": "Limited Inventory Source",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 5,
+          "availableQuantity": 4000,
+          "fulfillmentPercentage": 100,
+          "isFullFulfillment": true,
+          "transportCost": 1000,
+          "estimatedDeliveryMins": 25,
+          "score": 94,
+          "eligible": true,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "No Expiry Recorded",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Irrigation",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": null,
+          "scoreBreakdown": {
+            "qualityScore": 95,
+            "quantityScore": 100,
+            "proximityScore": 90,
+            "costScore": 85,
+            "timingScore": 98
+          },
+          "reasons": [
+            "Safe Reuse Gate: 100% Passed (Treated Wastewater water suitable for Irrigation).",
+            "Full volume coverage: 4,000 L available covers 100% of demand (4,000 L).",
+            "Proximity: 5 km from buyer (25 min delivery time).",
+            "Logistics: ₹1,000 estimated transport cost."
+          ],
+          "coordinates": [
+            13.045,
+            80.245
+          ],
+          "indicativePrice": "₹0.12/L"
+        },
+        {
+          "sourceId": "test-src-g-1793725299703",
+          "sourceName": "Cancellation Test STP",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 5,
+          "availableQuantity": 10000,
+          "fulfillmentPercentage": 100,
+          "isFullFulfillment": true,
+          "transportCost": 1000,
+          "estimatedDeliveryMins": 25,
+          "score": 94,
+          "eligible": true,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "No Expiry Recorded",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Irrigation",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": null,
+          "scoreBreakdown": {
+            "qualityScore": 95,
+            "quantityScore": 100,
+            "proximityScore": 90,
+            "costScore": 85,
+            "timingScore": 98
+          },
+          "reasons": [
+            "Safe Reuse Gate: 100% Passed (Treated Wastewater water suitable for Irrigation).",
+            "Full volume coverage: 10,000 L available covers 100% of demand (4,000 L).",
+            "Proximity: 5 km from buyer (25 min delivery time).",
+            "Logistics: ₹1,000 estimated transport cost."
+          ],
+          "coordinates": [
+            13.045,
+            80.245
+          ],
+          "indicativePrice": "₹0.12/L"
+        },
+        {
+          "sourceId": "test-src-e-1793725299668",
+          "sourceName": "Reject Scenario STP",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 5,
+          "availableQuantity": 6000,
+          "fulfillmentPercentage": 100,
+          "isFullFulfillment": true,
+          "transportCost": 1000,
+          "estimatedDeliveryMins": 25,
+          "score": 94,
+          "eligible": true,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "No Expiry Recorded",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Irrigation",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": null,
+          "scoreBreakdown": {
+            "qualityScore": 95,
+            "quantityScore": 100,
+            "proximityScore": 90,
+            "costScore": 85,
+            "timingScore": 98
+          },
+          "reasons": [
+            "Safe Reuse Gate: 100% Passed (Treated Wastewater water suitable for Irrigation).",
+            "Full volume coverage: 6,000 L available covers 100% of demand (4,000 L).",
+            "Proximity: 5 km from buyer (25 min delivery time).",
+            "Logistics: ₹1,000 estimated transport cost."
+          ],
+          "coordinates": [
+            13.045,
+            80.245
+          ],
+          "indicativePrice": "₹0.12/L"
+        },
+        {
+          "sourceId": "test-src-b-1793725299624",
+          "sourceName": "Limited Inventory Source",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 5,
+          "availableQuantity": 4000,
+          "fulfillmentPercentage": 100,
+          "isFullFulfillment": true,
+          "transportCost": 1000,
+          "estimatedDeliveryMins": 25,
+          "score": 94,
+          "eligible": true,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "No Expiry Recorded",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Irrigation",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": null,
+          "scoreBreakdown": {
+            "qualityScore": 95,
+            "quantityScore": 100,
+            "proximityScore": 90,
+            "costScore": 85,
+            "timingScore": 98
+          },
+          "reasons": [
+            "Safe Reuse Gate: 100% Passed (Treated Wastewater water suitable for Irrigation).",
+            "Full volume coverage: 4,000 L available covers 100% of demand (4,000 L).",
+            "Proximity: 5 km from buyer (25 min delivery time).",
+            "Logistics: ₹1,000 estimated transport cost."
+          ],
+          "coordinates": [
+            13.045,
+            80.245
+          ],
+          "indicativePrice": "₹0.12/L"
+        },
+        {
+          "sourceId": "test-src-g-1793725095076",
+          "sourceName": "Cancellation Test STP",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 5,
+          "availableQuantity": 10000,
+          "fulfillmentPercentage": 100,
+          "isFullFulfillment": true,
+          "transportCost": 1000,
+          "estimatedDeliveryMins": 25,
+          "score": 94,
+          "eligible": true,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "No Expiry Recorded",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Irrigation",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": null,
+          "scoreBreakdown": {
+            "qualityScore": 95,
+            "quantityScore": 100,
+            "proximityScore": 90,
+            "costScore": 85,
+            "timingScore": 98
+          },
+          "reasons": [
+            "Safe Reuse Gate: 100% Passed (Treated Wastewater water suitable for Irrigation).",
+            "Full volume coverage: 10,000 L available covers 100% of demand (4,000 L).",
+            "Proximity: 5 km from buyer (25 min delivery time).",
+            "Logistics: ₹1,000 estimated transport cost."
+          ],
+          "coordinates": [
+            13.045,
+            80.245
+          ],
+          "indicativePrice": "₹0.12/L"
+        },
+        {
+          "sourceId": "test-src-e-1793725095044",
+          "sourceName": "Reject Scenario STP",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 5,
+          "availableQuantity": 6000,
+          "fulfillmentPercentage": 100,
+          "isFullFulfillment": true,
+          "transportCost": 1000,
+          "estimatedDeliveryMins": 25,
+          "score": 94,
+          "eligible": true,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "No Expiry Recorded",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Irrigation",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": null,
+          "scoreBreakdown": {
+            "qualityScore": 95,
+            "quantityScore": 100,
+            "proximityScore": 90,
+            "costScore": 85,
+            "timingScore": 98
+          },
+          "reasons": [
+            "Safe Reuse Gate: 100% Passed (Treated Wastewater water suitable for Irrigation).",
+            "Full volume coverage: 6,000 L available covers 100% of demand (4,000 L).",
+            "Proximity: 5 km from buyer (25 min delivery time).",
+            "Logistics: ₹1,000 estimated transport cost."
+          ],
+          "coordinates": [
+            13.045,
+            80.245
+          ],
+          "indicativePrice": "₹0.12/L"
+        },
+        {
+          "sourceId": "test-src-b-1793725095010",
+          "sourceName": "Limited Inventory Source",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 5,
+          "availableQuantity": 4000,
+          "fulfillmentPercentage": 100,
+          "isFullFulfillment": true,
+          "transportCost": 1000,
+          "estimatedDeliveryMins": 25,
+          "score": 94,
+          "eligible": true,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "No Expiry Recorded",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Irrigation",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": null,
+          "scoreBreakdown": {
+            "qualityScore": 95,
+            "quantityScore": 100,
+            "proximityScore": 90,
+            "costScore": 85,
+            "timingScore": 98
+          },
+          "reasons": [
+            "Safe Reuse Gate: 100% Passed (Treated Wastewater water suitable for Irrigation).",
+            "Full volume coverage: 4,000 L available covers 100% of demand (4,000 L).",
+            "Proximity: 5 km from buyer (25 min delivery time).",
+            "Logistics: ₹1,000 estimated transport cost."
+          ],
+          "coordinates": [
+            13.045,
+            80.245
+          ],
+          "indicativePrice": "₹0.12/L"
+        },
+        {
+          "sourceId": "test-src-1793726176491",
+          "sourceName": "Scenario A Test STP Facility",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 5,
+          "availableQuantity": 3000,
+          "fulfillmentPercentage": 75,
+          "isFullFulfillment": false,
+          "transportCost": 1000,
+          "estimatedDeliveryMins": 25,
+          "score": 88,
+          "eligible": true,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "2027-12-31",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Irrigation, Construction, Toilet Flushing",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": null,
+          "scoreBreakdown": {
+            "qualityScore": 95,
+            "quantityScore": 75,
+            "proximityScore": 90,
+            "costScore": 85,
+            "timingScore": 98
+          },
+          "reasons": [
+            "Safe Reuse Gate: 100% Passed (Treated Wastewater water suitable for Irrigation).",
+            "Partial volume: Covers 75% (3,000 L of 4,000 L).",
+            "Proximity: 5 km from buyer (25 min delivery time).",
+            "Logistics: ₹1,000 estimated transport cost."
+          ],
+          "coordinates": [
+            13.045,
+            80.245
+          ],
+          "indicativePrice": "₹0.12/L"
+        },
+        {
+          "sourceId": "test-src-1793725299561",
+          "sourceName": "Scenario A Test STP Facility",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 5,
+          "availableQuantity": 3000,
+          "fulfillmentPercentage": 75,
+          "isFullFulfillment": false,
+          "transportCost": 1000,
+          "estimatedDeliveryMins": 25,
+          "score": 88,
+          "eligible": true,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "2027-12-31",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Irrigation, Construction, Toilet Flushing",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": null,
+          "scoreBreakdown": {
+            "qualityScore": 95,
+            "quantityScore": 75,
+            "proximityScore": 90,
+            "costScore": 85,
+            "timingScore": 98
+          },
+          "reasons": [
+            "Safe Reuse Gate: 100% Passed (Treated Wastewater water suitable for Irrigation).",
+            "Partial volume: Covers 75% (3,000 L of 4,000 L).",
+            "Proximity: 5 km from buyer (25 min delivery time).",
+            "Logistics: ₹1,000 estimated transport cost."
+          ],
+          "coordinates": [
+            13.045,
+            80.245
+          ],
+          "indicativePrice": "₹0.12/L"
+        },
+        {
+          "sourceId": "test-src-1793725094949",
+          "sourceName": "Scenario A Test STP Facility",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 5,
+          "availableQuantity": 3000,
+          "fulfillmentPercentage": 75,
+          "isFullFulfillment": false,
+          "transportCost": 1000,
+          "estimatedDeliveryMins": 25,
+          "score": 88,
+          "eligible": true,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "2027-12-31",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Irrigation, Construction, Toilet Flushing",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": null,
+          "scoreBreakdown": {
+            "qualityScore": 95,
+            "quantityScore": 75,
+            "proximityScore": 90,
+            "costScore": 85,
+            "timingScore": 98
+          },
+          "reasons": [
+            "Safe Reuse Gate: 100% Passed (Treated Wastewater water suitable for Irrigation).",
+            "Partial volume: Covers 75% (3,000 L of 4,000 L).",
+            "Proximity: 5 km from buyer (25 min delivery time).",
+            "Logistics: ₹1,000 estimated transport cost."
+          ],
+          "coordinates": [
+            13.045,
+            80.245
+          ],
+          "indicativePrice": "₹0.12/L"
+        },
+        {
+          "sourceId": "test-src-d-shared-1793726176572",
+          "sourceName": "Shared High Demand STP Basin",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 5,
+          "availableQuantity": 2000,
+          "fulfillmentPercentage": 50,
+          "isFullFulfillment": false,
+          "transportCost": 1000,
+          "estimatedDeliveryMins": 25,
+          "score": 82,
+          "eligible": true,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "No Expiry Recorded",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Irrigation",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": null,
+          "scoreBreakdown": {
+            "qualityScore": 95,
+            "quantityScore": 50,
+            "proximityScore": 90,
+            "costScore": 85,
+            "timingScore": 98
+          },
+          "reasons": [
+            "Safe Reuse Gate: 100% Passed (Treated Wastewater water suitable for Irrigation).",
+            "Partial volume: Covers 50% (2,000 L of 4,000 L).",
+            "Proximity: 5 km from buyer (25 min delivery time).",
+            "Logistics: ₹1,000 estimated transport cost."
+          ],
+          "coordinates": [
+            13.045,
+            80.245
+          ],
+          "indicativePrice": "₹0.12/L"
+        },
+        {
+          "sourceId": "test-src-d-shared-1793725299637",
+          "sourceName": "Shared High Demand STP Basin",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 5,
+          "availableQuantity": 2000,
+          "fulfillmentPercentage": 50,
+          "isFullFulfillment": false,
+          "transportCost": 1000,
+          "estimatedDeliveryMins": 25,
+          "score": 82,
+          "eligible": true,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "No Expiry Recorded",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Irrigation",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": null,
+          "scoreBreakdown": {
+            "qualityScore": 95,
+            "quantityScore": 50,
+            "proximityScore": 90,
+            "costScore": 85,
+            "timingScore": 98
+          },
+          "reasons": [
+            "Safe Reuse Gate: 100% Passed (Treated Wastewater water suitable for Irrigation).",
+            "Partial volume: Covers 50% (2,000 L of 4,000 L).",
+            "Proximity: 5 km from buyer (25 min delivery time).",
+            "Logistics: ₹1,000 estimated transport cost."
+          ],
+          "coordinates": [
+            13.045,
+            80.245
+          ],
+          "indicativePrice": "₹0.12/L"
+        },
+        {
+          "sourceId": "test-src-d-shared-1793725095020",
+          "sourceName": "Shared High Demand STP Basin",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 5,
+          "availableQuantity": 2000,
+          "fulfillmentPercentage": 50,
+          "isFullFulfillment": false,
+          "transportCost": 1000,
+          "estimatedDeliveryMins": 25,
+          "score": 82,
+          "eligible": true,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "No Expiry Recorded",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Irrigation",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": null,
+          "scoreBreakdown": {
+            "qualityScore": 95,
+            "quantityScore": 50,
+            "proximityScore": 90,
+            "costScore": 85,
+            "timingScore": 98
+          },
+          "reasons": [
+            "Safe Reuse Gate: 100% Passed (Treated Wastewater water suitable for Irrigation).",
+            "Partial volume: Covers 50% (2,000 L of 4,000 L).",
+            "Proximity: 5 km from buyer (25 min delivery time).",
+            "Logistics: ₹1,000 estimated transport cost."
+          ],
+          "coordinates": [
+            13.045,
+            80.245
+          ],
+          "indicativePrice": "₹0.12/L"
+        }
+      ],
+      "rejectedAlternatives": [
+        {
+          "sourceId": "src-seller-1792772734289",
+          "sourceName": "Multimiton water",
+          "waterCategory": "Treated Wastewater",
+          "distanceKm": 12.7,
+          "availableQuantity": 6000,
+          "fulfillmentPercentage": 100,
+          "isFullFulfillment": true,
+          "transportCost": 1847,
+          "estimatedDeliveryMins": 40,
+          "score": 35,
+          "eligible": false,
+          "safeGate": {
+            "passed": true,
+            "checks": [
+              {
+                "name": "Quality Verification Status",
+                "standard": "Verified by Accredited Testing Laboratory",
+                "observed": "Verified",
+                "passed": true
+              },
+              {
+                "name": "Documentation Validity",
+                "standard": "Active NABL Test Report (Not Expired)",
+                "observed": "2027-04-30",
+                "passed": true
+              },
+              {
+                "name": "Intended Application Match",
+                "standard": "CPCB Guidelines for 'Irrigation'",
+                "observed": "Treated Wastewater approved for Landscaping, Construction, Toilet Flushing",
+                "passed": true
+              },
+              {
+                "name": "pH Neutrality Index",
+                "standard": "6.5 – 8.5 pH",
+                "observed": "7.2 pH",
+                "passed": true
+              },
+              {
+                "name": "Turbidity Clarity Index",
+                "standard": "≤ 5.0 NTU",
+                "observed": "1.2 NTU",
+                "passed": true
+              }
+            ],
+            "rejectionReason": null
+          },
+          "exclusionReason": "Distance (12.7 km) exceeds configured rescue radius (10 km).",
+          "scoreBreakdown": {
+            "qualityScore": 98,
+            "quantityScore": 100,
+            "proximityScore": 60,
+            "costScore": 55,
+            "timingScore": 85
+          },
+          "reasons": [
+            "Safe Reuse Gate: REJECTED – Distance (12.7 km) exceeds configured rescue radius (10 km)."
+          ],
+          "coordinates": [
+            12.98,
+            80.22
+          ],
+          "indicativePrice": "₹0.10/L"
+        }
+      ],
+      "winningAlternative": {
+        "sourceId": "test-src-g-1793726176652",
+        "sourceName": "Cancellation Test STP",
+        "waterCategory": "Treated Wastewater",
+        "distanceKm": 5,
+        "availableQuantity": 10000,
+        "fulfillmentPercentage": 100,
+        "isFullFulfillment": true,
+        "transportCost": 1000,
+        "estimatedDeliveryMins": 25,
+        "score": 94,
+        "eligible": true,
+        "safeGate": {
+          "passed": true,
+          "checks": [
+            {
+              "name": "Quality Verification Status",
+              "standard": "Verified by Accredited Testing Laboratory",
+              "observed": "Verified",
+              "passed": true
+            },
+            {
+              "name": "Documentation Validity",
+              "standard": "Active NABL Test Report (Not Expired)",
+              "observed": "No Expiry Recorded",
+              "passed": true
+            },
+            {
+              "name": "Intended Application Match",
+              "standard": "CPCB Guidelines for 'Irrigation'",
+              "observed": "Treated Wastewater approved for Irrigation",
+              "passed": true
+            }
+          ],
+          "rejectionReason": null
+        },
+        "exclusionReason": null,
+        "scoreBreakdown": {
+          "qualityScore": 95,
+          "quantityScore": 100,
+          "proximityScore": 90,
+          "costScore": 85,
+          "timingScore": 98
+        },
+        "reasons": [
+          "Safe Reuse Gate: 100% Passed (Treated Wastewater water suitable for Irrigation).",
+          "Full volume coverage: 10,000 L available covers 100% of demand (4,000 L).",
+          "Proximity: 5 km from buyer (25 min delivery time).",
+          "Logistics: ₹1,000 estimated transport cost."
+        ],
+        "coordinates": [
+          13.045,
+          80.245
+        ],
+        "indicativePrice": "₹0.12/L"
+      },
+      "partialPlan": null,
+      "routeReassignment": {
+        "waybillNumber": "WYB-RESCUE-777161",
+        "transporterFleet": "EcoFlow Rapid Response Tanker Fleet",
+        "assignedVehicle": "TN-09-CV-8841 (Standby Unit B-4)",
+        "driverName": "Senthil Kumar (Verified Hazmat / Non-Potable Certified)",
+        "driverContact": "+91 97890 44556",
+        "pickupLocation": {
+          "supplierId": "test-src-g-1793726176652",
+          "supplierName": "Cancellation Test STP",
+          "coordinates": [
+            13.045,
+            80.245
+          ]
+        },
+        "deliveryLocation": {
+          "demandId": "dem-1793726176657",
+          "buyerTitle": "Cancel Demand Test",
+          "coordinates": [
+            13.0827,
+            80.2707
+          ]
+        },
+        "originalDistanceKm": 12.7,
+        "rescueDistanceKm": 5,
+        "distanceDeltaKm": -7.7,
+        "dispatchedVolumeLiters": 4000,
+        "estimatedTransitMins": 25,
+        "estimatedArrival": "11:44 am",
+        "transportCost": 1000,
+        "status": "Route Reassigned & Standby Locked"
+      },
+      "workflowStages": [
+        {
+          "stage": 1,
+          "title": "Supplier Disruption Detected",
+          "status": "completed",
+          "detail": "Contamination Alert: Optical Turbidity Spike at apex tech. Affected demand: Cancel Demand Test (4,000 L).",
+          "timestamp": "2026-11-05T05:49:37.160Z",
+          "badge": "SIMULATED TELEMETRY"
+        },
+        {
+          "stage": 2,
+          "title": "Spatial Backup Scan",
+          "status": "completed",
+          "detail": "Scanned all regional water nodes within 10 km radius. Identified 16 alternative facilities.",
+          "timestamp": "2026-11-05T05:49:37.161Z"
+        },
+        {
+          "stage": 3,
+          "title": "Safe Reuse Gate Quality Audit",
+          "status": "completed",
+          "detail": "Validated NABL certification, CPCB reuse compatibility for 'Irrigation', and lab expiry. 15 approved, 1 rejected.",
+          "timestamp": "2026-11-05T05:49:37.161Z"
+        },
+        {
+          "stage": 4,
+          "title": "Intelligent Multi-Criteria Ranking",
+          "status": "completed",
+          "detail": "Evaluated candidates using 5 weighted parameters (Quality 30%, Capacity 25%, Proximity 20%, Cost 15%, EDT 10%).",
+          "timestamp": "2026-11-05T05:49:37.161Z"
+        },
+        {
+          "stage": 5,
+          "title": "Alternative Supplier Selection",
+          "status": "completed",
+          "detail": "Selected Cancellation Test STP (Score: 94/100, Distance: 5 km, Cap: 10,000 L).",
+          "timestamp": "2026-11-05T05:49:37.161Z"
+        },
+        {
+          "stage": 6,
+          "title": "Route Reassignment & Dispatch",
+          "status": "completed",
+          "detail": "Waybill #WYB-RESCUE-777161 issued to EcoFlow Tanker. Dynamic GPS waypoints updated.",
+          "timestamp": "2026-11-05T05:49:37.161Z"
+        }
+      ],
+      "executedAt": "2026-11-05T05:49:37.161Z"
+    },
     "history": [
+      {
+        "id": "INC-777160",
+        "timestamp": "2026-11-05T05:49:37.160Z",
+        "failureType": "Contamination Alert: Optical Turbidity Spike",
+        "affectedSupplier": "apex tech",
+        "affectedBuyer": "Cancel Demand Test",
+        "outcome": "AUTOMATIC_RECOVERY",
+        "rescuedVolume": 4000,
+        "winningSupplier": "Cancellation Test STP",
+        "isSimulated": true
+      },
+      {
+        "id": "INC-775056",
+        "timestamp": "2026-11-05T05:49:35.056Z",
+        "failureType": "Contamination Alert: Optical Turbidity Spike",
+        "affectedSupplier": "Reject Scenario STP",
+        "affectedBuyer": "Reject Scenario Demand",
+        "outcome": "AUTOMATIC_RECOVERY",
+        "rescuedVolume": 3000,
+        "winningSupplier": "Cancellation Test STP",
+        "isSimulated": true
+      },
+      {
+        "id": "INC-361565",
+        "timestamp": "2026-11-05T04:36:01.565Z",
+        "failureType": "Contamination Alert: Optical Turbidity Spike",
+        "affectedSupplier": "Cancellation Test STP",
+        "affectedBuyer": "Cancel Demand Test",
+        "outcome": "AUTOMATIC_RECOVERY",
+        "rescuedVolume": 4000,
+        "winningSupplier": "Reject Scenario STP",
+        "isSimulated": true
+      },
       {
         "id": "INC-177815",
         "timestamp": "2026-11-03T17:16:17.815Z",
@@ -4102,9 +6445,9 @@
       }
     ],
     "stats": {
-      "totalIncidents": 16,
-      "rescuedLitres": 52000,
-      "recoveriesCount": 13,
+      "totalIncidents": 19,
+      "rescuedLitres": 63000,
+      "recoveriesCount": 16,
       "partialRecoveriesCount": 0,
       "failedIncidentsCount": 3,
       "avgResponseSeconds": 3.4

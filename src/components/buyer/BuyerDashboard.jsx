@@ -225,11 +225,7 @@ export default function BuyerDashboard({ currentUser, onLogout, onSwitchPortal }
     try {
       // Optimistic update to immediately show step 3 In Transit
       setMatches(prev => prev.map(m => (m.id === identifier || m.requestId === identifier) ? { ...m, status: 'In Transit' } : m));
-      await api.patchMatchStatus(identifier, 'In Transit', {
-        driverName: "Senthil Kumar (TN-09-CV-8841)",
-        driverPhone: "+91 97890 44556",
-        instructions: "Tanker dispatched from loading dock. GPS route tracking active."
-      });
+      await api.updateMatchStatus(identifier, 'In Transit');
       await loadData();
       showToast("Tanker #DLV-702786 dispatched! Real-time GPS transit active.", 'success');
     } catch (err) {
